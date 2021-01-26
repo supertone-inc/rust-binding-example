@@ -1,4 +1,4 @@
-pub fn hello() {
+pub fn greet() {
     println!("Hello world!")
 }
 
@@ -8,6 +8,6 @@ mod tests {
 
     #[test]
     fn it_works() {
-        hello();
+        greet();
     }
 }
