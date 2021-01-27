@@ -1,4 +1,4 @@
-# Binding Project Example
+# Rust Binding Example
 
 This project is aimed at testing and showing how to **bind a Rust project to the multiple languages**.
 
