@@ -6,7 +6,7 @@ edition = "2018"
 
 [lib]
 name = "hello_cpp"
-crate-type = ["dylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 hello = {path = "../../rust/hello"}
