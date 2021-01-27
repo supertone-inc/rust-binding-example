@@ -1,0 +1,4 @@
+language = "C"
+cpp_compat = true
+pragma_once = true
+namespace = "hello"
