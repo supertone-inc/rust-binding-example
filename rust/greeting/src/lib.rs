@@ -1,5 +1,5 @@
 pub fn greet() {
-    println!("Hello world!")
+    println!("Hello!")
 }
 
 #[cfg(test)]

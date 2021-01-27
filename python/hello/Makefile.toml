@@ -1,0 +1,21 @@
+[env]
+PYO3_PYTHON = {script = ["echo $CARGO_MAKE_WORKING_DIRECTORY/.venv/bin/python"]}
+
+[tasks.install]
+script = "poetry install"
+
+[tasks.build]
+clear = true
+script = """
+cargo build
+cp $CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY/target/debug/libhello.dylib hello/hello.so
+"""
+dependencies = ["install"]
+
+[tasks.test]
+clear = true
+script = """
+cargo test
+poetry run pytest -s
+"""
+dependencies = ["build"]
