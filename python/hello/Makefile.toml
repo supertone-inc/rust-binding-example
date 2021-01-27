@@ -1,7 +1,7 @@
 [env]
 PYO3_PYTHON = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/bin/python", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/Scripts/python.exe"}}
-SOURCE_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello_python.dll", "mac" = "libhello_python.dylib", "linux" = "libhello_python.so"}}
-TARGET_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello.pyd", "mac" = "hello.so", "linux" = "hello.so"}}
+SOURCE_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello_python.dll", "macos" = "libhello_python.dylib", "linux" = "libhello_python.so"}}
+TARGET_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello.pyd", "macos" = "hello.so", "linux" = "hello.so"}}
 
 [tasks.build]
 clear = true
