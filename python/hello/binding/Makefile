@@ -4,5 +4,5 @@ SOURCE_FILE_NAME := libhello.dylib
 
 build:
 	poetry run cargo build
-	cp target/debug/$(SOURCE_FILE_NAME) ../hello/hello.so
+	cp ../../../target/debug/$(SOURCE_FILE_NAME) ../hello/hello.so
 .PHONY: build
