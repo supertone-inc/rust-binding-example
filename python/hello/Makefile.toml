@@ -1,7 +1,11 @@
+env_files = ["../../global.env"]
+
 [env]
 PYO3_PYTHON = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/bin/python", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/Scripts/python.exe"}}
-SOURCE_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello_python.dll", "macos" = "libhello_python.dylib", "linux" = "libhello_python.so"}}
-TARGET_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello.pyd", "macos" = "hello.so", "linux" = "hello.so"}}
+SOURCE_LIB_DIR = "${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug"
+SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${CARGO_MAKE_CRATE_NAME}.dll", "macos" = "lib${CARGO_MAKE_CRATE_NAME}.dylib", "linux" = "lib${CARGO_MAKE_CRATE_NAME}.so"}}
+TARGET_LIB_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}/${PROJECT_NAME}"
+TARGET_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.pyd", "macos" = "${PROJECT_NAME}.so", "linux" = "${PROJECT_NAME}.so"}}
 
 [tasks.build]
 clear = true
@@ -9,7 +13,7 @@ install_script = "poetry install"
 script = '''
 #!@shell
 cargo build || exit $?
-cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug/${SOURCE_FILE_NAME} hello/${TARGET_FILE_NAME} || exit $?
+cp ${SOURCE_LIB_DIR}/${SOURCE_LIB_FILE_NAME} ${TARGET_LIB_DIR}/${TARGET_LIB_FILE_NAME} || exit $?
 '''
 
 [tasks.test]

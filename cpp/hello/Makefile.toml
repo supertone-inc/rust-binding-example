@@ -1,0 +1,32 @@
+env_files = ["../../global.env"]
+
+[env]
+PATH = "${CARGO_MAKE_WORKING_DIRECTORY}/bin:${PATH}"
+SOURCE_LIB_DIR = "${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug"
+SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${CARGO_MAKE_CRATE_NAME}.dll", "macos" = "lib${CARGO_MAKE_CRATE_NAME}.dylib", "linux" = "lib${CARGO_MAKE_CRATE_NAME}.so"}}
+TARGET_LIB_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}/${PROJECT_NAME}/lib"
+TARGET_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.dll", "macos" = "lib${PROJECT_NAME}.dylib", "linux" = "lib${PROJECT_NAME}.so"}}
+
+[tasks.cbindgen]
+install_script = "cargo install cbindgen --root ${CARGO_MAKE_WORKING_DIRECTORY}"
+script = 'cbindgen --crate ${CARGO_MAKE_CRATE_NAME} --output ${PROJECT_NAME}/include/${PROJECT_NAME}.h'
+
+[tasks.build]
+clear = true
+dependencies = ["cbindgen"]
+script = '''
+#!@shell
+cargo build || exit $?
+mkdir -p ${TARGET_LIB_DIR}
+cp ${SOURCE_LIB_DIR}/${SOURCE_LIB_FILE_NAME} ${TARGET_LIB_DIR}/${TARGET_LIB_FILE_NAME} || exit $?
+'''
+
+[tasks.test]
+clear = true
+dependencies = ["build"]
+script = '''
+#!@shell
+cmake -S . -B build
+cmake --build build
+cd build && ctest -V
+'''
