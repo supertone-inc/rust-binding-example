@@ -1,16 +1,14 @@
 default_target:
 
-SELF_DIR := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-
-export PYO3_PYTHON = $(SELF_DIR)/python/hello/.venv/bin/python
+include env.mk
 
 install:
+	cargo install cargo-post --root .
 	$(MAKE) -C python/hello install
 .PHONY: install
 
 build:
-	cargo build
-	$(MAKE) -C python/hello post-build
+	cargo post build --package hello-python
 .PHONY: build
 
 test:

@@ -1,5 +1,7 @@
 default_target:
 
+include ../../env.mk
+
 build:
 	cargo build
 .PHONY: build

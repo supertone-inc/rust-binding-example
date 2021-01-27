@@ -1,18 +1,13 @@
 default_target:
 
-SOURCE_FILE_NAME := libhello.dylib
+include ../../env.mk
 
 install:
 	poetry install
 .PHONY: install
 
 build:
-	poetry run cargo build
-	$(MAKE) post-build
-.PHONY: build
-
-post-build:
-	cp ../../target/debug/$(SOURCE_FILE_NAME) hello/hello.so
+	cargo post build --package hello-python
 .PHONY: build
 
 test:
