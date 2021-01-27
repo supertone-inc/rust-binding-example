@@ -1,5 +1,9 @@
+[env]
+PATH = "${CARGO_MAKE_WORKING_DIRECTORY}/bin:${PATH}"
+
 [tasks.cbindgen]
 install_script = "cargo install cbindgen --root ${CARGO_MAKE_WORKING_DIRECTORY}"
+script = "cbindgen --crate ${CARGO_MAKE_CRATE_NAME} --output hello/include/hello.h"
 
 [tasks.build]
 dependencies = ["cbindgen"]
