@@ -8,8 +8,8 @@ clear = true
 install_script = "poetry install"
 script = '''
 #!@shell
-cargo build
-cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug/${SOURCE_FILE_NAME} hello/${TARGET_FILE_NAME}
+cargo build || exit $?
+cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug/${SOURCE_FILE_NAME} hello/${TARGET_FILE_NAME} || exit $?
 '''
 
 [tasks.test]
@@ -17,6 +17,6 @@ clear = true
 dependencies = ["build"]
 script = '''
 #!@shell
-cargo test
-poetry run pytest -s
+cargo test || exit $?
+poetry run pytest -s || exit $?
 '''
