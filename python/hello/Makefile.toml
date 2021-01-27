@@ -3,23 +3,20 @@ PYO3_PYTHON = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO
 SOURCE_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello_python.dll", "mac" = "libhello_python.dylib", "linux" = "libhello_python.so"}}
 TARGET_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "hello.pyd", "mac" = "hello.so", "linux" = "hello.so"}}
 
-[tasks.install]
-script = "poetry install"
-
 [tasks.build]
 clear = true
-dependencies = ["install"]
-script = """
+install_script = "poetry install"
+script = '''
+#!@shell
 cargo build
 cp ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug/${SOURCE_FILE_NAME} hello/${TARGET_FILE_NAME}
-"""
-script_runner = "@shell"
+'''
 
 [tasks.test]
 clear = true
 dependencies = ["build"]
-script = """
+script = '''
+#!@shell
 cargo test
 poetry run pytest -s
-"""
-script_runner = "@shell"
+'''
