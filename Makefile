@@ -5,10 +5,10 @@ install:
 .PHONY: install
 
 build:
-	$(MAKE) -C python/hello build
+	cargo build
+	$(MAKE) -C python/hello/binding post-build
 .PHONY: build
 
 test:
-	$(MAKE) -C rust/hello test
-	$(MAKE) -C python/hello test
+	cargo test
 .PHONY: test
