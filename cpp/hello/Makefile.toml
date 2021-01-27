@@ -1,0 +1,5 @@
+[tasks.cbindgen]
+install_script = "cargo install cbindgen --root ${CARGO_MAKE_WORKING_DIRECTORY}"
+
+[tasks.build]
+dependencies = ["cbindgen"]

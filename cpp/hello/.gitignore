@@ -1,1 +1,3 @@
 /target
+/bin
+.crates2.json
