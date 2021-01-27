@@ -1,0 +1,12 @@
+[package]
+name = "hello_cpp"
+version = "0.1.0"
+authors = []
+edition = "2018"
+
+[lib]
+name = "hello_cpp"
+crate-type = ["dylib"]
+
+[dependencies]
+hello = {path = "../../rust/hello"}

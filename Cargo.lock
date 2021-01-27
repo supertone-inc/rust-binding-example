@@ -39,6 +39,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "hello_cpp"
+version = "0.1.0"
+dependencies = [
+ "hello",
+]
+
+[[package]]
 name = "hello_python"
 version = "0.1.0"
 dependencies = [

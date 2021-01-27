@@ -1,5 +1,6 @@
 [workspace]
 members = [
   "rust/*",
-  "python/*"
+  "cpp/*",
+  "python/*",
 ]
