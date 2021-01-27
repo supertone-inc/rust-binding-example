@@ -10,7 +10,7 @@ install:
 
 build:
 	cargo build
-	$(MAKE) -C python/hello/binding post-build
+	$(MAKE) -C python/hello post-build
 .PHONY: build
 
 test:

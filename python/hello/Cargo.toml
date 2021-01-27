@@ -1,5 +1,5 @@
 [package]
-name = "hello-binding"
+name = "hello-python"
 version = "0.1.0"
 authors = ["krazijames <krazijames@gmail.com>"]
 edition = "2018"
@@ -11,7 +11,7 @@ name = "hello"
 crate-type = ["cdylib"]
 
 [dependencies]
-hello = {path = "../../../rust/hello"}
+hello = {path = "../../rust/hello"}
 
 [dependencies.pyo3]
 version = "0.13"
