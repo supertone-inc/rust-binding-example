@@ -39,7 +39,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-python"
+name = "hello_python"
 version = "0.1.0"
 dependencies = [
  "hello",
