@@ -41,7 +41,6 @@ cp ../../target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAM
 '''
 
 [tasks.test]
-clear = true
 dependencies = ["build"]
 script = '''
 #!@shell

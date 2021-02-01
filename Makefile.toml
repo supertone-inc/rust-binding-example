@@ -3,6 +3,10 @@ CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
 PROJECT_NAME = "hello"
 PATH = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/bin:${PATH}", mapping = {"windows" = "${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}\\bin;${PATH}"}}
 
+[tasks.test]
+clear = true
+script = "cargo test --lib -- --nocapture"
+
 [tasks.watch]
-install_script = "cargo install cargo-watch --root ${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}"
-script = "cargo watch -x 'test --lib -- --nocapture'"
+script = "cargo make test"
+watch = true
