@@ -28,16 +28,16 @@ cp ../../target/debug/${PROJECT_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME
 
 [tasks.build.mac]
 script = '''
-cargo build || exit $?
+cargo build
 mkdir -p ${PROJECT_NAME}/lib
-cp ../../target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib || exit $?
+cp ../../target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib
 '''
 
 [tasks.build.linux]
 script = '''
-cargo build || exit $?
+cargo build
 mkdir -p ${PROJECT_NAME}/lib
-cp ../../target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so || exit $?
+cp ../../target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so
 '''
 
 [tasks.test]
