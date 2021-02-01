@@ -1,5 +1,6 @@
 /target
 /bin
+.crates.toml
 .crates2.json
 /hello
 /build
