@@ -28,15 +28,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "greeting"
-version = "0.1.0"
-
-[[package]]
 name = "hello"
 version = "0.1.0"
-dependencies = [
- "greeting",
-]
 
 [[package]]
 name = "hello_cpp"

@@ -1,5 +1,5 @@
 pub fn greet() {
-    greeting::greet()
+    println!("Hello!")
 }
 
 #[cfg(test)]
