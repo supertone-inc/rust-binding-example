@@ -1,9 +1,7 @@
 extend = "../../Makefile.toml"
 
 [env]
-PATH = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "./bin:${PATH}", mapping = {"windows" = "./bin;${PATH}"}}
-SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${CARGO_MAKE_CRATE_NAME}.dll", "macos" = "lib${CARGO_MAKE_CRATE_NAME}.dylib", "linux" = "lib${CARGO_MAKE_CRATE_NAME}.so"}}
-TARGET_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.dll", "macos" = "lib${PROJECT_NAME}.dylib", "linux" = "lib${PROJECT_NAME}.so"}}
+PATH = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/bin:${PATH}", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}/bin;${CARGO_MAKE_WORKING_DIRECTORY}/${PROJECT_NAME}/lib;${PATH}"}}
 
 [tasks.cbindgen]
 install_script = '''
@@ -18,11 +16,28 @@ cbindgen --crate ${CARGO_MAKE_CRATE_NAME} --output ${PROJECT_NAME}/include/${PRO
 [tasks.build]
 clear = true
 dependencies = ["cbindgen"]
+
+[tasks.build.windows]
 script = '''
 #!@shell
 cargo build || exit $?
 mkdir -p ${PROJECT_NAME}/lib
-cp ../../target/debug/${SOURCE_LIB_FILE_NAME} ${PROJECT_NAME}/lib/${TARGET_LIB_FILE_NAME} || exit $?
+cp ../../target/debug/${PROJECT_NAME}.dll ${PROJECT_NAME}/lib/${PROJECT_NAME}.dll || exit $?
+cp ../../target/debug/${PROJECT_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME}.lib || exit $?
+'''
+
+[tasks.build.mac]
+script = '''
+cargo build || exit $?
+mkdir -p ${PROJECT_NAME}/lib
+cp ../../target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib || exit $?
+'''
+
+[tasks.build.linux]
+script = '''
+cargo build || exit $?
+mkdir -p ${PROJECT_NAME}/lib
+cp ../../target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so || exit $?
 '''
 
 [tasks.test]
