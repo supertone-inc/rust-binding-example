@@ -6,11 +6,6 @@ set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../hello/lib)
 include_directories(${INCLUDE_DIR})
 link_directories(${LIB_DIR})
 
-find_library(hello
-  NAMES hello
-  HINTS ${LIB_DIR}
-)
-
 set(TEST_SOURCES
   test_hello.cpp
 )
