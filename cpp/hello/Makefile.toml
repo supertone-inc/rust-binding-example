@@ -1,24 +1,43 @@
-env_files = ["../../global.env"]
+extend = "../../Makefile.toml"
 
 [env]
-PATH = "${CARGO_MAKE_WORKING_DIRECTORY}/bin:${PATH}"
-SOURCE_LIB_DIR = "${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/target/debug"
-SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${CARGO_MAKE_CRATE_NAME}.dll", "macos" = "lib${CARGO_MAKE_CRATE_NAME}.dylib", "linux" = "lib${CARGO_MAKE_CRATE_NAME}.so"}}
-TARGET_LIB_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}/${PROJECT_NAME}/lib"
-TARGET_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.dll", "macos" = "lib${PROJECT_NAME}.dylib", "linux" = "lib${PROJECT_NAME}.so"}}
+PATH = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/bin:${PATH}", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}/bin;${CARGO_MAKE_WORKING_DIRECTORY}/${PROJECT_NAME}/lib;${PATH}"}}
 
 [tasks.cbindgen]
-install_script = "cargo install cbindgen --root ${CARGO_MAKE_WORKING_DIRECTORY}"
-script = 'cbindgen --crate ${CARGO_MAKE_CRATE_NAME} --output ${PROJECT_NAME}/include/${PROJECT_NAME}.h'
+install_script = '''
+#!@shell
+cargo install cbindgen --root .
+'''
+script = '''
+#!@shell
+cbindgen --crate ${CARGO_MAKE_CRATE_NAME} --output ${PROJECT_NAME}/include/${PROJECT_NAME}.h
+'''
 
 [tasks.build]
 clear = true
 dependencies = ["cbindgen"]
+
+[tasks.build.windows]
 script = '''
 #!@shell
 cargo build || exit $?
-mkdir -p ${TARGET_LIB_DIR}
-cp ${SOURCE_LIB_DIR}/${SOURCE_LIB_FILE_NAME} ${TARGET_LIB_DIR}/${TARGET_LIB_FILE_NAME} || exit $?
+mkdir -p ${PROJECT_NAME}/lib
+cp ../../target/debug/${PROJECT_NAME}.dll ${PROJECT_NAME}/lib/${PROJECT_NAME}.dll || exit $?
+cp ../../target/debug/${PROJECT_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME}.lib || exit $?
+'''
+
+[tasks.build.mac]
+script = '''
+cargo build
+mkdir -p ${PROJECT_NAME}/lib
+cp ../../target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib
+'''
+
+[tasks.build.linux]
+script = '''
+cargo build
+mkdir -p ${PROJECT_NAME}/lib
+cp ../../target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so
 '''
 
 [tasks.test]
@@ -26,7 +45,7 @@ clear = true
 dependencies = ["build"]
 script = '''
 #!@shell
-cmake -S . -B build
-cmake --build build
-cd build && ctest -V
+cmake -S . -B build || exit $?
+cmake --build build || exit $?
+cd build && ctest -V || exit $?
 '''
