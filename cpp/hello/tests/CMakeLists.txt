@@ -1,25 +1,19 @@
-project(hello_test)
+project(tests)
 
-set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../hello/include)
-set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../hello/lib)
+Include(FetchContent)
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v2.13.1)
+FetchContent_MakeAvailable(Catch2)
 
-include_directories(${INCLUDE_DIR})
-link_directories(${LIB_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../hello/include)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../hello/lib)
 
-set(TEST_SOURCES
-  test_hello.cpp
-)
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello)
 
-create_test_sourcelist(TESTS
-  tests.cpp
-  ${TEST_SOURCES}
-)
-
-add_executable(${PROJECT_NAME} ${TESTS})
-
-target_link_libraries(${PROJECT_NAME} hello)
-
-foreach(TEST_SOURCE ${TEST_SOURCES})
-  get_filename_component(TEST_NAME ${TEST_SOURCE} NAME_WE)
-  add_test(${TEST_NAME} ${PROJECT_NAME} ${TEST_NAME})
-endforeach(TEST_SOURCE)
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/contrib)
+include(CTest)
+include(Catch)
+catch_discover_tests(${PROJECT_NAME})
