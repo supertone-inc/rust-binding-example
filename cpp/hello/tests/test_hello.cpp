@@ -9,7 +9,7 @@ int test_hello(int argc, char* argv[]) {
 
   int result = strcmp(string, "Hello world!");
 
-  free(string);
+  hello::destroy_string(string);
 
   if (result) {
     return -1;

@@ -14,3 +14,10 @@ pub extern fn get_string(name: *const c_char) -> *mut c_char {
     let string = hello::get_string(c_name.to_str().unwrap());
     CString::new(string).unwrap().into_raw()
 }
+
+#[no_mangle]
+pub extern fn destroy_string(string: *mut c_char) {
+    unsafe {
+        let _ = CString::from_raw(string);
+    }
+}
