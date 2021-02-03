@@ -3,7 +3,7 @@
 
 #include <hello.h>
 
-TEST_CASE("test_to_uppercase") {
+TEST_CASE("test_to_uppercase", "[hello]") {
   char* string = hello::to_uppercase("Hello World!");
 
   CHECK(std::string(string) == "HELLO WORLD!");
@@ -11,7 +11,7 @@ TEST_CASE("test_to_uppercase") {
   hello::destroy_string(string);
 }
 
-TEST_CASE("test_to_uppercase_safe") {
+TEST_CASE("test_to_uppercase_safe", "[hello]") {
   std::string in_string("Hello World!");
   std::string out_string = in_string;
 
@@ -21,7 +21,7 @@ TEST_CASE("test_to_uppercase_safe") {
   CHECK(out_string == "HELLO WORLD!");
 }
 
-TEST_CASE("test_concat") {
+TEST_CASE("test_concat", "[hello]") {
   float a[] = {1.f, 2.f};
   size_t a_length = sizeof(a) / sizeof(a[0]);
 
@@ -39,12 +39,12 @@ TEST_CASE("test_concat") {
   hello::destroy_array(array);
 }
 
-TEST_CASE("test_concat_safe") {
+TEST_CASE("test_concat_safe", "[hello]") {
   float a[] = {1.f, 2.f};
-  size_t a_length = sizeof(a) / sizeof(a[0]);
+  const size_t a_length = sizeof(a) / sizeof(a[0]);
 
   float b[] = {3.f, 4.f, 5.f};
-  size_t b_length = sizeof(b) / sizeof(b[0]);
+  const size_t b_length = sizeof(b) / sizeof(b[0]);
 
   float c[a_length + b_length];
 

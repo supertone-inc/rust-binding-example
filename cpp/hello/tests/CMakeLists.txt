@@ -7,10 +7,10 @@ FetchContent_Declare(
   GIT_TAG        v2.13.1)
 FetchContent_MakeAvailable(Catch2)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../hello/include)
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../hello/lib)
+include_directories(${CMAKE_SOURCE_DIR}/hello/include)
+link_directories(${CMAKE_SOURCE_DIR}/hello/lib)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} test_hello.cpp)
 target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/contrib)

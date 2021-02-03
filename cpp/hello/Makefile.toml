@@ -31,3 +31,6 @@ cmake -S . -B build || exit $?
 cmake --build build || exit $?
 cd build && ctest -V || exit $?
 '''
+
+[tasks.test.windows]
+env.PATH = "${CARGO_MAKE_WORKING_DIRECTORY}\\${PROJECT_NAME}\\lib;${PATH}"
