@@ -3,14 +3,10 @@
 
 #include <hello.h>
 
-TEST_CASE("print_string", "[hello]") {
-  hello::print_string("world");
-}
+TEST_CASE("test_to_uppercase", "[hello]") {
+  char* string = hello::to_uppercase("Hello World!");
 
-TEST_CASE("get_string", "[hello]") {
-  char* string = hello::get_string("world");
-
-  CHECK(std::string(string) == "Hello world!");
+  CHECK(std::string(string) == "HELLO WORLD!");
 
   hello::destroy_string(string);
 }

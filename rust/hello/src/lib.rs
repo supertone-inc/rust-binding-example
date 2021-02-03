@@ -1,9 +1,5 @@
-pub fn print_string(name: &str) {
-    println!("Hello {}!", name)
-}
-
-pub fn get_string(name: &str) -> String {
-    format!("Hello {}!", name)
+pub fn to_uppercase(s: &str) -> String {
+    String::from(s).to_uppercase()
 }
 
 #[cfg(test)]
@@ -11,12 +7,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_print_string() {
-        print_string("world");
-    }
-
-    #[test]
-    fn test_get_string() {
-        assert_eq!(get_string("world"), "Hello world!");
+    fn test_to_uppercase() {
+        assert_eq!(to_uppercase("Hello World!"), "HELLO WORLD!");
     }
 }

@@ -1,23 +1,14 @@
-use std::os::raw::c_char;
 use std::ffi::CStr;
 use std::ffi::CString;
+use std::os::raw::c_char;
 
 #[no_mangle]
-pub extern fn print_string(name: *const c_char) {
-    let c_str: &CStr = unsafe { CStr::from_ptr(name) };
-    hello::print_string(c_str.to_str().unwrap());
-}
-
-#[no_mangle]
-pub extern fn get_string(name: *const c_char) -> *mut c_char {
-    let c_name: &CStr = unsafe { CStr::from_ptr(name) };
-    let string = hello::get_string(c_name.to_str().unwrap());
+pub extern fn to_uppercase(s: *const c_char) -> *mut c_char {
+    let string = hello::to_uppercase(unsafe { CStr::from_ptr(s) }.to_str().unwrap());
     CString::new(string).unwrap().into_raw()
 }
 
 #[no_mangle]
-pub extern fn destroy_string(string: *mut c_char) {
-    unsafe {
-        let _ = CString::from_raw(string);
-    }
+pub unsafe extern fn destroy_string(string: *mut c_char) {
+    let _ = CString::from_raw(string);
 }
