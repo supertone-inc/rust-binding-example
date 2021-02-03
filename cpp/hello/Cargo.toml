@@ -10,3 +10,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 hello = {path = "../../rust/hello"}
+
+[build-dependencies]
+cbindgen = "0.17"

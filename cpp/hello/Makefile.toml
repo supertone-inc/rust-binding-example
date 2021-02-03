@@ -1,21 +1,5 @@
 extend = "../../Makefile.toml"
 
-[env]
-PATH = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/bin:${PATH}", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}\\bin;${CARGO_MAKE_WORKING_DIRECTORY}\\${PROJECT_NAME}\\lib;${PATH}"}}
-
-[tasks.cbindgen]
-install_script = '''
-#!@shell
-cargo install cbindgen --root .
-'''
-script = '''
-#!@shell
-cbindgen --crate ${CARGO_MAKE_CRATE_NAME} --output ${PROJECT_NAME}/include/${PROJECT_NAME}.h
-'''
-
-[tasks.build]
-dependencies = ["cbindgen"]
-
 [tasks.build.windows]
 script = '''
 #!@shell
