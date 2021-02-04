@@ -1,3 +1,14 @@
 [env]
-CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
 PROJECT_NAME = "hello"
+CARGO_TARGET_DIR = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/target", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}\\target"}}
+
+[tasks.build]
+clear = true
+
+[tasks.test]
+clear = true
+script = "cargo test --lib -- --nocapture"
+
+[tasks.watch]
+script = "cargo make test"
+watch = true

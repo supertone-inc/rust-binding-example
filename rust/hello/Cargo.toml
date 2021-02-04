@@ -5,4 +5,4 @@ authors = []
 edition = "2018"
 
 [dependencies]
-greeting = {path = "../greeting"}
+error-chain = "0.12.4"

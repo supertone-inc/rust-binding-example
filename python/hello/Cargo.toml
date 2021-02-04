@@ -5,10 +5,11 @@ authors = []
 edition = "2018"
 
 [lib]
-name = "hello_python"
+name = "hello"
 crate-type = ["cdylib"]
 
 [dependencies]
+error-chain = "0.12.4"
 hello = {path = "../../rust/hello"}
 
 [dependencies.pyo3]

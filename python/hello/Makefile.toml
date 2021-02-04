@@ -2,23 +2,21 @@ extend = "../../Makefile.toml"
 
 [env]
 PYO3_PYTHON = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/bin/python", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/Scripts/python.exe"}}
-SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${CARGO_MAKE_CRATE_NAME}.dll", "macos" = "lib${CARGO_MAKE_CRATE_NAME}.dylib", "linux" = "lib${CARGO_MAKE_CRATE_NAME}.so"}}
+SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.dll", "macos" = "lib${PROJECT_NAME}.dylib", "linux" = "lib${PROJECT_NAME}.so"}}
 TARGET_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.pyd", "macos" = "${PROJECT_NAME}.so", "linux" = "${PROJECT_NAME}.so"}}
 
 [tasks.build]
-clear = true
 install_script = "poetry install"
 script = '''
 #!@shell
 cargo build || exit $?
-cp ../../target/debug/${SOURCE_LIB_FILE_NAME} ${PROJECT_NAME}/${TARGET_LIB_FILE_NAME} || exit $?
+cp target/debug/${SOURCE_LIB_FILE_NAME} ${PROJECT_NAME}/${TARGET_LIB_FILE_NAME} || exit $?
 '''
 
 [tasks.test]
-clear = true
 dependencies = ["build"]
 script = '''
 #!@shell
-cargo test || exit $?
+cargo test --lib -- --nocapture || exit $?
 poetry run pytest -s || exit $?
 '''

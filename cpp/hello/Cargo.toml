@@ -9,4 +9,9 @@ name = "hello"
 crate-type = ["cdylib"]
 
 [dependencies]
+error-chain = "0.12.4"
 hello = {path = "../../rust/hello"}
+libc = "0.2"
+
+[build-dependencies]
+cbindgen = "0.17"
