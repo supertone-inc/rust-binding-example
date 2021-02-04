@@ -1,7 +1,7 @@
 extend = "../../Makefile.toml"
 
 [env]
-PYO3_PYTHON = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/bin/python", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/Scripts/python.exe"}}
+PYO3_PYTHON = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "${CARGO_MAKE_WORKING_DIRECTORY}/.venv/bin/python", mapping = {"windows" = "${CARGO_MAKE_WORKING_DIRECTORY}\\.venv\\Scripts\\python.exe"}}
 SOURCE_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.dll", "macos" = "lib${PROJECT_NAME}.dylib", "linux" = "lib${PROJECT_NAME}.so"}}
 TARGET_LIB_FILE_NAME = {source = "${CARGO_MAKE_RUST_TARGET_OS}", mapping = {"windows" = "${PROJECT_NAME}.pyd", "macos" = "${PROJECT_NAME}.so", "linux" = "${PROJECT_NAME}.so"}}
 
