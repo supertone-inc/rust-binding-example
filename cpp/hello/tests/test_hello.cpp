@@ -15,12 +15,11 @@ TEST_CASE("test_to_uppercase", "[hello]")
 TEST_CASE("test_to_uppercase_safe", "[hello]")
 {
   std::string in_string("Hello World!");
-  std::string out_string = in_string;
+  std::string out_string(in_string.length(), '\0');
 
-  hello::to_uppercase_safe(in_string.data(), (char *)out_string.data());
+  hello::to_uppercase_safe(in_string.c_str(), (char *)out_string.c_str());
 
-  CHECK(in_string == "Hello World!");
-  CHECK(out_string == "HELLO WORLD!");
+  REQUIRE(out_string == "HELLO WORLD!");
 }
 
 TEST_CASE("test_concat", "[hello]")
@@ -54,9 +53,26 @@ TEST_CASE("test_concat_safe", "[hello]")
 
   hello::concat_safe(a, a_length, b, b_length, c);
 
-  CHECK(c[0] == 1.f);
-  CHECK(c[1] == 2.f);
-  CHECK(c[2] == 3.f);
-  CHECK(c[3] == 4.f);
-  CHECK(c[4] == 5.f);
+  REQUIRE(c[0] == 1.f);
+  REQUIRE(c[1] == 2.f);
+  REQUIRE(c[2] == 3.f);
+  REQUIRE(c[3] == 4.f);
+  REQUIRE(c[4] == 5.f);
+}
+
+TEST_CASE("test_raise_error", "[hello]")
+{
+  int result = hello::raise_error();
+
+  REQUIRE(result < 0);
+
+  size_t error_length = hello::last_error_length();
+
+  REQUIRE(error_length > 0);
+
+  std::string message(error_length, '\0');
+  int message_length = hello::last_error_message((char *)message.c_str(), message.capacity());
+  
+  REQUIRE(message_length > 0);
+  REQUIRE(message == "error raised from Rust!");
 }

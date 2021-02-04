@@ -1,4 +1,10 @@
-use libc::{c_char, c_float, size_t};
+#[macro_use]
+extern crate error_chain;
+
+mod errors;
+use errors::*;
+
+use libc::{c_char, c_float, c_int, size_t};
 use std::ffi::{CStr, CString};
 
 #[no_mangle]
@@ -17,8 +23,11 @@ pub unsafe extern "C" fn destroy_string(string: *mut c_char) {
 pub extern "C" fn to_uppercase_safe(in_string: *const c_char, out_string: *mut c_char) {
     let in_string = unsafe { CStr::from_ptr(in_string) }.to_str().unwrap();
     let string = hello::to_uppercase(in_string);
+    println!("RUSTSTRING: {}", string.len());
     let string = CString::new(string).unwrap();
+
     let bytes = string.as_bytes();
+    println!("CSTRING: {}", bytes.len());
 
     unsafe { std::ptr::copy_nonoverlapping(bytes.as_ptr(), out_string as *mut u8, bytes.len()) }
 }
@@ -54,4 +63,15 @@ pub extern "C" fn concat_safe(
     let c = hello::concat(a, b);
 
     unsafe { std::ptr::copy_nonoverlapping(c.as_ptr(), out_array, c.len()) }
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn raise_error() -> c_int {
+    match hello::raise_error() {
+        Ok(_) => return 0,
+        Err(err) => {
+            update_last_error(err.into());
+            return -1;
+        }
+    };
 }
