@@ -11,5 +11,5 @@ clear = true
 script = "cargo test --lib -- --nocapture"
 
 [tasks.watch]
-script = "cargo make test"
+extend = "test"
 watch = true
