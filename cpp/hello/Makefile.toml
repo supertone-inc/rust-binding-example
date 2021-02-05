@@ -1,27 +1,23 @@
 extend = "../../Makefile.toml"
 
-[tasks.build.windows]
+[tasks.pre-build]
 script = '''
 #!@shell
-cargo build || exit $?
 mkdir -p ${PROJECT_NAME}/lib
+'''
+
+[tasks.post-build.windows]
+script = '''
+#!@shell
 cp target/debug/${PROJECT_NAME}.dll ${PROJECT_NAME}/lib/${PROJECT_NAME}.dll || exit $?
 cp target/debug/${PROJECT_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME}.lib || exit $?
 '''
 
-[tasks.build.mac]
-script = '''
-cargo build
-mkdir -p ${PROJECT_NAME}/lib
-cp target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib
-'''
+[tasks.post-build.mac]
+script = "cp target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib"
 
-[tasks.build.linux]
-script = '''
-cargo build
-mkdir -p ${PROJECT_NAME}/lib
-cp target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so
-'''
+[tasks.post-build.linux]
+script = "cp target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so"
 
 [tasks.test]
 dependencies = ["build"]

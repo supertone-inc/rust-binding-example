@@ -5,6 +5,16 @@ CARGO_TARGET_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}${/}target"
 
 [tasks.build]
 clear = true
+script.pre = "cargo make pre-build"
+script.main = "cargo make main-build"
+script.post = "cargo make post-build"
+
+[tasks.pre-build]
+
+[tasks.main-build]
+script = "cargo build"
+
+[tasks.post-build]
 
 [tasks.test]
 clear = true
