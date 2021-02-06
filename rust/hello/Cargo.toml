@@ -5,4 +5,4 @@ authors = []
 edition = "2018"
 
 [dependencies]
-error-chain = "0.12.4"
+error-chain = "0.12"
