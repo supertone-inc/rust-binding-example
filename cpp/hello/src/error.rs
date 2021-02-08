@@ -2,7 +2,7 @@ use libc::{c_char, c_int, size_t};
 use std::{cell::RefCell, ptr, slice};
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum Error {
     #[error(transparent)]
     Hello(#[from] hello::Error),

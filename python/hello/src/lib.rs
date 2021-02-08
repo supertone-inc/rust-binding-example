@@ -1,7 +1,7 @@
 use pyo3::{exceptions::PyException, prelude::*, wrap_pyfunction};
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum Error {
     #[error(transparent)]
     Hello(#[from] hello::Error),
