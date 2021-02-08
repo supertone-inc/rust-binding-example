@@ -70,7 +70,7 @@ TEST_CASE("test_raise_error")
 
   REQUIRE(error_length > 0);
 
-  std::string message(error_length, '\0');
+  std::string message(error_length - 1, '\0');
   int message_length = hello::last_error_message((char *)message.c_str(), message.capacity());
   
   REQUIRE(message_length > 0);

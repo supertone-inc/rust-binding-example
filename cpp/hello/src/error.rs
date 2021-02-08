@@ -25,7 +25,7 @@ pub fn take_last_error() -> Option<Box<Error>> {
 #[no_mangle]
 pub extern "C" fn last_error_length() -> size_t {
     LAST_ERROR.with(|prev| match *prev.borrow() {
-        Some(ref err) => err.to_string().len() as size_t,
+        Some(ref err) => err.to_string().len() as size_t + 1,
         None => 0,
     })
 }
