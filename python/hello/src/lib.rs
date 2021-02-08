@@ -1,10 +1,17 @@
-#[macro_use]
-extern crate error_chain;
+use pyo3::{exceptions::PyException, prelude::*, wrap_pyfunction};
+use thiserror::Error;
 
-mod errors;
-use errors::*;
+#[derive(Error, Debug, PartialEq)]
+pub enum Error {
+    #[error(transparent)]
+    Hello(#[from] hello::Error),
+}
 
-use pyo3::{prelude::*, *};
+impl std::convert::From<Error> for PyErr {
+    fn from(err: Error) -> PyErr {
+        PyException::new_err(err.to_string())
+    }
+}
 
 #[pymodule]
 fn hello(_py: Python, m: &PyModule) -> PyResult<()> {
@@ -26,6 +33,6 @@ fn concat(a: Vec<f32>, b: Vec<f32>) -> Vec<f32> {
 }
 
 #[pyfunction]
-fn raise_error() -> Result<()> {
-    hello::raise_error().map_err(|err| err.into())
+fn raise_error() -> Result<(), Error> {
+    Ok(hello::raise_error()?)
 }

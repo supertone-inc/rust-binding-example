@@ -9,8 +9,8 @@ name = "hello"
 crate-type = ["cdylib"]
 
 [dependencies]
-error-chain = "0.12"
 libc = "0.2"
+thiserror = "1.0"
 hello = {path = "../../rust/hello"}
 
 [build-dependencies]

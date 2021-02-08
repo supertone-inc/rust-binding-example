@@ -1,8 +1,5 @@
-#[macro_use]
-extern crate error_chain;
-
-mod errors;
-use errors::*;
+mod error;
+use error::*;
 
 use libc::{c_char, c_float, c_int, size_t};
 use std::ffi::{CStr, CString};

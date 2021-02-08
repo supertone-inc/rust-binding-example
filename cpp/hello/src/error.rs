@@ -1,10 +1,11 @@
 use libc::{c_char, c_int, size_t};
 use std::{cell::RefCell, ptr, slice};
+use thiserror::Error;
 
-error_chain! {
-    links {
-        Hello(hello::errors::Error, hello::errors::ErrorKind);
-    }
+#[derive(Error, Debug, PartialEq)]
+pub enum Error {
+    #[error(transparent)]
+    Hello(#[from] hello::Error),
 }
 
 thread_local! {
