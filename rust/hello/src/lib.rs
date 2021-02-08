@@ -21,6 +21,10 @@ pub fn raise_error() -> Result<()> {
 }
 
 #[cfg(test)]
+#[macro_use]
+extern crate assert_matches;
+
+#[cfg(test)]
 mod tests {
     use super::*;
 
@@ -39,9 +43,6 @@ mod tests {
 
     #[test]
     fn test_raise_error() {
-        match raise_error() {
-            Err(Error::Default(msg)) => assert_eq!(msg, "error raised from Rust!"),
-            _ => panic!("wrong result"),
-        }
+        assert_matches!(raise_error(), Err(Error::Default(msg)) if msg == "error raised from Rust!");
     }
 }
