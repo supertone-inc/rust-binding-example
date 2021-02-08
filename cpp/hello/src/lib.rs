@@ -20,11 +20,8 @@ pub unsafe extern "C" fn hello__destroy_string(string: *mut c_char) {
 pub extern "C" fn hello__to_uppercase_safe(in_string: *const c_char, out_string: *mut c_char) {
     let in_string = unsafe { CStr::from_ptr(in_string) }.to_str().unwrap();
     let string = hello::to_uppercase(in_string);
-    println!("RUSTSTRING: {}", string.len());
     let string = CString::new(string).unwrap();
-
     let bytes = string.as_bytes();
-    println!("CSTRING: {}", bytes.len());
 
     unsafe { std::ptr::copy_nonoverlapping(bytes.as_ptr(), out_string as *mut u8, bytes.len()) }
 }

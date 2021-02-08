@@ -1,9 +1,8 @@
-#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
 #include <hello.h>
 
-TEST_CASE("test_to_uppercase")
+TEST_CASE("test_c_to_uppercase")
 {
   char *string = hello__to_uppercase("Hello World!");
 
@@ -12,7 +11,7 @@ TEST_CASE("test_to_uppercase")
   hello__destroy_string(string);
 }
 
-TEST_CASE("test_to_uppercase_safe")
+TEST_CASE("test_c_to_uppercase_safe")
 {
   std::string in_string("Hello World!");
   std::string out_string(in_string.length(), '\0');
@@ -22,7 +21,7 @@ TEST_CASE("test_to_uppercase_safe")
   REQUIRE(out_string == "HELLO WORLD!");
 }
 
-TEST_CASE("test_concat")
+TEST_CASE("test_c_concat")
 {
   float a[] = {1.f, 2.f};
   size_t a_length = sizeof(a) / sizeof(a[0]);
@@ -41,7 +40,7 @@ TEST_CASE("test_concat")
   hello__destroy_array(array);
 }
 
-TEST_CASE("test_concat_safe")
+TEST_CASE("test_c_concat_safe")
 {
   float a[] = {1.f, 2.f};
   const size_t a_length = sizeof(a) / sizeof(a[0]);
@@ -60,7 +59,7 @@ TEST_CASE("test_concat_safe")
   REQUIRE(c[4] == 5.f);
 }
 
-TEST_CASE("test_raise_error")
+TEST_CASE("test_c_raise_error")
 {
   int result = hello__raise_error();
 
@@ -70,9 +69,9 @@ TEST_CASE("test_raise_error")
 
   REQUIRE(error_length > 0);
 
-  std::string message(error_length - 1, '\0');
-  int message_length = hello__last_error_message((char *)message.c_str(), message.capacity());
-  
+  char message[error_length];
+  int message_length = hello__last_error_message(message, error_length);
+
   REQUIRE(message_length > 0);
-  REQUIRE(message == "error raised from Rust!");
+  REQUIRE(std::string(message) == "error raised from Rust!");
 }
