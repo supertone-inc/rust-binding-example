@@ -5,11 +5,11 @@
 
 TEST_CASE("test_to_uppercase")
 {
-  char *string = hello::to_uppercase("Hello World!");
+  char *string = hello__to_uppercase("Hello World!");
 
   CHECK(std::string(string) == "HELLO WORLD!");
 
-  hello::destroy_string(string);
+  hello__destroy_string(string);
 }
 
 TEST_CASE("test_to_uppercase_safe")
@@ -17,7 +17,7 @@ TEST_CASE("test_to_uppercase_safe")
   std::string in_string("Hello World!");
   std::string out_string(in_string.length(), '\0');
 
-  hello::to_uppercase_safe(in_string.c_str(), (char *)out_string.c_str());
+  hello__to_uppercase_safe(in_string.c_str(), (char *)out_string.c_str());
 
   REQUIRE(out_string == "HELLO WORLD!");
 }
@@ -30,7 +30,7 @@ TEST_CASE("test_concat")
   float b[] = {3.f, 4.f, 5.f};
   size_t b_length = sizeof(b) / sizeof(b[0]);
 
-  float *array = hello::concat(a, a_length, b, b_length);
+  float *array = hello__concat(a, a_length, b, b_length);
 
   CHECK(array[0] == 1.f);
   CHECK(array[1] == 2.f);
@@ -38,7 +38,7 @@ TEST_CASE("test_concat")
   CHECK(array[3] == 4.f);
   CHECK(array[4] == 5.f);
 
-  hello::destroy_array(array);
+  hello__destroy_array(array);
 }
 
 TEST_CASE("test_concat_safe")
@@ -51,7 +51,7 @@ TEST_CASE("test_concat_safe")
 
   float c[a_length + b_length];
 
-  hello::concat_safe(a, a_length, b, b_length, c);
+  hello__concat_safe(a, a_length, b, b_length, c);
 
   REQUIRE(c[0] == 1.f);
   REQUIRE(c[1] == 2.f);
@@ -62,16 +62,16 @@ TEST_CASE("test_concat_safe")
 
 TEST_CASE("test_raise_error")
 {
-  int result = hello::raise_error();
+  int result = hello__raise_error();
 
   REQUIRE(result < 0);
 
-  size_t error_length = hello::last_error_length();
+  size_t error_length = hello__last_error_length();
 
   REQUIRE(error_length > 0);
 
   std::string message(error_length - 1, '\0');
-  int message_length = hello::last_error_message((char *)message.c_str(), message.capacity());
+  int message_length = hello__last_error_message((char *)message.c_str(), message.capacity());
   
   REQUIRE(message_length > 0);
   REQUIRE(message == "error raised from Rust!");

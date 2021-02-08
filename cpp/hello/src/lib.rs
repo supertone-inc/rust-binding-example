@@ -5,19 +5,19 @@ use libc::{c_char, c_float, c_int, size_t};
 use std::ffi::{CStr, CString};
 
 #[no_mangle]
-pub extern "C" fn to_uppercase(string: *const c_char) -> *mut c_char {
+pub extern "C" fn hello__to_uppercase(string: *const c_char) -> *mut c_char {
     let string = unsafe { CStr::from_ptr(string) }.to_str().unwrap();
     let string = hello::to_uppercase(string);
     CString::new(string).unwrap().into_raw()
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn destroy_string(string: *mut c_char) {
+pub unsafe extern "C" fn hello__destroy_string(string: *mut c_char) {
     let _ = CString::from_raw(string);
 }
 
 #[no_mangle]
-pub extern "C" fn to_uppercase_safe(in_string: *const c_char, out_string: *mut c_char) {
+pub extern "C" fn hello__to_uppercase_safe(in_string: *const c_char, out_string: *mut c_char) {
     let in_string = unsafe { CStr::from_ptr(in_string) }.to_str().unwrap();
     let string = hello::to_uppercase(in_string);
     println!("RUSTSTRING: {}", string.len());
@@ -30,7 +30,7 @@ pub extern "C" fn to_uppercase_safe(in_string: *const c_char, out_string: *mut c
 }
 
 #[no_mangle]
-pub extern "C" fn concat(
+pub extern "C" fn hello__concat(
     a: *const c_float,
     a_length: size_t,
     b: *const c_float,
@@ -43,12 +43,12 @@ pub extern "C" fn concat(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn destroy_array(array: *mut c_float) {
+pub unsafe extern "C" fn hello__destroy_array(array: *mut c_float) {
     let _ = Box::from_raw(array);
 }
 
 #[no_mangle]
-pub extern "C" fn concat_safe(
+pub extern "C" fn hello__concat_safe(
     a: *const c_float,
     a_length: size_t,
     b: *const c_float,
@@ -63,7 +63,7 @@ pub extern "C" fn concat_safe(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn raise_error() -> c_int {
+pub unsafe extern "C" fn hello__raise_error() -> c_int {
     match hello::raise_error() {
         Ok(_) => return 0,
         Err(err) => {

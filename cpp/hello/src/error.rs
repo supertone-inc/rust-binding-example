@@ -23,7 +23,7 @@ pub fn take_last_error() -> Option<Box<Error>> {
 }
 
 #[no_mangle]
-pub extern "C" fn last_error_length() -> size_t {
+pub extern "C" fn hello__last_error_length() -> size_t {
     LAST_ERROR.with(|prev| match *prev.borrow() {
         Some(ref err) => err.to_string().len() as size_t + 1,
         None => 0,
@@ -31,7 +31,7 @@ pub extern "C" fn last_error_length() -> size_t {
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn last_error_message(buffer: *mut c_char, length: size_t) -> c_int {
+pub unsafe extern "C" fn hello__last_error_message(buffer: *mut c_char, length: size_t) -> c_int {
     if buffer.is_null() {
         return -1;
     }
