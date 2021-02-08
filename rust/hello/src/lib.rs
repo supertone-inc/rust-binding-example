@@ -1,6 +1,8 @@
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+pub type Result<T, E = Error> = std::result::Result<T, E>;
+
+#[derive(Error, Debug)]
 pub enum Error {
     #[error("{0}")]
     Default(&'static str),
@@ -14,7 +16,7 @@ pub fn concat(a: &[f32], b: &[f32]) -> Vec<f32> {
     [a, b].concat()
 }
 
-pub fn raise_error() -> Result<(), Error> {
+pub fn raise_error() -> Result<()> {
     Err(Error::Default("error raised from Rust!"))
 }
 
@@ -37,9 +39,9 @@ mod tests {
 
     #[test]
     fn test_raise_error() {
-        assert_eq!(
-            raise_error(),
-            Err(Error::Default("error raised from Rust!"))
-        );
+        match raise_error() {
+            Err(Error::Default(msg)) => assert_eq!(msg, "error raised from Rust!"),
+            _ => panic!("wrong result"),
+        }
     }
 }
