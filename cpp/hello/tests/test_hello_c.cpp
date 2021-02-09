@@ -69,9 +69,9 @@ TEST_CASE("test_c_raise_error")
 
   REQUIRE(error_length > 0);
 
-  char message[error_length];
-  int message_length = hello__last_error_message(message, error_length);
+  std::string message(error_length - 1, '\0');
+  int message_length = hello__last_error_message((char *)message.c_str(), message.capacity());
 
   REQUIRE(message_length > 0);
-  REQUIRE(std::string(message) == "error raised from Rust!");
+  REQUIRE(message == "error raised from Rust!");
 }
