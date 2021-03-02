@@ -1,13 +1,11 @@
 [env]
 PROJECT_NAME = "hello"
-"/" = {source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "/", mapping = {"windows" = "\\"}}
-CARGO_TARGET_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}${/}target"
+l = { source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "/", mapping = { "windows" = "\\" } }
+CARGO_TARGET_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}${l}target"
 
 [tasks.build]
 clear = true
-script.pre = "cargo make pre-build"
-script.main = "cargo make main-build"
-script.post = "cargo make post-build"
+run_task = [{ name = ["pre-build", "main-build", "post-build"] }]
 
 [tasks.pre-build]
 
