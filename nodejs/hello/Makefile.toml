@@ -3,3 +3,7 @@ extend = "../../Makefile.toml"
 [tasks.main-build]
 install_script = "yarn"
 script = "yarn build:debug"
+
+[tasks.test]
+dependencies = ["build"]
+script = "yarn test"

@@ -8,7 +8,8 @@
     "@node-rs/helper": "^1.0.0"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^1.0.0"
+    "@napi-rs/cli": "^1.0.0",
+    "jest": "^26.6.3"
   },
   "engines": {
     "node": ">= 10"
@@ -18,6 +19,7 @@
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
-    "version": "napi version"
+    "version": "napi version",
+    "test": "jest"
   }
 }
