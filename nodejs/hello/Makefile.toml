@@ -1,0 +1,5 @@
+extend = "../../Makefile.toml"
+
+[tasks.main-build]
+install_script = "yarn"
+script = "yarn build:debug"
