@@ -1,0 +1,16 @@
+{
+  "name": "hello-linux-x64-gnu",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "hello.linux-x64-gnu.node",
+  "files": [
+    "hello.linux-x64-gnu.node"
+  ],
+  "engines": {
+    "node": ">= 10"
+  }
+}

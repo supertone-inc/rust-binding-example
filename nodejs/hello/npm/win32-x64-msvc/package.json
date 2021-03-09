@@ -1,0 +1,16 @@
+{
+  "name": "hello-win32-x64-msvc",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "hello.win32-x64-msvc.node",
+  "files": [
+    "hello.win32-x64-msvc.node"
+  ],
+  "engines": {
+    "node": ">= 10"
+  }
+}
