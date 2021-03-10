@@ -13,6 +13,3 @@ hello = { path = "../../rust/hello" }
 
 [build-dependencies]
 napi-build = "1"
-
-[profile.release]
-lto = true

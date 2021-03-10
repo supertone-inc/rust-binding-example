@@ -5,7 +5,7 @@ script = "mkdir -p hello"
 
 [tasks.main-build]
 install_script = "npm install"
-script = "npm build"
+script = "npm run-script build"
 
 [tasks.test]
 dependencies = ["build"]
