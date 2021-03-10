@@ -7,3 +7,7 @@ test('to_uppercase', () => {
 test('concat', () => {
   expect(hello.concat([1, 2], [3, 4, 5])).toEqual([1, 2, 3, 4, 5])
 })
+
+test('raise_error', () => {
+  expect(() => hello.raise_error()).toThrow('error raised from Rust!')
+})

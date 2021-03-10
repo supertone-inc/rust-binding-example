@@ -2,13 +2,13 @@
 extern crate napi_derive;
 
 use std::convert::TryInto;
-
-use napi::{CallContext, JsNumber, JsObject, JsString, Result};
+use napi::{CallContext, Env, JsNumber, JsObject, JsString, JsUndefined, Result, ContextlessResult, Error};
 
 #[module_exports]
 fn init(mut exports: JsObject) -> Result<()> {
   exports.create_named_method("to_uppercase", to_uppercase)?;
   exports.create_named_method("concat", concat)?;
+  exports.create_named_method("raise_error", raise_error)?;
 
   Ok(())
 }
@@ -47,4 +47,10 @@ fn concat(ctx: CallContext) -> Result<JsObject> {
     .collect::<Result<Vec<()>>>()?;
 
   Ok(array)
+}
+
+#[contextless_function]
+fn raise_error(env: Env) -> ContextlessResult<JsUndefined> {
+  hello::raise_error().map_err(|err| Error::from_reason(err.to_string()))?;
+  env.get_undefined().map(Some)
 }
