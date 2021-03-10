@@ -1,4 +1,4 @@
-const hello = require("..");
+const hello = require("../hello");
 
 test("to_uppercase", () => {
   expect(hello.to_uppercase("Hello World!")).toBe("HELLO WORLD!");
