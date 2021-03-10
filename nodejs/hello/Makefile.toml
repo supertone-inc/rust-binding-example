@@ -4,9 +4,9 @@ extend = "../../Makefile.toml"
 script = "mkdir -p hello"
 
 [tasks.main-build]
-install_script = "yarn"
-script = "yarn build"
+install_script = "npm install"
+script = "npm build"
 
 [tasks.test]
 dependencies = ["build"]
-script = "yarn test"
+script = "npm test"
