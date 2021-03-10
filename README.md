@@ -13,6 +13,10 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 
 - [CMake](https://cmake.org/download) (See [this](https://cgold.readthedocs.io/en/latest/first-step/installation.html) for installation.)
 
+### For Node.js Project
+
+- [Node.js](https://nodejs.org/en/download) >= 10 (Using [nvm](https://github.com/nvm-sh/nvm) is recommended.)
+
 ### For Python Project
 
 - [Python](https://www.python.org/downloads) >= 3.8 (Using [pyenv](https://github.com/pyenv/pyenv#installation) is recommended.)
