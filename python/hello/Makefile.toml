@@ -16,8 +16,4 @@ cp target/debug/${SOURCE_LIB_FILE_NAME} ${PROJECT_NAME}/${TARGET_LIB_FILE_NAME} 
 
 [tasks.test]
 dependencies = ["build"]
-script = '''
-#!@shell
-cargo test --lib -- --nocapture || exit $?
-poetry run pytest -s || exit $?
-'''
+script = "poetry run pytest -s"
