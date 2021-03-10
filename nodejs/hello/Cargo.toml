@@ -1,0 +1,18 @@
+[package]
+name = "hello_nodejs"
+version = "0.0.0"
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = "1"
+napi-derive = "1"
+hello = { path = "../../rust/hello" }
+
+[build-dependencies]
+napi-build = "1"
+
+[profile.release]
+lto = true

@@ -1,0 +1,12 @@
+extend = "../../Makefile.toml"
+
+[tasks.pre-build]
+script = "mkdir -p hello"
+
+[tasks.main-build]
+install_script = "yarn"
+script = "yarn build"
+
+[tasks.test]
+dependencies = ["build"]
+script = "yarn test"
