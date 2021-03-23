@@ -3,7 +3,7 @@ extend = "../../Makefile.toml"
 [tasks.pre-build]
 script = '''
 #!@shell
-mkdir -p ${PROJECT_NAME}/lib
+mkdir -p ${PROJECT_NAME}/lib || exit 0
 '''
 
 [tasks.post-build.windows]

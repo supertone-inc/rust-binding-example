@@ -1,7 +1,10 @@
 extend = "../../Makefile.toml"
 
 [tasks.pre-build]
-script = "mkdir -p hello"
+script = '''
+#!@shell
+mkdir -p ${PROJECT_NAME} || exit 0
+'''
 
 [tasks.main-build]
 install_script = "npm install"
