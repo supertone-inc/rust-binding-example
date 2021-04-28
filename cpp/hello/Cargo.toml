@@ -14,4 +14,4 @@ thiserror = "1.0"
 hello = { path = "../../rust/hello" }
 
 [build-dependencies]
-cbindgen = "0.17"
+cbindgen = "0.19"
