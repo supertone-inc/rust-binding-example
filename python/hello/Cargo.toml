@@ -10,7 +10,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 thiserror = "1.0"
-hello = {path = "../../rust/hello"}
+hello = { path = "../../rust/hello" }
 
 [dependencies.pyo3]
 version = "0.13"

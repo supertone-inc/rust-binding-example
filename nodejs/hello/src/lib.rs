@@ -2,9 +2,22 @@
 extern crate napi_derive;
 
 use napi::{
-    CallContext, ContextlessResult, Env, Error, JsNumber, JsObject, JsString, JsUndefined, Result,
+    CallContext, ContextlessResult, Env, JsNumber, JsObject, JsString, JsUndefined, Result,
 };
 use std::convert::TryInto;
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum Error {
+    #[error(transparent)]
+    Hello(#[from] hello::Error),
+}
+
+impl From<Error> for napi::Error {
+    fn from(err: Error) -> Self {
+        Self::from_reason(err.to_string())
+    }
+}
 
 #[module_exports]
 fn init(mut exports: JsObject) -> Result<()> {
@@ -55,6 +68,6 @@ fn concat(ctx: CallContext) -> Result<JsObject> {
 
 #[contextless_function]
 fn raise_error(env: Env) -> ContextlessResult<JsUndefined> {
-    hello::raise_error().map_err(|err| Error::from_reason(err.to_string()))?;
+    hello::raise_error().map_err(Into::<Error>::into)?;
     env.get_undefined().map(Some)
 }
