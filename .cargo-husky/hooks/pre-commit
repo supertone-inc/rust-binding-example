@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for file in $(git diff --name-only --staged); do
+    if [ ! -f "$file" ]; then
+        continue
+    fi
+
+    rustfmt $file
+    git add $file
+done
