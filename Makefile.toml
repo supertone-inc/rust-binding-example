@@ -1,7 +1,6 @@
 [env]
 PROJECT_NAME = "hello"
 l = { source = "${CARGO_MAKE_RUST_TARGET_OS}", default_value = "/", mapping = { "windows" = "\\" } }
-CARGO_TARGET_DIR = "${CARGO_MAKE_WORKING_DIRECTORY}${l}target"
 
 [tasks.build]
 clear = true

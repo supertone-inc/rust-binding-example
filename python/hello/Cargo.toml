@@ -1,11 +1,10 @@
 [package]
-name = "hello_python"
+name = "hello-python"
 version = "0.1.0"
 authors = []
 edition = "2018"
 
 [lib]
-name = "hello"
 crate-type = ["cdylib"]
 
 [dependencies]

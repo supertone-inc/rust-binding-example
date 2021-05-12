@@ -168,7 +168,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello_cpp"
+name = "hello-cpp"
 version = "0.1.0"
 dependencies = [
  "cbindgen",
@@ -178,7 +178,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello_nodejs"
+name = "hello-nodejs"
 version = "0.0.0"
 dependencies = [
  "hello",
@@ -189,7 +189,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello_python"
+name = "hello-python"
 version = "0.1.0"
 dependencies = [
  "hello",

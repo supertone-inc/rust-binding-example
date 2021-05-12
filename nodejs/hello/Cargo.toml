@@ -1,5 +1,5 @@
 [package]
-name = "hello_nodejs"
+name = "hello-nodejs"
 version = "0.0.0"
 edition = "2018"
 

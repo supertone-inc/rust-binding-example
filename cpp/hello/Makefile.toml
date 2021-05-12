@@ -9,15 +9,15 @@ mkdir -p ${PROJECT_NAME}/lib || exit 0
 [tasks.post-build.windows]
 script = '''
 #!@shell
-cp target/debug/${PROJECT_NAME}.dll ${PROJECT_NAME}/lib/${PROJECT_NAME}.dll || exit $?
-cp target/debug/${PROJECT_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME}.lib || exit $?
+cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/${CARGO_MAKE_CRATE_FS_NAME}.dll ${PROJECT_NAME}/lib/${PROJECT_NAME}.dll || exit $?
+cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/${CARGO_MAKE_CRATE_FS_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME}.lib || exit $?
 '''
 
 [tasks.post-build.mac]
-script = "cp target/debug/lib${PROJECT_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib"
+script = "cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/lib${CARGO_MAKE_CRATE_FS_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib"
 
 [tasks.post-build.linux]
-script = "cp target/debug/lib${PROJECT_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so"
+script = "cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/lib${CARGO_MAKE_CRATE_FS_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so"
 
 [tasks.test]
 dependencies = ["build"]
