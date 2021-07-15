@@ -9,24 +9,21 @@ mkdir -p ${PROJECT_NAME}/lib || exit 0
 [tasks.post-build.windows]
 script = '''
 #!@shell
-cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/${CARGO_MAKE_CRATE_FS_NAME}.dll ${PROJECT_NAME}/lib/${PROJECT_NAME}.dll || exit $?
-cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/${CARGO_MAKE_CRATE_FS_NAME}.dll.lib ${PROJECT_NAME}/lib/${PROJECT_NAME}.lib || exit $?
+cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/${CARGO_MAKE_CRATE_FS_NAME}.dll ${PROJECT_NAME}/lib/${CARGO_MAKE_CRATE_FS_NAME}.dll || exit $?
+cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/${CARGO_MAKE_CRATE_FS_NAME}.dll.lib ${PROJECT_NAME}/lib/${CARGO_MAKE_CRATE_FS_NAME}.lib || exit $?
 '''
 
 [tasks.post-build.mac]
-script = "cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/lib${CARGO_MAKE_CRATE_FS_NAME}.dylib ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.dylib"
+script = "cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/lib${CARGO_MAKE_CRATE_FS_NAME}.dylib ${PROJECT_NAME}/lib/lib${CARGO_MAKE_CRATE_FS_NAME}.dylib"
 
 [tasks.post-build.linux]
-script = "cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/lib${CARGO_MAKE_CRATE_FS_NAME}.so ${PROJECT_NAME}/lib/lib${PROJECT_NAME}.so"
+script = "cp ${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/debug/lib${CARGO_MAKE_CRATE_FS_NAME}.so ${PROJECT_NAME}/lib/lib${CARGO_MAKE_CRATE_FS_NAME}.so"
 
 [tasks.test]
 dependencies = ["build"]
 script = '''
 #!@shell
 cmake -S . -B build || exit $?
-cmake --build build || exit $?
-cd build && ctest -V || exit $?
+cmake --build build --clean-first || exit $?
+ctest --test-dir build -V || exit $?
 '''
-
-[tasks.test.windows]
-env.PATH = "${CARGO_MAKE_WORKING_DIRECTORY}\\${PROJECT_NAME}\\lib;${PATH}"
