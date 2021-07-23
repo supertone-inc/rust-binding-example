@@ -7,7 +7,7 @@ mkdir -p ${PROJECT_NAME} || exit 0
 '''
 
 [tasks.main-build]
-install_script = "npm install"
+install_script = "npm ci"
 script = "npm run-script build"
 
 [tasks.test]
