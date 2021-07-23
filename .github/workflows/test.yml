@@ -40,7 +40,6 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/.cargo/bin
             ~/.cargo/git
             ~/.cargo/registry
             **/target
@@ -61,7 +60,7 @@ jobs:
           restore-keys: ${{ runner.os }}-node-
 
       - name: Install cargo-make
-        run: cargo install --debug cargo-make
+        uses: davidB/rust-cargo-make@v1
 
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v4
