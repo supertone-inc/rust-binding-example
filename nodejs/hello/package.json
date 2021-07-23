@@ -4,7 +4,7 @@
     "name": "index"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^1.0.4",
+    "@napi-rs/cli": "^1.1.0",
     "jest": "^26.6.3"
   },
   "engines": {
