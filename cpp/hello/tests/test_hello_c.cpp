@@ -2,7 +2,7 @@
 
 #include <hello.h>
 
-TEST_CASE("test_c_to_uppercase")
+TEST_CASE("[C] to_uppercase()")
 {
   char *string = hello__to_uppercase("Hello World!");
 
@@ -11,7 +11,7 @@ TEST_CASE("test_c_to_uppercase")
   hello__destroy_string(string);
 }
 
-TEST_CASE("test_c_to_uppercase_safe")
+TEST_CASE("[C] to_uppercase_safe()")
 {
   std::string in_string("Hello World!");
   std::string out_string(in_string.length(), '\0');
@@ -21,7 +21,7 @@ TEST_CASE("test_c_to_uppercase_safe")
   REQUIRE(out_string == "HELLO WORLD!");
 }
 
-TEST_CASE("test_c_concat")
+TEST_CASE("[C] concat()")
 {
   float a[] = {1.f, 2.f};
   size_t a_length = sizeof(a) / sizeof(a[0]);
@@ -40,7 +40,7 @@ TEST_CASE("test_c_concat")
   hello__destroy_array(array);
 }
 
-TEST_CASE("test_c_concat_safe")
+TEST_CASE("[C] concat_safe()")
 {
   float a[] = {1.f, 2.f};
   const size_t a_length = sizeof(a) / sizeof(a[0]);
@@ -59,7 +59,7 @@ TEST_CASE("test_c_concat_safe")
   REQUIRE(c[4] == 5.f);
 }
 
-TEST_CASE("test_c_raise_error")
+TEST_CASE("[C] raise_error()")
 {
   int result = hello__raise_error();
 
