@@ -62,16 +62,15 @@ TEST_CASE("[C] concat_safe()")
 TEST_CASE("[C] raise_error()")
 {
   int result = hello__raise_error();
-
   REQUIRE(result < 0);
 
   size_t error_length = hello__last_error_length();
-
   REQUIRE(error_length > 0);
 
-  std::string message(error_length - 1, '\0');
-  int message_length = hello__last_error_message((char *)message.c_str(), message.capacity());
+  char *message = new char[error_length];
+  int message_length = hello__last_error_message(message, error_length);
+  CHECK(message_length == error_length - 1);
+  CHECK(std::string(message) == "error raised from Rust!");
 
-  REQUIRE(message_length > 0);
-  REQUIRE(message == "error raised from Rust!");
+  delete[] message;
 }

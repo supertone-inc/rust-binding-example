@@ -50,7 +50,7 @@ namespace hello
       return;
     }
 
-    std::string message(error_length - 1, '\0');
+    std::string message(error_length, '\0');
     int message_length = hello__last_error_message((char *)message.c_str(), message.capacity());
     if (message_length <= 0)
     {
