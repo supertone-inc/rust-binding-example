@@ -5,7 +5,7 @@
 
 TEST_CASE("[C++] to_uppercase()")
 {
-  REQUIRE(hello::to_uppercase(std::string("Hello World!")) == "HELLO WORLD!");
+  REQUIRE(hello::string::to_uppercase(std::string("Hello World!")) == "HELLO WORLD!");
 }
 
 TEST_CASE("[C++] concat()")

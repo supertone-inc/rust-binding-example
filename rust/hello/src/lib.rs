@@ -1,12 +1,9 @@
 pub mod error;
+pub mod string;
 
 pub use error::Error;
 
 pub type Result<T, E = Error> = std::result::Result<T, E>;
-
-pub fn to_uppercase(s: &str) -> String {
-    String::from(s).to_uppercase()
-}
 
 pub fn concat(a: &[f32], b: &[f32]) -> Vec<f32> {
     [a, b].concat()
@@ -19,11 +16,6 @@ extern crate assert_matches;
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn test_to_uppercase() {
-        assert_eq!(to_uppercase("Hello World!"), "HELLO WORLD!");
-    }
 
     #[test]
     fn test_concat() {

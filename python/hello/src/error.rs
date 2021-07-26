@@ -13,9 +13,7 @@ impl std::convert::From<Error> for PyErr {
     }
 }
 
-pub fn init_module(py: Python) -> PyResult<&PyModule> {
-    let m = PyModule::new(py, "error")?;
-
+pub fn init_module(m: &PyModule) -> PyResult<&PyModule> {
     m.add_function(wrap_pyfunction!(raise_error, m)?)?;
 
     Ok(m)

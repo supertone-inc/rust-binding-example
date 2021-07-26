@@ -1,26 +1,20 @@
 mod error;
+mod string;
 
 #[macro_use]
 extern crate napi_derive;
 
-use napi::{CallContext, Env, JsNumber, JsObject, JsString, Result};
+use napi::{CallContext, Env, JsNumber, JsObject, Result};
 use std::convert::TryInto;
 
 #[module_exports]
 fn init(mut exports: JsObject, env: Env) -> Result<()> {
-    exports.create_named_method("to_uppercase", to_uppercase)?;
     exports.create_named_method("concat", concat)?;
 
     exports.set_named_property("error", error::init_module(env)?)?;
+    exports.set_named_property("string", string::init_module(env)?)?;
 
     Ok(())
-}
-
-#[js_function(1)]
-fn to_uppercase(ctx: CallContext) -> Result<JsString> {
-    let s = ctx.get::<JsString>(0)?.into_utf8()?;
-
-    ctx.env.create_string(&hello::to_uppercase(s.as_str()?))
 }
 
 #[js_function(2)]

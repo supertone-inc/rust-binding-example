@@ -1,20 +1,16 @@
 mod error;
+mod string;
 
 use pyo3::{prelude::*, wrap_pyfunction};
 
 #[pymodule]
 fn hello(py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(to_uppercase, m)?)?;
     m.add_function(wrap_pyfunction!(concat, m)?)?;
 
-    m.add_submodule(error::init_module(py)?)?;
+    m.add_submodule(error::init_module(PyModule::new(py, "error")?)?)?;
+    m.add_submodule(string::init_module(PyModule::new(py, "string")?)?)?;
 
     Ok(())
-}
-
-#[pyfunction]
-fn to_uppercase(s: &str) -> String {
-    hello::to_uppercase(s)
 }
 
 #[pyfunction]
