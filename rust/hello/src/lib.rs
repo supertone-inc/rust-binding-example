@@ -1,12 +1,8 @@
-use thiserror::Error;
+pub mod error;
+
+pub use error::Error;
 
 pub type Result<T, E = Error> = std::result::Result<T, E>;
-
-#[derive(Error, Debug)]
-pub enum Error {
-    #[error("{0}")]
-    Default(&'static str),
-}
 
 pub fn to_uppercase(s: &str) -> String {
     String::from(s).to_uppercase()

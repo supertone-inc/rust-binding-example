@@ -1,17 +1,7 @@
-use pyo3::{exceptions::PyException, prelude::*, wrap_pyfunction};
-use thiserror::Error;
+mod error;
 
-#[derive(Error, Debug)]
-pub enum Error {
-    #[error(transparent)]
-    Hello(#[from] hello::Error),
-}
-
-impl std::convert::From<Error> for PyErr {
-    fn from(err: Error) -> PyErr {
-        PyException::new_err(err.to_string())
-    }
-}
+use error::Error;
+use pyo3::{prelude::*, wrap_pyfunction};
 
 #[pymodule]
 fn hello(_py: Python, m: &PyModule) -> PyResult<()> {
@@ -33,6 +23,6 @@ fn concat(a: Vec<f32>, b: Vec<f32>) -> Vec<f32> {
 }
 
 #[pyfunction]
-fn raise_error() -> Result<(), Error> {
+pub fn raise_error() -> Result<(), Error> {
     Ok(hello::raise_error()?)
 }
