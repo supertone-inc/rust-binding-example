@@ -1,5 +1,6 @@
 {
   "name": "hello",
+  "main": "hello",
   "napi": {
     "name": "index"
   },
