@@ -1,8 +1,8 @@
 {
   "name": "hello-neon",
-  "main": "index.node",
+  "main": "hello",
   "scripts": {
-    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "build": "cargo-cp-artifact -nc hello/index.node -- cargo build --message-format=json-render-diagnostics",
     "install": "npm run build",
     "test": "cargo test"
   },
