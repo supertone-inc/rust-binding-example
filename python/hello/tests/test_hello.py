@@ -1,4 +1,3 @@
-import pytest
 import hello
 
 def test_to_uppercase():
@@ -6,7 +5,3 @@ def test_to_uppercase():
 
 def test_concat():
     assert hello.concat([1, 2], [3, 4, 5]) == [1, 2, 3, 4, 5]
-
-def test_raise_error():
-    with pytest.raises(BaseException, match="error raised from Rust!"):
-        hello.raise_error()

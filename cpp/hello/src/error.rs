@@ -12,18 +12,18 @@ thread_local! {
     static LAST_ERROR: RefCell<Option<Box<Error>>> = RefCell::new(None);
 }
 
-pub fn update_last_error(err: Error) {
+fn update_last_error(err: Error) {
     LAST_ERROR.with(|prev| {
         *prev.borrow_mut() = Some(Box::new(err));
     });
 }
 
-pub fn take_last_error() -> Option<Box<Error>> {
+fn take_last_error() -> Option<Box<Error>> {
     LAST_ERROR.with(|prev| prev.borrow_mut().take())
 }
 
 #[no_mangle]
-pub extern "C" fn hello__last_error_length() -> size_t {
+pub extern "C" fn hello__error__last_error_length() -> size_t {
     LAST_ERROR.with(|prev| match *prev.borrow() {
         Some(ref err) => err.to_string().len() as size_t + 1,
         None => 0,
@@ -31,7 +31,10 @@ pub extern "C" fn hello__last_error_length() -> size_t {
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn hello__last_error_message(buffer: *mut c_char, length: size_t) -> c_int {
+pub unsafe extern "C" fn hello__error__last_error_message(
+    buffer: *mut c_char,
+    length: size_t,
+) -> c_int {
     if buffer.is_null() {
         return -1;
     }
@@ -58,4 +61,15 @@ pub unsafe extern "C" fn hello__last_error_message(buffer: *mut c_char, length: 
     buffer[error_message.len()] = 0;
 
     error_message.len() as c_int
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn hello__error__raise_error() -> c_int {
+    match hello::error::raise_error() {
+        Ok(_) => return 0,
+        Err(err) => {
+            update_last_error(err.into());
+            return -1;
+        }
+    };
 }

@@ -12,10 +12,6 @@ pub fn concat(a: &[f32], b: &[f32]) -> Vec<f32> {
     [a, b].concat()
 }
 
-pub fn raise_error() -> Result<()> {
-    Err(Error::Default("error raised from Rust!"))
-}
-
 #[cfg(test)]
 #[macro_use]
 extern crate assert_matches;
@@ -35,10 +31,5 @@ mod tests {
             concat(&[1.0, 2.0], &[3.0, 4.0, 5.0]),
             [1.0, 2.0, 3.0, 4.0, 5.0]
         );
-    }
-
-    #[test]
-    fn test_raise_error() {
-        assert_matches!(raise_error(), Err(Error::Default(msg)) if msg == "error raised from Rust!");
     }
 }

@@ -1,7 +1,6 @@
 mod error;
-use error::*;
 
-use libc::{c_char, c_float, c_int, size_t};
+use libc::{c_char, c_float, size_t};
 use std::ffi::{CStr, CString};
 
 #[no_mangle]
@@ -57,15 +56,4 @@ pub extern "C" fn hello__concat_safe(
     let c = hello::concat(a, b);
 
     unsafe { std::ptr::copy_nonoverlapping(c.as_ptr(), out_array, c.len()) }
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn hello__raise_error() -> c_int {
-    match hello::raise_error() {
-        Ok(_) => return 0,
-        Err(err) => {
-            update_last_error(err.into());
-            return -1;
-        }
-    };
 }

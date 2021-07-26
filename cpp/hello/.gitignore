@@ -1,4 +1,4 @@
 /target
 /hello
-!/hello/include/hello.hpp
+!/hello/include/*.hpp
 /build

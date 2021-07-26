@@ -15,6 +15,6 @@ TEST_CASE("[C++] concat()")
 
 TEST_CASE("[C++] raise_error()")
 {
-  REQUIRE_THROWS_AS(hello::raise_error(), hello::Exception);
-  REQUIRE_THROWS_WITH(hello::raise_error(), "error raised from Rust!");
+  REQUIRE_THROWS_AS(hello::error::raise_error(), hello::error::Exception);
+  REQUIRE_THROWS_WITH(hello::error::raise_error(), "error raised from Rust!");
 }
