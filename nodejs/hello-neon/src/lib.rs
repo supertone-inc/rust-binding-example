@@ -1,11 +1,11 @@
-use neon::prelude::*;
+mod string;
 
-fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
-    Ok(cx.string("hello node"))
-}
+use neon::prelude::*;
 
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
-    cx.export_function("hello", hello)?;
+    let string = string::init_module(&mut cx)?;
+    cx.export_value("string", string)?;
+
     Ok(())
 }

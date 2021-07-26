@@ -141,6 +141,7 @@ dependencies = [
 name = "hello-neon"
 version = "0.1.0"
 dependencies = [
+ "hello",
  "neon",
 ]
 
