@@ -1,38 +1,14 @@
-use pyo3::{exceptions::PyException, prelude::*, wrap_pyfunction};
-use thiserror::Error;
+mod array;
+mod error;
+mod string;
 
-#[derive(Error, Debug)]
-pub enum Error {
-    #[error(transparent)]
-    Hello(#[from] hello::Error),
-}
-
-impl std::convert::From<Error> for PyErr {
-    fn from(err: Error) -> PyErr {
-        PyException::new_err(err.to_string())
-    }
-}
+use pyo3::prelude::*;
 
 #[pymodule]
-fn hello(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(to_uppercase, m)?)?;
-    m.add_function(wrap_pyfunction!(concat, m)?)?;
-    m.add_function(wrap_pyfunction!(raise_error, m)?)?;
+fn hello(py: Python, m: &PyModule) -> PyResult<()> {
+    m.add_submodule(array::init_module(PyModule::new(py, "array")?)?)?;
+    m.add_submodule(error::init_module(PyModule::new(py, "error")?)?)?;
+    m.add_submodule(string::init_module(PyModule::new(py, "string")?)?)?;
 
     Ok(())
-}
-
-#[pyfunction]
-fn to_uppercase(s: &str) -> String {
-    hello::to_uppercase(s)
-}
-
-#[pyfunction]
-fn concat(a: Vec<f32>, b: Vec<f32>) -> Vec<f32> {
-    hello::concat(&a, &b)
-}
-
-#[pyfunction]
-fn raise_error() -> Result<(), Error> {
-    Ok(hello::raise_error()?)
 }
