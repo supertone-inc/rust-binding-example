@@ -1,5 +1,5 @@
 /target
-/hello/include
+/hello/include/*
 !/hello/include/*.hpp
 /hello/lib
 /build
