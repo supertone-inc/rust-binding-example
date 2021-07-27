@@ -143,6 +143,7 @@ version = "0.1.0"
 dependencies = [
  "hello",
  "neon",
+ "thiserror",
 ]
 
 [[package]]

@@ -8,6 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 hello = { path = "../../rust/hello" }
+thiserror = "1.0"
 
 [dependencies.neon]
 version = "0.9"
