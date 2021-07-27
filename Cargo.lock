@@ -138,22 +138,22 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-neon"
-version = "0.1.0"
-dependencies = [
- "hello",
- "neon",
- "thiserror",
-]
-
-[[package]]
-name = "hello-nodejs"
+name = "hello-nodejs-napi"
 version = "0.1.0"
 dependencies = [
  "hello",
  "napi",
  "napi-build",
  "napi-derive",
+ "thiserror",
+]
+
+[[package]]
+name = "hello-nodejs-neon"
+version = "0.1.0"
+dependencies = [
+ "hello",
+ "neon",
  "thiserror",
 ]
 

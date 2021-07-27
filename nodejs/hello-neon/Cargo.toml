@@ -1,5 +1,5 @@
 [package]
-name = "hello-neon"
+name = "hello-nodejs-neon"
 version = "0.1.0"
 edition = "2018"
 
