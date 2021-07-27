@@ -20,10 +20,11 @@ jobs:
           - ubuntu-latest
           - windows-latest
         target:
-          - cpp
-          - nodejs
-          - python
-          - rust
+          - cpp/hello
+          - nodejs/hello-napi
+          - nodejs/hello-neon
+          - python/hello
+          - rust/hello
 
     runs-on: ${{ matrix.os }}
 
@@ -31,13 +32,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - if: ${{ matrix.target == 'nodejs' }}
+      - if: ${{ startsWith(matrix.target, 'nodejs') }}
         name: Setup Node
         uses: actions/setup-node@v2.3.0
         with:
           node-version: 14
 
-      - if: ${{ matrix.target == 'python' }}
+      - if: ${{ startsWith(matrix.target, 'python') }}
         name: Setup Python
         uses: actions/setup-python@v2
         with:
@@ -52,29 +53,29 @@ jobs:
             **/target
           key: ${{ runner.os }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - if: ${{ matrix.target == 'python' }}
+      - if: ${{ startsWith(matrix.target, 'python') }}
         name: Cache Poetry
         uses: actions/cache@v2
         with:
           path: "**/.venv"
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: ${{ runner.os }}-poetry-
+          key: ${{ runner.os }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.target }}-poetry-
 
-      - if: ${{ matrix.target == 'nodejs' }}
+      - if: ${{ startsWith(matrix.target, 'nodejs') }}
         name: Cache Node
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+          key: ${{ runner.os }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.target }}-node-
 
       - name: Install cargo-make
         uses: davidB/rust-cargo-make@v1
 
-      - if: ${{ matrix.target == 'python' }}
+      - if: ${{ startsWith(matrix.target, 'python') }}
         name: Install Poetry
         uses: Gr1N/setup-poetry@v7
 
       - name: Test
-        working-directory: ${{ matrix.target }}/hello
+        working-directory: ${{ matrix.target }}
         run: cargo make test
