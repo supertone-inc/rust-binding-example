@@ -4,15 +4,15 @@
   "napi": {
     "name": "index"
   },
+  "scripts": {
+    "build": "napi build ./hello",
+    "test": "jest"
+  },
   "devDependencies": {
     "@napi-rs/cli": "^1.1.0",
     "jest": "^27.0.6"
   },
   "engines": {
-    "node": ">= 10"
-  },
-  "scripts": {
-    "build": "napi build ./hello",
-    "test": "jest"
+    "node": ">= 14"
   }
 }

@@ -9,5 +9,8 @@
   "devDependencies": {
     "cargo-cp-artifact": "^0.1",
     "jest": "^27.0.6"
+  },
+  "engines": {
+    "node": ">= 14"
   }
 }
