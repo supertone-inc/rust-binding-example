@@ -8,8 +8,10 @@ pub enum Error {
 }
 
 impl Error {
-    pub fn throw<'a, C: Context<'a>>(&self, c: &mut C) -> neon::result::Throw {
-        c.throw_error::<String, JsError>(self.to_string()).err().unwrap()
+    pub fn to_throw<'a, C: Context<'a>>(&self, c: &mut C) -> neon::result::Throw {
+        c.throw_error::<String, JsError>(self.to_string())
+            .err()
+            .unwrap()
     }
 }
 
@@ -23,7 +25,7 @@ pub fn init_module<'a, C: Context<'a>>(c: &mut C) -> JsResult<'a, JsObject> {
 }
 
 fn raise_error(mut cx: FunctionContext) -> JsResult<JsUndefined> {
-    hello::error::raise_error().map_err(|err| Error::from(err).throw(&mut cx))?;
+    hello::error::raise_error().map_err(|err| Error::from(err).to_throw(&mut cx))?;
 
     Ok(cx.undefined())
 }
