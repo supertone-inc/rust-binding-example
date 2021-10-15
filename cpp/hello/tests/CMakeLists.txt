@@ -21,7 +21,7 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello_cpp)
 
 if(WIN32)
-  file(GLOB_RECURSE DYNAMIC_LIBS "$ENV{CARGO_MAKE_WORKING_DIRECTORY}/$ENV{PROJECT_NAME}/lib/*.dll")
+  file(GLOB_RECURSE DYNAMIC_LIBS "${CMAKE_SOURCE_DIR}/hello/lib/*.dll")
 	foreach(dll ${DYNAMIC_LIBS})
 		add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy ${dll} $<TARGET_FILE_DIR:${PROJECT_NAME}>

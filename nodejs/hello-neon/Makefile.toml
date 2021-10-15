@@ -1,8 +1,0 @@
-extend = "../../Makefile.toml"
-
-[tasks.main-build]
-script = "npm install"
-
-[tasks.test]
-dependencies = ["build"]
-script = "npm test"
