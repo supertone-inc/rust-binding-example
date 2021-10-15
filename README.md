@@ -11,7 +11,7 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 
 ### For C++ Project
 
-- [CMake](https://cmake.org/download) (See [this](https://cgold.readthedocs.io/en/latest/first-step/installation.html) for installation.)
+- [CMake](https://cmake.org/download) >= 3.16 (See [this](https://cgold.readthedocs.io/en/latest/first-step/installation.html) for installation.)
 
 ### For Node.js Project
 
