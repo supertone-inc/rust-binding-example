@@ -18,6 +18,7 @@ jobs:
           distro: ubuntu20.04
           githubToken: ${{ github.token }}
           install: |
+            # Install essential dependencies
             apt-get update -y
             apt-get install -y curl
 
@@ -41,6 +42,7 @@ jobs:
             # Poetry
             curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
           run: |
+            # Setup paths
             source $HOME/.cargo/env
             source $HOME/.poetry/env
 
@@ -51,3 +53,6 @@ jobs:
             node -v
             python -V
             poetry -V
+
+            # Test
+            just test
