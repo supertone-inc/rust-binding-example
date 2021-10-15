@@ -40,7 +40,7 @@ jobs:
           install: |
             # Install essential dependencies
             apt-get update -y
-            apt-get install -y curl
+            apt-get install -y build-essential curl
 
             # Rust
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
