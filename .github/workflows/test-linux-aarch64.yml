@@ -26,3 +26,7 @@ jobs:
             source $HOME/.cargo/env
             cargo -V
             just -V
+            cmake --version
+            node -v
+            python -V
+            poetry -V
