@@ -11,6 +11,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Cache Cargo
+        uses: actions/cache@v2
+        with:
+          path: "**/target"
+          key: linux-aarch64-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache NPM
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: linux-aarch64-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: linux-aarch64-node-
+
+      - name: Cache Poetry
+        uses: actions/cache@v2
+        with:
+          path: "**/.venv"
+          key: linux-aarch64-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: linux-aarch64-poetry-
+
       - name: Test
         uses: uraimo/run-on-arch-action@v2.1.1
         with:
