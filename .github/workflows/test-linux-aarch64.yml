@@ -19,11 +19,20 @@ jobs:
           githubToken: ${{ github.token }}
           install: |
             apt-get update -y
-            apt-get install -y \
-              curl \
-              cmake
+            apt-get install -y curl
+
+            # Rust
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+
+            # just
             curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
+
+            # CMake
+            apt-get install -y cmake
+
+            # Node.js
+            curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+            apt-get install -y nodejs
           run: |
             source $HOME/.cargo/env
             cargo -V
