@@ -6,8 +6,8 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 
 ### Common
 
-- [Rust](https://www.rust-lang.org) (See [Getting started](https://www.rust-lang.org/learn/get-started) for installation.)
-- [cargo-make](https://sagiegurari.github.io/cargo-make)
+- [Rust](https://www.rust-lang.org/tools/install)
+- [just](https://github.com/casey/just)
 
 ### For C++ Project
 
@@ -28,14 +28,14 @@ You can run following commands either in project's root directory or in each sub
 
 ### Build
 
-```sh
-cargo make build
+```shell
+just build
 ```
 
 ### Test
 
-```sh
-cargo make test
+```shell
+just test
 ```
 
 > The `test` command automatically runs `build` before being executed.
