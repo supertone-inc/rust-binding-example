@@ -19,4 +19,4 @@ build:
 test: build
     cmake -S . -B build
     cmake --build build --clean-first
-    ctest --test-dir build -V
+    ctest --test-dir build -V --no-tests=error
