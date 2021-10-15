@@ -48,9 +48,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/.cargo/git
-            ~/.cargo/registry
-            **/target
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            **/target/
           key: ${{ runner.os }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - if: ${{ startsWith(matrix.target, 'python') }}
