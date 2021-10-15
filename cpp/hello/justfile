@@ -1,17 +1,19 @@
-export LIB_FILE_NAME := if os() == "windows" {
-    "hello_cpp.dll"
+LIB_NAME := "hello_cpp"
+
+LIB_FILE_NAME := if os() == "windows" {
+    LIB_NAME + ".dll"
 } else if os() == "macos" {
-    "libhello_cpp.dylib"
+    "lib" + LIB_NAME + ".dylib"
 } else {
-    "libhello_cpp.so"
+    "lib" + LIB_NAME + ".so"
 }
 
 build:
     cargo build
     mkdir -p hello/lib
-    cp ../../target/debug/$LIB_FILE_NAME hello/lib/$LIB_FILE_NAME
+    cp ../../target/debug/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
     if [ {{os()}} = "windows" ]; then \
-        cp ../../target/debug/$LIB_FILE_NAME.lib hello/lib/$LIB_FILE_NAME.lib; \
+        cp ../../target/debug/{{LIB_FILE_NAME}}.lib hello/lib/{{LIB_NAME}}.lib; \
     fi
 
 test: build

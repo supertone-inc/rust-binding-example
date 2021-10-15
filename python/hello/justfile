@@ -4,7 +4,7 @@ export PYO3_PYTHON := if os() == "windows" {
     justfile_directory() + "/.venv/bin/python"
 }
 
-export SOURCE_LIB_FILE_NAME := if os() == "windows" {
+SOURCE_LIB_FILE_NAME := if os() == "windows" {
     "hello_python.dll"
 } else if os() == "macos" {
     "libhello_python.dylib"
@@ -12,7 +12,7 @@ export SOURCE_LIB_FILE_NAME := if os() == "windows" {
     "libhello_python.so"
 }
 
-export TARGET_LIB_FILE_NAME := if os() == "windows" {
+TARGET_LIB_FILE_NAME := if os() == "windows" {
     "hello.pyd"
 } else {
     "hello.so"
@@ -21,7 +21,7 @@ export TARGET_LIB_FILE_NAME := if os() == "windows" {
 build:
     poetry install
     cargo build
-    cp ../../target/debug/$SOURCE_LIB_FILE_NAME hello/$TARGET_LIB_FILE_NAME
+    cp ../../target/debug/{{SOURCE_LIB_FILE_NAME}} hello/{{TARGET_LIB_FILE_NAME}}
 
 test: build
     poetry run pytest -s
