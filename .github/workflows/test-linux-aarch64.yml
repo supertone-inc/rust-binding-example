@@ -20,6 +20,7 @@ jobs:
           install: |
             apt-get update -y
             apt-get install -y curl
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
           run: |
+            source $HOME/.cargo/env
             cargo -V
