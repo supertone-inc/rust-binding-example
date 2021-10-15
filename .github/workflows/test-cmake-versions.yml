@@ -1,6 +1,6 @@
 name: Test CMake Versions
 
-on: push
+on: workflow_dispatch
 
 jobs:
   test:
