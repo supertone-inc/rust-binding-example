@@ -1,0 +1,20 @@
+export LIB_FILE_NAME := if os() == "windows" {
+    "hello_cpp.dll"
+} else if os() == "macos" {
+    "libhello_cpp.dylib"
+} else {
+    "libhello_cpp.so"
+}
+
+build:
+    cargo build
+    mkdir -p hello/lib
+    cp ../../target/debug/$LIB_FILE_NAME hello/lib/$LIB_FILE_NAME
+    if [ {{os()}} = "windows" ]; then \
+        cp ../../target/debug/$LIB_FILE_NAME.lib hello/lib/$LIB_FILE_NAME.lib; \
+    fi
+
+test: build
+    cmake -S . -B build
+    cmake --build build --clean-first
+    ctest --test-dir build -V

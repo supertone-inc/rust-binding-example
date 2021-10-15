@@ -1,0 +1,6 @@
+build:
+    npm install
+    npm run-script build
+
+test: build
+    npm test
