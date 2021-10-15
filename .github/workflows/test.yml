@@ -32,18 +32,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - if: ${{ startsWith(matrix.target, 'nodejs') }}
-        name: Setup Node
-        uses: actions/setup-node@v2.4.1
-        with:
-          node-version: 14
-
-      - if: ${{ startsWith(matrix.target, 'python') }}
-        name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
       - name: Cache Cargo
         uses: actions/cache@v2
         with:
@@ -55,13 +43,14 @@ jobs:
             **/target/
           key: ${{ runner.os }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - if: ${{ startsWith(matrix.target, 'python') }}
-        name: Cache Poetry
-        uses: actions/cache@v2
+      - name: Install `just`
+        uses: extractions/setup-just@v1
+
+      - if: ${{ startsWith(matrix.target, 'nodejs') }}
+        name: Setup Node
+        uses: actions/setup-node@v2.4.1
         with:
-          path: "**/.venv"
-          key: ${{ runner.os }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: ${{ runner.os }}-${{ matrix.target }}-poetry-
+          node-version: 14
 
       - if: ${{ startsWith(matrix.target, 'nodejs') }}
         name: Cache Node
@@ -71,8 +60,19 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-${{ matrix.target }}-node-
 
-      - name: Install cargo-make
-        uses: davidB/rust-cargo-make@v1
+      - if: ${{ startsWith(matrix.target, 'python') }}
+        name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - if: ${{ startsWith(matrix.target, 'python') }}
+        name: Cache Poetry
+        uses: actions/cache@v2
+        with:
+          path: "**/.venv"
+          key: ${{ runner.os }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.target }}-poetry-
 
       - if: ${{ startsWith(matrix.target, 'python') }}
         name: Install Poetry
@@ -80,4 +80,4 @@ jobs:
 
       - name: Test
         working-directory: ${{ matrix.target }}
-        run: cargo make test
+        run: just test
