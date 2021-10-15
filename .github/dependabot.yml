@@ -21,12 +21,7 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "cargo"
-    directory: "/nodejs/hello-napi"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "cargo"
-    directory: "/nodejs/hello-neon"
+    directory: "/nodejs/hello"
     schedule:
       interval: "daily"
 
@@ -41,12 +36,7 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "npm"
-    directory: "/nodejs/hello-napi"
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "npm"
-    directory: "/nodejs/hello-neon"
+    directory: "/nodejs/hello"
     schedule:
       interval: "daily"
 
