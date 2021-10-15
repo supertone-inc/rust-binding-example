@@ -39,8 +39,8 @@ jobs:
           githubToken: ${{ github.token }}
           install: |
             # Install essential dependencies
-            apt-get update -y
-            apt-get install -y \
+            apt-get update -q -y
+            apt-get install -q -y \
               build-essential \
               curl \
               git
@@ -52,14 +52,14 @@ jobs:
             curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
 
             # CMake
-            apt-get install -y cmake
+            apt-get install -q -y cmake
 
             # Node.js
             curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-            apt-get install -y nodejs
+            apt-get install -q -y nodejs
 
             # Python
-            apt-get install -y python3.8 python3.8-distutils
+            apt-get install -q -y python3.8 python3.8-distutils
             update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
 
             # Poetry
