@@ -19,7 +19,9 @@ jobs:
           githubToken: ${{ github.token }}
           install: |
             apt-get update -y
-            apt-get install -y curl
+            apt-get install -y \
+              curl \
+              cmake
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
             curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
           run: |
