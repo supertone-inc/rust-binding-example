@@ -1,0 +1,86 @@
+name: Test Linux AArch64
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Cargo
+        uses: actions/cache@v2
+        with:
+          path: "**/target"
+          key: linux-aarch64-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache NPM
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: linux-aarch64-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: linux-aarch64-node-
+
+      - name: Cache Poetry
+        uses: actions/cache@v2
+        with:
+          path: "**/.venv"
+          key: linux-aarch64-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: linux-aarch64-poetry-
+
+      - name: Test
+        uses: uraimo/run-on-arch-action@v2.1.1
+        with:
+          arch: aarch64
+          distro: ubuntu20.04
+          githubToken: ${{ github.token }}
+          install: |
+            # Install essential dependencies
+            apt-get update -q -y
+            apt-get install -q -y \
+              build-essential \
+              wget \
+              curl \
+              git
+
+            # Rust
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+            # just
+            curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
+
+            # CMake
+            wget -qP ~/.cache/cmake https://github.com/Kitware/CMake/releases/download/v3.22.0-rc1/cmake-3.22.0-rc1-linux-aarch64.sh
+            mkdir /opt/cmake
+            sh ~/.cache/cmake/cmake-3.22.0-rc1-linux-aarch64.sh --skip-license --prefix=/opt/cmake
+            rm -rf ~/.cache/cmake
+            cp -s /opt/cmake/bin/* /usr/local/bin
+
+            # Node.js
+            curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+            apt-get install -q -y nodejs
+
+            # Python
+            apt-get install -q -y python3.8 python3.8-distutils
+            update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
+
+            # Poetry
+            curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+          run: |
+            # Setup paths
+            source $HOME/.cargo/env
+            source $HOME/.poetry/env
+
+            # Check versions
+            cargo -V
+            just -V
+            cmake --version
+            node -v
+            python -V
+            poetry -V
+
+            # Test
+            just test
