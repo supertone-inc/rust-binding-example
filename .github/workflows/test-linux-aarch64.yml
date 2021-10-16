@@ -57,7 +57,7 @@ jobs:
             mkdir /opt/cmake
             sh ~/.cache/cmake/cmake-3.22.0-rc1-linux-aarch64.sh --skip-license --prefix=/opt/cmake
             rm -rf ~/.cache/cmake
-            ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
+            cp -s /opt/cmake/bin/* /usr/local/bin
 
             # Node.js
             curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
