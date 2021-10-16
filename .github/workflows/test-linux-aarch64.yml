@@ -47,7 +47,7 @@ jobs:
               git
 
             # Rust
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
             # just
             curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
