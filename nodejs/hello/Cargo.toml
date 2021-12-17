@@ -8,7 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 napi = "1"
-napi-derive = "1"
+napi-derive = "2"
 hello = { path = "../../rust/hello" }
 thiserror = "1.0"
 
