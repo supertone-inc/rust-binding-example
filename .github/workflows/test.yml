@@ -59,7 +59,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             **/target/
-          key: ${{ runner.os }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ matrix.rust-target }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Setup Rust Toolchain
         uses: actions-rs/toolchain@v1
@@ -85,8 +85,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-${{ matrix.target }}-node-
+          key: ${{ matrix.rust-target }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ matrix.rust-target }}-${{ matrix.target }}-node-
 
       - if: ${{ startsWith(matrix.target, 'python') }}
         name: Setup Python
@@ -100,8 +100,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "**/.venv"
-          key: ${{ runner.os }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: ${{ runner.os }}-${{ matrix.target }}-poetry-
+          key: ${{ matrix.rust-target }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: ${{ matrix.rust-target }}-${{ matrix.target }}-poetry-
 
       - if: ${{ startsWith(matrix.target, 'python') }}
         name: Install Poetry
