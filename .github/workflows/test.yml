@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
+        runs-on:
           - macos-latest
           - ubuntu-latest
           - windows-latest
@@ -25,7 +25,7 @@ jobs:
           - python/hello
           - rust/hello
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - name: Checkout
