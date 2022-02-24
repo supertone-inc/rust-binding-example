@@ -38,7 +38,7 @@ jobs:
 
           - rust-target: i686-pc-windows-msvc
             runs-on: windows-latest
-            python-architecture: x64
+            python-architecture: x86
 
           - rust-target: x86_64-pc-windows-msvc
             runs-on: windows-latest
