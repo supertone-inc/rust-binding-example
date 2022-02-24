@@ -65,7 +65,6 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          target: ${{ matrix.rust-target }}
 
       - name: Setup Rust Default Toolchain
         run: rustup default stable-${{ matrix.rust-target }}
