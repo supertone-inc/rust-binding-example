@@ -8,6 +8,16 @@ LIB_FILE_NAME := if os() == "windows" {
     "lib" + LIB_NAME + ".so"
 }
 
+CMAKE_OPTIONS := if os() == "windows" {
+    if arch() == "x86" {
+        "-A Win32"
+    } else {
+        ""
+    }
+} else {
+    ""
+}
+
 build:
     cargo build
     mkdir -p hello/lib
@@ -17,6 +27,6 @@ build:
     fi
 
 test: build
-    cmake -S . -B build
+    cmake -S . -B build {{CMAKE_OPTIONS}}
     cmake --build build --clean-first
     ctest --test-dir build -V --no-tests=error
