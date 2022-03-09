@@ -15,7 +15,7 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 
 ### For Node.js Project
 
-- [Node.js](https://nodejs.org/en/download) >= 14 (Using [nvm](https://github.com/nvm-sh/nvm) is recommended.)
+- [Node.js](https://nodejs.org/en/download) >= 16 (Using [nvm](https://github.com/nvm-sh/nvm) is recommended.)
 
 ### For Python Project
 

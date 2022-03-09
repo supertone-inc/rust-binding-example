@@ -60,7 +60,7 @@ jobs:
             cp -s /opt/cmake/bin/* /usr/local/bin
 
             # Node.js
-            curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+            curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
             apt-get install -q -y nodejs
 
             # Python
