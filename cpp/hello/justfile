@@ -8,6 +8,14 @@ LIB_FILE_NAME := if os() == "windows" {
     "lib" + LIB_NAME + ".so"
 }
 
+RUST_TOOLCHAIN := `rustup default`
+
+CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
+    "-A Win32"
+} else {
+    ""
+}
+
 build:
     cargo build
     mkdir -p hello/lib
@@ -17,6 +25,6 @@ build:
     fi
 
 test: build
-    cmake -S . -B build
+    cmake -S . -B build {{CMAKE_OPTIONS}}
     cmake --build build --clean-first
     ctest --test-dir build -V --no-tests=error
