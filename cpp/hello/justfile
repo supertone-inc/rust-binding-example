@@ -8,12 +8,10 @@ LIB_FILE_NAME := if os() == "windows" {
     "lib" + LIB_NAME + ".so"
 }
 
-CMAKE_OPTIONS := if os() == "windows" {
-    if arch() == "x86" {
-        "-A Win32"
-    } else {
-        ""
-    }
+RUST_TOOLCHAIN := `rustup default`
+
+CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
+    "-A Win32"
 } else {
     ""
 }
