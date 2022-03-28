@@ -15,24 +15,47 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - macos-latest
-          - ubuntu-latest
-          - windows-latest
+        rust-target:
+          - x86_64-unknown-linux-gnu
+          - x86_64-apple-darwin
+          - i686-pc-windows-msvc
+          - x86_64-pc-windows-msvc
+
         target:
           - cpp/hello
           - nodejs/hello
           - python/hello
           - rust/hello
 
-    runs-on: ${{ matrix.os }}
+        include:
+          - rust-target: x86_64-unknown-linux-gnu
+            runs-on: ubuntu-latest
+            node-architecture: x64
+            python-architecture: x64
+
+          - rust-target: x86_64-apple-darwin
+            runs-on: macos-latest
+            node-architecture: x64
+            python-architecture: x64
+
+          - rust-target: i686-pc-windows-msvc
+            runs-on: windows-latest
+            node-architecture: x86
+            python-architecture: x86
+
+          - rust-target: x86_64-pc-windows-msvc
+            runs-on: windows-latest
+            node-architecture: x64
+            python-architecture: x64
+
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Cache Cargo
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cargo/bin/
@@ -40,7 +63,15 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             **/target/
-          key: ${{ runner.os }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ matrix.rust-target }}-${{ matrix.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Setup Rust Toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Setup Rust Default Toolchain
+        run: rustup default stable-${{ matrix.rust-target }}
 
       - name: Install `just`
         uses: extractions/setup-just@v1
@@ -49,31 +80,33 @@ jobs:
 
       - if: ${{ startsWith(matrix.target, 'nodejs') }}
         name: Setup Node
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
+          architecture: ${{ matrix.node-architecture }}
 
       - if: ${{ startsWith(matrix.target, 'nodejs') }}
         name: Cache Node
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-${{ matrix.target }}-node-
+          key: ${{ matrix.rust-target }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ matrix.rust-target }}-${{ matrix.target }}-node-
 
       - if: ${{ startsWith(matrix.target, 'python') }}
         name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+          architecture: ${{ matrix.python-architecture }}
 
       - if: ${{ startsWith(matrix.target, 'python') }}
         name: Cache Poetry
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "**/.venv"
-          key: ${{ runner.os }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: ${{ runner.os }}-${{ matrix.target }}-poetry-
+          key: ${{ matrix.rust-target }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: ${{ matrix.rust-target }}-${{ matrix.target }}-poetry-
 
       - if: ${{ startsWith(matrix.target, 'python') }}
         name: Install Poetry
