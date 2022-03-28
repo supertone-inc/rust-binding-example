@@ -32,7 +32,7 @@ jobs:
           restore-keys: linux-aarch64-poetry-
 
       - name: Test
-        uses: uraimo/run-on-arch-action@v2.1.1
+        uses: uraimo/run-on-arch-action@v2.1.2
         with:
           arch: aarch64
           distro: ubuntu20.04
