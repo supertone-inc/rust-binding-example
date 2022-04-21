@@ -69,9 +69,8 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-
-      - name: Setup Rust Default Toolchain
-        run: rustup default stable-${{ matrix.rust-target }}
+          target: ${{ matrix.rust-target }}
+          default: true
 
       - name: Install `just`
         uses: extractions/setup-just@v1
