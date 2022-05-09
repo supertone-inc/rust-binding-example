@@ -13,4 +13,4 @@ hello = { path = "../../rust/hello" }
 thiserror = "1.0"
 
 [build-dependencies]
-napi-build = "1"
+napi-build = "2"
