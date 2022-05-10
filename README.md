@@ -22,6 +22,11 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 - [Python](https://www.python.org/downloads) >= 3.8 (Using [pyenv](https://github.com/pyenv/pyenv#installation) is recommended.)
 - [Poetry](https://python-poetry.org/docs/#installation)
 
+### For Wasm Project
+
+- [wasm-pack](https://rustwasm.github.io/wasm-pack/installer)
+- [Node.js](https://nodejs.org/en/download) >= 16 (Using [nvm](https://github.com/nvm-sh/nvm) is recommended.)
+
 ## Getting Started
 
 You can run following commands either in project's root directory or in each subproject's directory.
