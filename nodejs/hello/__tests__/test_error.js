@@ -1,5 +1,5 @@
 const hello = require("..");
 
-test("raise_error", () => {
-  expect(() => hello.error.raise_error()).toThrow("error raised from Rust!");
+test("raiseError", () => {
+  expect(() => hello.error.raiseError()).toThrow("error raised from Rust!");
 });

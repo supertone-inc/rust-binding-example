@@ -1,40 +1,12 @@
-use napi::{CallContext, Env, JsNumber, JsObject, Result};
-use std::convert::TryInto;
-
-pub fn init_module(env: Env) -> Result<JsObject> {
-    let mut exports: JsObject = env.create_object()?;
-
-    exports.create_named_method("concat", concat)?;
-
-    Ok(exports)
-}
-
-#[js_function(2)]
-fn concat(ctx: CallContext) -> Result<JsObject> {
-    let a_obj: JsObject = ctx.get(0)?;
-    let a_len: u32 = a_obj.get_array_length()?;
-    let a = (0..a_len)
-        .map(|i| {
-            let value: f64 = a_obj.get_element::<JsNumber>(i)?.try_into()?;
-            Ok(value as f32)
-        })
-        .collect::<Result<Vec<f32>>>()?;
-
-    let b_obj: JsObject = ctx.get(1)?;
-    let b_len: u32 = b_obj.get_array_length()?;
-    let b = (0..b_len)
-        .map(|i| {
-            let value: f64 = b_obj.get_element::<JsNumber>(i)?.try_into()?;
-            Ok(value as f32)
-        })
-        .collect::<Result<Vec<f32>>>()?;
-
-    let result: Vec<f32> = hello::array::concat(&a, &b);
-    let mut array = ctx.env.create_array(result.len() as u32)?;
-    result
-        .iter()
-        .enumerate()
-        .try_for_each(|(i, v)| array.set(i as u32, ctx.env.create_double(*v as f64)))?;
-
-    array.coerce_to_object()
+#[napi]
+mod array {
+    #[napi]
+    fn concat(a: Vec<f64>, b: Vec<f64>) -> Vec<f64> {
+        let a: Vec<f32> = a.iter().map(|v| *v as f32).collect();
+        let b: Vec<f32> = b.iter().map(|v| *v as f32).collect();
+        hello::array::concat(&a, &b)
+            .iter()
+            .map(|v| *v as f64)
+            .collect()
+    }
 }
