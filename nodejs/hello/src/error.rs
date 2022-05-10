@@ -16,7 +16,7 @@ mod error {
     }
 
     #[napi]
-    fn raise_error() -> Result<()> {
-        Ok(hello::error::raise_error().map_err(Into::<Error>::into)?)
+    fn throw_error() -> Result<()> {
+        Ok(hello::error::throw_error().map_err(Into::<Error>::into)?)
     }
 }

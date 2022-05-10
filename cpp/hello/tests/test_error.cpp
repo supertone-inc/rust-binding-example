@@ -2,9 +2,9 @@
 
 #include <error.hpp>
 
-TEST_CASE("[C] hello__error__raise_error()")
+TEST_CASE("[C] hello__error__throw_error()")
 {
-  int result = hello__error__raise_error();
+  int result = hello__error__throw_error();
   REQUIRE(result < 0);
 
   size_t error_length = hello__error__last_error_length();
@@ -13,13 +13,13 @@ TEST_CASE("[C] hello__error__raise_error()")
   char *message = new char[error_length];
   int message_length = hello__error__last_error_message(message, error_length);
   CHECK(message_length == error_length - 1);
-  CHECK(std::string(message) == "error raised from Rust!");
+  CHECK(std::string(message) == "error from Rust!");
 
   delete[] message;
 }
 
-TEST_CASE("[C++] hello::error::raise_error()")
+TEST_CASE("[C++] hello::error::throw_error()")
 {
-  REQUIRE_THROWS_AS(hello::error::raise_error(), hello::error::Exception);
-  REQUIRE_THROWS_WITH(hello::error::raise_error(), "error raised from Rust!");
+  REQUIRE_THROWS_AS(hello::error::throw_error(), hello::error::Exception);
+  REQUIRE_THROWS_WITH(hello::error::throw_error(), "error from Rust!");
 }

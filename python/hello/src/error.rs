@@ -14,12 +14,12 @@ impl std::convert::From<Error> for PyErr {
 }
 
 pub fn init_module(m: &PyModule) -> PyResult<&PyModule> {
-    m.add_function(wrap_pyfunction!(raise_error, m)?)?;
+    m.add_function(wrap_pyfunction!(throw_error, m)?)?;
 
     Ok(m)
 }
 
 #[pyfunction]
-fn raise_error() -> Result<(), Error> {
-    Ok(hello::error::raise_error()?)
+fn throw_error() -> Result<(), Error> {
+    Ok(hello::error::throw_error()?)
 }

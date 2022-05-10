@@ -7,8 +7,8 @@ pub enum Error {
     Default(&'static str),
 }
 
-pub fn raise_error() -> Result<()> {
-    Err(Error::Default("error raised from Rust!"))
+pub fn throw_error() -> Result<()> {
+    Err(Error::Default("error from Rust!"))
 }
 
 #[cfg(test)]
@@ -16,7 +16,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_raise_error() {
-        assert_matches!(raise_error(), Err(Error::Default(msg)) if msg == "error raised from Rust!");
+    fn test_throw_error() {
+        assert_matches!(throw_error(), Err(Error::Default(msg)) if msg == "error from Rust!");
     }
 }

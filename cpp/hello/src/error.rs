@@ -64,8 +64,8 @@ pub unsafe extern "C" fn hello__error__last_error_message(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn hello__error__raise_error() -> c_int {
-    match hello::error::raise_error() {
+pub unsafe extern "C" fn hello__error__throw_error() -> c_int {
+    match hello::error::throw_error() {
         Ok(_) => return 0,
         Err(err) => {
             update_last_error(err.into());

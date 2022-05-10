@@ -23,9 +23,9 @@ namespace hello
             std::string message;
         };
 
-        void raise_error()
+        void throw_error()
         {
-            int result = hello__error__raise_error();
+            int result = hello__error__throw_error();
             if (!result)
             {
                 return;
