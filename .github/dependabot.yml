@@ -35,8 +35,18 @@ updates:
     schedule:
       interval: "daily"
 
+  - package-ecosystem: "cargo"
+    directory: "/wasm/hello"
+    schedule:
+      interval: "daily"
+
   - package-ecosystem: "npm"
     directory: "/nodejs/hello"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/wasm/hello"
     schedule:
       interval: "daily"
 
