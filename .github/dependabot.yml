@@ -5,52 +5,52 @@
 
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - directory: "/"
+    package-ecosystem: "github-actions"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "cargo"
-    directory: "/"
+  - directory: "/"
+    package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "cargo"
-    directory: "/cpp/hello"
+  - directory: "/cpp/hello"
+    package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "cargo"
-    directory: "/nodejs/hello"
+  - directory: "/nodejs/hello"
+    package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "cargo"
-    directory: "/python/hello"
+  - directory: "/nodejs/hello"
+    package-ecosystem: "npm"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "cargo"
-    directory: "/rust/hello"
+  - directory: "/python/hello"
+    package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "cargo"
-    directory: "/wasm/hello"
+  - directory: "/python/hello"
+    package-ecosystem: "pip"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/nodejs/hello"
+  - directory: "/rust/hello"
+    package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "npm"
-    directory: "/wasm/hello"
+  - directory: "/wasm/hello"
+    package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "pip"
-    directory: "/python/hello"
+  - directory: "/wasm/hello"
+    package-ecosystem: "npm"
     schedule:
       interval: "daily"
