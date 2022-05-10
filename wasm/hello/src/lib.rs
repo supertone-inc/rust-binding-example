@@ -1,3 +1,4 @@
+pub mod array;
 pub mod string;
 
 #[cfg(test)]
