@@ -5,6 +5,6 @@ for file in $(git diff --name-only --staged); do
         continue
     fi
 
-    rustfmt --edition 2018 "$file"
+    rustfmt --edition 2021 "$file"
     git add "$file"
 done
