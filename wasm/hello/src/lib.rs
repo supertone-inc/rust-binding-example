@@ -1,8 +1,4 @@
+pub mod string;
+
 #[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
-}
+wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);

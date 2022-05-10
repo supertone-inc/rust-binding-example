@@ -182,6 +182,7 @@ dependencies = [
 name = "hello-wasm"
 version = "0.1.0"
 dependencies = [
+ "hello",
  "wasm-bindgen",
  "wasm-bindgen-test",
 ]

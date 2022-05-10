@@ -1,5 +1,5 @@
 build:
-    wasm-pack build --out-dir hello
+    wasm-pack build --out-dir hello --out-name hello
 
 test:
     wasm-pack test --headless --chrome
