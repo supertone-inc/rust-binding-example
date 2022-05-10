@@ -30,12 +30,11 @@ fn concat(ctx: CallContext) -> Result<JsObject> {
         .collect::<Result<Vec<f32>>>()?;
 
     let result: Vec<f32> = hello::array::concat(&a, &b);
-    let mut array = ctx.env.create_array()?;
+    let mut array = ctx.env.create_array(result.len() as u32)?;
     result
         .iter()
         .enumerate()
-        .map(|(i, v)| array.set_element(i as u32, ctx.env.create_double(*v as f64)?))
-        .collect::<Result<Vec<()>>>()?;
+        .try_for_each(|(i, v)| array.set(i as u32, ctx.env.create_double(*v as f64)))?;
 
-    Ok(array)
+    array.coerce_to_object()
 }
