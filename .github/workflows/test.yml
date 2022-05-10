@@ -49,7 +49,7 @@ jobs:
             node-architecture: x64
             python-architecture: x64
 
-          - rust-target: wasm32-unknown-unknown
+          - rust-target: x86_64-unknown-linux-gnu
             target: wasm/hello
             runs-on: ubuntu-latest
             node-architecture: x64
