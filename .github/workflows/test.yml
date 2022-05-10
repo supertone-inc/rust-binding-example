@@ -49,6 +49,11 @@ jobs:
             node-architecture: x64
             python-architecture: x64
 
+          - rust-target: x86_64-unknown-linux-gnu
+            target: wasm/hello
+            runs-on: ubuntu-latest
+            node-architecture: x64
+
     runs-on: ${{ matrix.runs-on }}
 
     steps:
@@ -79,14 +84,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - if: ${{ startsWith(matrix.target, 'nodejs') }}
+      - name: Install `wasm-pack`
+        if: startsWith(matrix.target, 'wasm')
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - if: startsWith(matrix.target, 'nodejs') || startsWith(matrix.target, 'wasm')
         name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 16
           architecture: ${{ matrix.node-architecture }}
 
-      - if: ${{ startsWith(matrix.target, 'nodejs') }}
+      - if: startsWith(matrix.target, 'nodejs') || startsWith(matrix.target, 'wasm')
         name: Cache Node
         uses: actions/cache@v3
         with:
@@ -94,14 +103,14 @@ jobs:
           key: ${{ matrix.rust-target }}-${{ matrix.target }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ matrix.rust-target }}-${{ matrix.target }}-node-
 
-      - if: ${{ startsWith(matrix.target, 'python') }}
+      - if: startsWith(matrix.target, 'python')
         name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
           architecture: ${{ matrix.python-architecture }}
 
-      - if: ${{ startsWith(matrix.target, 'python') }}
+      - if: startsWith(matrix.target, 'python')
         name: Cache Poetry
         uses: actions/cache@v3
         with:
@@ -109,7 +118,7 @@ jobs:
           key: ${{ matrix.rust-target }}-${{ matrix.target }}-poetry-${{ hashFiles('**/poetry.lock') }}
           restore-keys: ${{ matrix.rust-target }}-${{ matrix.target }}-poetry-
 
-      - if: ${{ startsWith(matrix.target, 'python') }}
+      - if: startsWith(matrix.target, 'python')
         name: Install Poetry
         uses: Gr1N/setup-poetry@v7
 
