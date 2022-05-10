@@ -84,6 +84,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install `wasm-pack`
+        if: startsWith(matrix.target, 'wasm')
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
       - if: startsWith(matrix.target, 'nodejs') || startsWith(matrix.target, 'wasm')
         name: Setup Node
         uses: actions/setup-node@v3
