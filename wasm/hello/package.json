@@ -1,0 +1,15 @@
+{
+  "name": "hello-wasm-test",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "hello-wasm": "file:hello-wasm"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

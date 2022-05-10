@@ -1,5 +1,6 @@
 build:
-    wasm-pack build --out-dir hello --out-name hello
+    wasm-pack build --out-dir hello-wasm --target nodejs
 
-test:
-    wasm-pack test --headless --chrome
+test: build
+    npm install
+    npm test
