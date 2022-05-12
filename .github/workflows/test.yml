@@ -16,17 +16,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        rust-target:
-          - x86_64-unknown-linux-gnu
-          - x86_64-apple-darwin
-          - i686-pc-windows-msvc
-          - x86_64-pc-windows-msvc
-
         target:
           - cpp/hello
           - nodejs/hello
           - python/hello
           - rust/hello
+
+        rust-target:
+          - x86_64-unknown-linux-gnu
+          - x86_64-apple-darwin
+          - i686-pc-windows-msvc
+          - x86_64-pc-windows-msvc
 
         include:
           - rust-target: x86_64-unknown-linux-gnu
@@ -49,8 +49,8 @@ jobs:
             node-architecture: x64
             python-architecture: x64
 
-          - rust-target: x86_64-unknown-linux-gnu
-            target: wasm/hello
+          - target: wasm/hello
+            rust-target: x86_64-unknown-linux-gnu
             runs-on: ubuntu-latest
             node-architecture: x64
 
