@@ -1,5 +1,5 @@
 build:
-    wasm-pack build --out-dir hello-wasm --target nodejs
+    wasm-pack build --out-dir hello-wasm --target web
 
 test: build
     npm install

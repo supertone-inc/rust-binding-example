@@ -1,5 +1,14 @@
-const hello = require("hello-wasm");
+const initPage = require("../init-page");
 
-test("throw_error", () => {
-  expect(() => hello.throw_error()).toThrow("error from Rust!");
+beforeAll(initPage);
+
+test("throw_error", async () => {
+  const result = await page.evaluate(() => {
+    try {
+      hello.throw_error();
+    } catch (error) {
+      return error.message;
+    }
+  });
+  expect(result).toBe("error from Rust!");
 });

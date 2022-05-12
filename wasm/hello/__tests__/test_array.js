@@ -1,5 +1,8 @@
-const hello = require("hello-wasm");
+const initPage = require("../init-page");
 
-test("concat", () => {
-  expect(hello.concat([1, 2], [3, 4, 5])).toEqual([1, 2, 3, 4, 5]);
+beforeAll(initPage);
+
+test("concat", async () => {
+  const result = await page.evaluate(() => hello.concat([1, 2], [3, 4, 5]));
+  expect(result).toEqual([1, 2, 3, 4, 5]);
 });

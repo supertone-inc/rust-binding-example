@@ -3,11 +3,11 @@
   "scripts": {
     "test": "jest"
   },
-  "dependencies": {
-    "hello-wasm": "file:hello-wasm"
-  },
   "devDependencies": {
-    "jest": "^28.1.0"
+    "hello-wasm": "file:hello-wasm",
+    "jest": "^28.1.0",
+    "jest-dev-server": "^6.0.3",
+    "jest-puppeteer": "^6.1.0"
   },
   "engines": {
     "node": ">= 16"
