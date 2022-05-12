@@ -4,7 +4,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "hello-wasm": "file:hello-wasm",
     "jest": "^28.1.0",
     "jest-dev-server": "^6.0.3",
     "jest-puppeteer": "^6.1.0"
