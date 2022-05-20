@@ -23,6 +23,7 @@ TEST_CASE("[C] hello__callback__map_safe()")
 
 TEST_CASE("[C++] hello::callback::map()")
 {
-    REQUIRE(hello::callback::map({1.f, 2.f, 3.f}, [](float item) { return item * 2; }) ==
-            std::vector<float>{2.f, 4.f, 6.f});
+    auto result = hello::callback::map({1.f, 2.f, 3.f}, [](float item) { return item * 2; });
+
+    REQUIRE(result == std::vector<float>{2.f, 4.f, 6.f});
 }
