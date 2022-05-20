@@ -1,5 +1,5 @@
 #[napi]
-mod error {
+pub mod error {
     use napi::bindgen_prelude::*;
     use thiserror::Error;
 
@@ -16,7 +16,7 @@ mod error {
     }
 
     #[napi]
-    fn throw_error() -> Result<()> {
+    pub fn throw_error() -> Result<()> {
         Ok(hello::error::throw_error().map_err(Into::<Error>::into)?)
     }
 }

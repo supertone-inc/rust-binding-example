@@ -1,4 +1,4 @@
-mod array;
-mod callback;
-mod error;
-mod string;
+pub mod array;
+pub mod callback;
+pub mod error;
+pub mod string;

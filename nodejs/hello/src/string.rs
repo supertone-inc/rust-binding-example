@@ -1,7 +1,7 @@
 #[napi]
-mod string {
+pub mod string {
     #[napi]
-    fn to_uppercase(s: String) -> String {
+    pub fn to_uppercase(s: String) -> String {
         hello::string::to_uppercase(&s)
     }
 }
