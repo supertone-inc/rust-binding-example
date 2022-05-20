@@ -1,4 +1,4 @@
-use pyo3::{exceptions::PyException, prelude::*, wrap_pyfunction};
+use pyo3::{exceptions::PyException, prelude::*};
 use thiserror::Error;
 
 #[derive(Error, Debug)]

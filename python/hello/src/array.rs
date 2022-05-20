@@ -1,4 +1,4 @@
-use pyo3::{prelude::*, wrap_pyfunction};
+use pyo3::prelude::*;
 
 pub fn init_module(m: &PyModule) -> PyResult<&PyModule> {
     m.add_function(wrap_pyfunction!(concat, m)?)?;
