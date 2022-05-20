@@ -9,4 +9,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 hello = { path = "../../rust/hello" }
+js-sys = "0.3"
 wasm-bindgen = "0.2"
