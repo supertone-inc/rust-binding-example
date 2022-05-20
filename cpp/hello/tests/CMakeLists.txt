@@ -15,6 +15,7 @@ link_directories(${CMAKE_SOURCE_DIR}/hello/lib)
 add_executable(${PROJECT_NAME}
   main.cpp
   test_array.cpp
+  test_callback.cpp
   test_error.cpp
   test_string.cpp
 )
