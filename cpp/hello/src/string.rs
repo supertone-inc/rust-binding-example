@@ -2,7 +2,7 @@ use libc::c_char;
 use std::ffi::{CStr, CString};
 
 #[no_mangle]
-pub extern "C" fn hello__string__to_uppercase(string: *const c_char) -> *mut c_char {
+pub extern "C" fn hello__string__to_uppercase_alloc(string: *const c_char) -> *mut c_char {
     let string = unsafe { CStr::from_ptr(string) }.to_str().unwrap();
     let string = hello::string::to_uppercase(string);
     CString::new(string).unwrap().into_raw()
@@ -14,10 +14,7 @@ pub unsafe extern "C" fn hello__string__destroy_string(string: *mut c_char) {
 }
 
 #[no_mangle]
-pub extern "C" fn hello__string__to_uppercase_safe(
-    in_string: *const c_char,
-    out_string: *mut c_char,
-) {
+pub extern "C" fn hello__string__to_uppercase(in_string: *const c_char, out_string: *mut c_char) {
     let in_string = unsafe { CStr::from_ptr(in_string) }.to_str().unwrap();
     let string = hello::string::to_uppercase(in_string);
     let string = CString::new(string).unwrap();

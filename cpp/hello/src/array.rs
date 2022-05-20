@@ -1,7 +1,7 @@
 use libc::{c_float, size_t};
 
 #[no_mangle]
-pub extern "C" fn hello__array__concat(
+pub extern "C" fn hello__array__concat_alloc(
     a: *const c_float,
     a_length: size_t,
     b: *const c_float,
@@ -19,7 +19,7 @@ pub unsafe extern "C" fn hello__array__destroy_array(array: *mut c_float) {
 }
 
 #[no_mangle]
-pub extern "C" fn hello__array__concat_safe(
+pub extern "C" fn hello__array__concat(
     a: *const c_float,
     a_length: size_t,
     b: *const c_float,

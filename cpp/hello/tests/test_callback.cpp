@@ -7,14 +7,14 @@ float mapper(int item)
     return item / 2.0f;
 }
 
-TEST_CASE("[C] hello__callback__map_safe()")
+TEST_CASE("[C] hello__callback__map()")
 {
     int items_in[] = {1, 2, 3};
     const size_t item_count = sizeof(items_in) / sizeof(items_in[0]);
 
     float items_out[item_count];
 
-    hello__callback__map_safe(items_in, items_out, item_count, mapper);
+    hello__callback__map(items_in, items_out, item_count, mapper);
 
     REQUIRE(items_out[0] == 0.5f);
     REQUIRE(items_out[1] == 1.0f);

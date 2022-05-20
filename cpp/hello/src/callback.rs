@@ -1,7 +1,7 @@
 use libc::{c_float, c_int, size_t};
 
 #[no_mangle]
-pub extern "C" fn hello__callback__map_safe(
+pub extern "C" fn hello__callback__map(
     items_in: *const c_int,
     items_out: *mut c_float,
     item_count: size_t,
