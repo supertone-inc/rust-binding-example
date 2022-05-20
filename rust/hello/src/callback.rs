@@ -1,6 +1,6 @@
-pub fn map<F, T>(items: &[T], mapper: F) -> Vec<T>
+pub fn map<F, T, U>(items: &[T], mapper: F) -> Vec<U>
 where
-    F: Fn(&T) -> T,
+    F: Fn(&T) -> U,
 {
     items.iter().map(mapper).collect()
 }
@@ -11,6 +11,6 @@ mod tests {
 
     #[test]
     fn test_map() {
-        assert_eq!(map(&[1, 2, 3], |v| v * 2), [2, 4, 6]);
+        assert_eq!(map(&[1, 2, 3], |v| *v as f32 / 2.0), [0.5, 1.0, 1.5]);
     }
 }
