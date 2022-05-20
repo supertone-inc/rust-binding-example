@@ -8,9 +8,9 @@ namespace hello
 {
 namespace callback
 {
-std::vector<float> map(const std::vector<float> &items, float (*mapper)(float))
+std::vector<int> map(const std::vector<int> &items, int (*mapper)(int))
 {
-    std::vector<float> mapped_items(items.size());
+    std::vector<int> mapped_items(items.size());
     hello__callback__map_safe(items.data(), mapped_items.data(), items.size(), mapper);
     return mapped_items;
 }
