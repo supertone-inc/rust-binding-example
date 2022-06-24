@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <error.hpp>
+#include <hello_error.hpp>
 
 TEST_CASE("[C] hello__error__throw_error()")
 {

@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <callback.hpp>
+#include <hello_callback.hpp>
 
 float mapper(int item)
 {

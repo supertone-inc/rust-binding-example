@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <string.hpp>
+#include <hello_string.hpp>
 
 TEST_CASE("[C] hello__string__to_uppercase_alloc()")
 {

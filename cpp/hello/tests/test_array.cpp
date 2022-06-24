@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <array.hpp>
+#include <hello_array.hpp>
 
 TEST_CASE("[C] hello__array__concat_alloc()")
 {
