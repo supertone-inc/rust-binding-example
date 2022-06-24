@@ -8,6 +8,10 @@ add_executable(${PROJECT_NAME}
   src/lib.cpp
 )
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_CPP_INCLUDE_DIR})
+target_link_directories(${PROJECT_NAME} PRIVATE ${HELLO_CPP_LIB_DIR})
+target_link_libraries(${PROJECT_NAME} hello_cpp)
+
 set(OUTPUT_NAME index)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

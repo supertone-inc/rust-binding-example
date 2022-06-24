@@ -22,18 +22,28 @@ CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
     ""
 }
 
+CARGO_BUILD_TARGET := env_var_or_default("CARGO_BUILD_TARGET", "")
+
+TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
+    CARGO_BUILD_TARGET
+} else {
+    "."
+}
+
+TARGET_DIR := justfile_directory() + "/../../target/" + TARGET_DIR_NAME + "/debug"
+
 build-dynamic:
     cargo build --package hello-cpp-dynamic
-    mkdir -p hello/lib/dynamic
-    cp ../../target/debug/{{LIB_FILE_NAME_DYNAMIC}} hello/lib/dynamic/{{LIB_FILE_NAME_DYNAMIC}}
+    mkdir -p hello/lib/{{TARGET_DIR_NAME}}/dynamic
+    cp {{TARGET_DIR}}/{{LIB_FILE_NAME_DYNAMIC}} hello/lib/{{TARGET_DIR_NAME}}/dynamic/{{LIB_FILE_NAME_DYNAMIC}}
     if [ {{os()}} = "windows" ]; then \
-        cp ../../target/debug/{{LIB_FILE_NAME_DYNAMIC}}.lib hello/lib/dynamic/{{LIB_NAME}}.lib; \
+        cp {{TARGET_DIR}}/{{LIB_FILE_NAME_DYNAMIC}}.lib hello/lib/{{TARGET_DIR_NAME}}/dynamic/{{LIB_NAME}}.lib; \
     fi
 
 build-static:
     cargo build --package hello-cpp-static
-    mkdir -p hello/lib/static
-    cp ../../target/debug/{{LIB_FILE_NAME_STATIC}} hello/lib/static/{{LIB_FILE_NAME_STATIC}}
+    mkdir -p hello/lib/{{TARGET_DIR_NAME}}/static
+    cp {{TARGET_DIR}}/{{LIB_FILE_NAME_STATIC}} hello/lib/{{TARGET_DIR_NAME}}/static/{{LIB_FILE_NAME_STATIC}}
 
 build: build-dynamic build-static
 
@@ -42,7 +52,7 @@ test-dynamic: build-dynamic
         -S . \
         -B build/dynamic \
         -D HELLO_CPP_INCLUDE_DIR={{justfile_directory()}}/hello/include \
-        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib/dynamic \
+        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib/{{TARGET_DIR_NAME}}/dynamic \
         -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
         {{CMAKE_OPTIONS}}
     cmake --build build/dynamic --clean-first
@@ -53,7 +63,7 @@ test-static: build-static
         -S . \
         -B build/static \
         -D HELLO_CPP_INCLUDE_DIR={{justfile_directory()}}/hello/include \
-        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib/static \
+        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib/{{TARGET_DIR_NAME}}/static \
         -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
         {{CMAKE_OPTIONS}}
     cmake --build build/static --clean-first

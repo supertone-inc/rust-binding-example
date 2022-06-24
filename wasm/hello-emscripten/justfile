@@ -1,10 +1,29 @@
+EMSDK_DIR := justfile_directory() + "/build/_deps/emsdk-src"
+HELLO_CPP_DIR := justfile_directory() + "/../../cpp/hello/hello"
+
 build:
-    cmake -S. -Bbuild -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-    cmake --build build
+    #!/usr/bin/env bash
+    set -e
+
+    export CARGO_BUILD_TARGET=wasm32-unknown-emscripten
+
+    cmake \
+        -S . \
+        -B build \
+        -D HELLO_CPP_INCLUDE_DIR={{HELLO_CPP_DIR}}/include \
+        -D HELLO_CPP_LIB_DIR={{HELLO_CPP_DIR}}/lib/${CARGO_BUILD_TARGET}/static \
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=1
+
+    source {{EMSDK_DIR}}/emsdk_env.sh
+    just {{HELLO_CPP_DIR}}/build-static
+
+    cmake --build build --clean-first
     cmake --install build --prefix hello
 
 test: build
     #!/usr/bin/env bash
+    set -e
+
     cd tests
     npm install
     npm test
