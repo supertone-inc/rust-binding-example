@@ -1,5 +1,4 @@
 {
-  "name": "hello-wasm-test",
   "scripts": {
     "test": "jest"
   },
