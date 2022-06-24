@@ -45,6 +45,11 @@ updates:
     schedule:
       interval: "daily"
 
+  - directory: "/wasm/hello-emscripten/tests"
+    package-ecosystem: "npm"
+    schedule:
+      interval: "daily"
+
   - directory: "/wasm/hello-wasm-pack"
     package-ecosystem: "cargo"
     schedule:

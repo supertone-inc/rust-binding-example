@@ -49,6 +49,11 @@ jobs:
             node-architecture: x64
             python-architecture: x64
 
+          - target: wasm/hello-emscripten
+            rust-target: x86_64-unknown-linux-gnu
+            runs-on: ubuntu-latest
+            node-architecture: x64
+
           - target: wasm/hello-wasm-pack
             rust-target: x86_64-unknown-linux-gnu
             runs-on: ubuntu-latest
