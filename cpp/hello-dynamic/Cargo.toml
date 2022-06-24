@@ -1,0 +1,12 @@
+[package]
+name = "hello-cpp-dynamic"
+version = "0.1.0"
+publish = false
+edition = "2021"
+
+[lib]
+name = "hello_cpp"
+crate-type = ["cdylib"]
+
+[dependencies]
+hello-cpp = { path = "../hello" }

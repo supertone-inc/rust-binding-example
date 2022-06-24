@@ -9,8 +9,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-include_directories(${CMAKE_SOURCE_DIR}/hello/include)
-link_directories(${CMAKE_SOURCE_DIR}/hello/lib)
+include_directories(${HELLO_CPP_INCLUDE_DIR})
+link_directories(${HELLO_CPP_LIB_DIR})
 
 add_executable(${PROJECT_NAME}
   main.cpp
@@ -22,7 +22,7 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello_cpp)
 
 if(WIN32)
-  file(GLOB_RECURSE DYNAMIC_LIBS "${CMAKE_SOURCE_DIR}/hello/lib/*.dll")
+  file(GLOB_RECURSE DYNAMIC_LIBS "${HELLO_CPP_LIB_DIR}/*.dll")
 	foreach(dll ${DYNAMIC_LIBS})
 		add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy ${dll} $<TARGET_FILE_DIR:${PROJECT_NAME}>

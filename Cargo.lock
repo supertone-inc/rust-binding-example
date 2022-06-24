@@ -149,6 +149,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "hello-cpp-dynamic"
+version = "0.1.0"
+dependencies = [
+ "hello-cpp",
+]
+
+[[package]]
+name = "hello-cpp-static"
+version = "0.1.0"
+dependencies = [
+ "hello-cpp",
+]
+
+[[package]]
 name = "hello-nodejs"
 version = "0.1.0"
 dependencies = [

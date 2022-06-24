@@ -1,11 +1,17 @@
 LIB_NAME := "hello_cpp"
 
-LIB_FILE_NAME := if os() == "windows" {
+LIB_FILE_NAME_DYNAMIC := if os() == "windows" {
     LIB_NAME + ".dll"
 } else if os() == "macos" {
     "lib" + LIB_NAME + ".dylib"
 } else {
     "lib" + LIB_NAME + ".so"
+}
+
+LIB_FILE_NAME_STATIC := if os() == "windows" {
+    LIB_NAME + ".lib"
+} else {
+    "lib" + LIB_NAME + ".a"
 }
 
 RUST_TOOLCHAIN := `rustup default`
@@ -16,15 +22,41 @@ CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
     ""
 }
 
-build:
-    cargo build
-    mkdir -p hello/lib
-    cp ../../target/debug/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
+build-dynamic:
+    cargo build --package hello-cpp-dynamic
+    mkdir -p hello/lib/dynamic
+    cp ../../target/debug/{{LIB_FILE_NAME_DYNAMIC}} hello/lib/dynamic/{{LIB_FILE_NAME_DYNAMIC}}
     if [ {{os()}} = "windows" ]; then \
-        cp ../../target/debug/{{LIB_FILE_NAME}}.lib hello/lib/{{LIB_NAME}}.lib; \
+        cp ../../target/debug/{{LIB_FILE_NAME_DYNAMIC}}.lib hello/lib/dynamic/{{LIB_NAME}}.lib; \
     fi
 
-test: build
-    cmake -S . -B build {{CMAKE_OPTIONS}}
-    cmake --build build --clean-first
-    ctest --test-dir build -V --no-tests=error
+build-static:
+    cargo build --package hello-cpp-static
+    mkdir -p hello/lib/static
+    cp ../../target/debug/{{LIB_FILE_NAME_STATIC}} hello/lib/static/{{LIB_FILE_NAME_STATIC}}
+
+build: build-dynamic build-static
+
+test-dynamic: build-dynamic
+    cmake \
+        -S . \
+        -B build/dynamic \
+        -D HELLO_CPP_INCLUDE_DIR={{justfile_directory()}}/hello/include \
+        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib/dynamic \
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
+        {{CMAKE_OPTIONS}}
+    cmake --build build/dynamic --clean-first
+    ctest --test-dir build/dynamic -V --no-tests=error
+
+test-static: build-static
+    cmake \
+        -S . \
+        -B build/static \
+        -D HELLO_CPP_INCLUDE_DIR={{justfile_directory()}}/hello/include \
+        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib/static \
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
+        {{CMAKE_OPTIONS}}
+    cmake --build build/static --clean-first
+    ctest --test-dir build/static -V --no-tests=error
+
+test: test-dynamic test-static
