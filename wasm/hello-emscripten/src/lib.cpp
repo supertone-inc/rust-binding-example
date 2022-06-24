@@ -1,15 +1,12 @@
 #include <emscripten/bind.h>
 
+#include <hello_string.hpp>
+
 #include <iostream>
 
-namespace embind = emscripten;
-
-void greet()
-{
-    std::cout << "hello" << std::endl;
-}
+namespace em = emscripten;
 
 EMSCRIPTEN_BINDINGS()
 {
-    embind::function("greet", &greet);
+    em::function("to_uppercase", &hello::string::to_uppercase);
 }
