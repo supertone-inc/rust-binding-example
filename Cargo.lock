@@ -169,7 +169,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-wasm"
+name = "hello-wasm-pack"
 version = "0.1.0"
 dependencies = [
  "hello",

@@ -45,12 +45,12 @@ updates:
     schedule:
       interval: "daily"
 
-  - directory: "/wasm/hello"
+  - directory: "/wasm/hello-wasm-pack"
     package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - directory: "/wasm/hello"
+  - directory: "/wasm/hello-wasm-pack/tests"
     package-ecosystem: "npm"
     schedule:
       interval: "daily"
