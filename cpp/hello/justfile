@@ -48,6 +48,10 @@ build-static:
 build: build-dynamic build-static
 
 test-dynamic: build-dynamic
+    #!/usr/bin/env bash
+    set -e
+
+    cd tests
     cmake \
         -S . \
         -B build/dynamic \
@@ -59,6 +63,10 @@ test-dynamic: build-dynamic
     ctest --test-dir build/dynamic -V --no-tests=error
 
 test-static: build-static
+    #!/usr/bin/env bash
+    set -e
+
+    cd tests
     cmake \
         -S . \
         -B build/static \

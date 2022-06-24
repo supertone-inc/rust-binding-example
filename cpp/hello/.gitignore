@@ -2,4 +2,3 @@
 /hello/include/*
 !/hello/include/*.hpp
 /hello/lib
-/build
