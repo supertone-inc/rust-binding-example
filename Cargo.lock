@@ -149,14 +149,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-cpp-dynamic"
+name = "hello-cpp-cdylib"
 version = "0.1.0"
 dependencies = [
  "hello-cpp",
 ]
 
 [[package]]
-name = "hello-cpp-static"
+name = "hello-cpp-staticlib"
 version = "0.1.0"
 dependencies = [
  "hello-cpp",
