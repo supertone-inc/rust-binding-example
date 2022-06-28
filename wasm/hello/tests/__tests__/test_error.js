@@ -3,12 +3,9 @@ const initPage = require("../init-page");
 beforeAll(initPage);
 
 test("throw_error", async () => {
-  const result = await page.evaluate(() => {
-    try {
+  await expect(
+    page.evaluate(() => {
       hello.throw_error();
-    } catch (error) {
-      return error.message;
-    }
-  });
-  expect(result).toBe("error from Rust!");
+    })
+  ).rejects.toThrow("error from Rust!");
 });
