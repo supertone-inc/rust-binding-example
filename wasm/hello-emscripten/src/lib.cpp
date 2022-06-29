@@ -1,22 +1,21 @@
 #include <emscripten/bind.h>
 
-#include <hello_string.hpp>
 #include <hello_array.hpp>
+#include <hello_string.hpp>
 
 #include <iostream>
 
 namespace em = emscripten;
 
-const auto concat(const em::val &a, const em::val &b)
+em::val concat(const em::val &a, const em::val &b)
 {
-    const auto vec_a{ em::convertJSArrayToNumberVector<float>(a) };
-    const auto vec_b{ em::convertJSArrayToNumberVector<float>(b) };
+    auto a_vec{em::convertJSArrayToNumberVector<float>(a)};
+    auto b_vec{em::convertJSArrayToNumberVector<float>(b)};
+    auto c_vec{hello::array::concat(a_vec, b_vec)};
+    auto c_float32_array{em::typed_memory_view(c_vec.size(), c_vec.data())};
 
-    const auto vec_c{ hello::array::concat(vec_a, vec_b) };
-
-    return em::val{ em::typed_memory_view(vec_c.size(), vec_c.data()) };
+    return em::val::global("Array").call<em::val>("from", c_float32_array);
 }
-
 
 EMSCRIPTEN_BINDINGS()
 {
