@@ -22,7 +22,7 @@ em::val concat(const em::val &a, const em::val &b)
     return vector_to_typed_array(c_vec);
 }
 
-void concat_prealloc(const std::vector<float> &a, const std::vector<float> &b, std::vector<float> &c)
+void concat_preallocated(const std::vector<float> &a, const std::vector<float> &b, std::vector<float> &c)
 {
     hello__array__concat(a.data(), a.size(), b.data(), b.size(), c.data());
 }
@@ -35,7 +35,7 @@ EMSCRIPTEN_BINDINGS()
         .function("toTypedArray", &vector_to_typed_array<float>);
 
     em::function("concat", &concat);
-    em::function("concatPrealloc", &concat_prealloc);
+    em::function("concatPreallocated", &concat_preallocated);
 
-    em::function("to_uppercase", &hello::string::to_uppercase);
+    em::function("toUppercase", &hello::string::to_uppercase);
 }

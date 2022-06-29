@@ -10,14 +10,14 @@ test("concat", async () => {
   ).resolves.toEqual([1, 2, 3, 4, 5]);
 });
 
-test("concatPrealloc", async () => {
+test("concatPreallocated", async () => {
   await expect(
     page.evaluate(() => {
       const a = hello.Float32Vector.from([1, 2]);
       const b = hello.Float32Vector.from([3, 4, 5]);
       const c = new hello.Float32Vector(5);
 
-      hello.concatPrealloc(a, b, c);
+      hello.concatPreallocated(a, b, c);
 
       return Array.from(c.toTypedArray());
     })

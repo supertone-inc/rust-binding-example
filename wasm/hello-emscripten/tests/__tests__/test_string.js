@@ -2,10 +2,10 @@ const initPage = require("../init-page");
 
 beforeAll(initPage);
 
-test("to_uppercase", async () => {
+test("toUppercase", async () => {
   await expect(
     page.evaluate(() => {
-      return hello.to_uppercase("Hello World!");
+      return hello.toUppercase("Hello World!");
     })
   ).resolves.toBe("HELLO WORLD!");
 });
