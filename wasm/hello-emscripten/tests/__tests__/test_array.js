@@ -19,7 +19,7 @@ test("concatPreallocated", async () => {
 
       hello.concatPreallocated(a, b, c);
 
-      return Array.from(c.toTypedArray());
+      return Array.from(c.asTypedArray());
     })
   ).resolves.toEqual([1, 2, 3, 4, 5]);
 });
@@ -29,9 +29,9 @@ test("Float32Vector", async () => {
     page.evaluate(() => {
       const vector = new hello.Float32Vector(3);
 
-      vector.toTypedArray().set([1, 2, 3]);
+      vector.asTypedArray().set([1, 2, 3]);
 
-      return Array.from(vector.toTypedArray());
+      return Array.from(vector.asTypedArray());
     })
   ).resolves.toEqual([1, 2, 3]);
 });
