@@ -27,3 +27,10 @@ test: build
     cd tests
     npm install
     npm test
+
+test-quick:
+    #!/usr/bin/env bash
+    set -e
+
+    cd tests
+    npm test
