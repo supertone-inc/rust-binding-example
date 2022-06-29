@@ -3,7 +3,6 @@
 #include <hello_array.hpp>
 #include <hello_string.hpp>
 
-#include <iostream>
 #include <vector>
 
 namespace em = emscripten;
