@@ -1,7 +1,6 @@
 #include <emscripten/bind.h>
 
 #include <hello/array.hpp>
-#include <hello/string.hpp>
 
 #include <vector>
 
@@ -35,6 +34,4 @@ EMSCRIPTEN_BINDINGS()
 
     em::function("concat", &concat);
     em::function("concatPreallocated", &concat_preallocated);
-
-    em::function("toUppercase", &hello::string::to_uppercase);
 }

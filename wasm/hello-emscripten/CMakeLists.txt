@@ -5,7 +5,8 @@ include(emscripten.cmake)
 project(hello-emscripten)
 
 add_executable(${PROJECT_NAME}
-  src/lib.cpp
+  src/array.cpp
+  src/string.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_CPP_INCLUDE_DIR})
@@ -26,7 +27,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 install(
   FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME}.js
-    ${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME}.wasm
+  ${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME}.js
+  ${CMAKE_CURRENT_BINARY_DIR}/${OUTPUT_NAME}.wasm
   DESTINATION .
 )
