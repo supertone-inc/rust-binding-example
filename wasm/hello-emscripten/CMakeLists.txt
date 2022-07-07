@@ -6,6 +6,7 @@ project(hello-emscripten)
 
 add_executable(${PROJECT_NAME}
   src/array.cpp
+  src/error.cpp
   src/string.cpp
 )
 
@@ -19,9 +20,10 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   OUTPUT_NAME ${OUTPUT_NAME}
   CXX_STANDARD 17
   LINK_FLAGS "\
-    -s MODULARIZE=1 \
-    -s EXPORT_ES6=1 \
-    -l embind \
+  -s MODULARIZE \
+  -s EXPORT_ES6 \
+  -s NO_DISABLE_EXCEPTION_CATCHING \
+  --bind \
   "
 )
 
