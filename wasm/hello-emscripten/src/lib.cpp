@@ -1,7 +1,7 @@
 #include <emscripten/bind.h>
 
-#include <hello_array.hpp>
-#include <hello_string.hpp>
+#include <hello/array.hpp>
+#include <hello/string.hpp>
 
 #include <vector>
 
