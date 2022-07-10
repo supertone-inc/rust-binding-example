@@ -6,6 +6,7 @@ project(hello-emscripten)
 
 add_executable(${PROJECT_NAME}
   src/array.cpp
+  src/callback.cpp
   src/error.cpp
   src/string.cpp
 )
