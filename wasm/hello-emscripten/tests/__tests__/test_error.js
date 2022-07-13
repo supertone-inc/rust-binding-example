@@ -5,7 +5,13 @@ beforeAll(initPage);
 test("throwError", async () => {
   await expect(
     page.evaluate(() => {
-      hello.throwError();
+      try {
+        hello.throwError();
+      } catch (error) {
+        throw typeof error === "number"
+          ? new Error(hello.getExceptionMessage(error))
+          : error;
+      }
     })
   ).rejects.toThrow("error from Rust!");
 });
