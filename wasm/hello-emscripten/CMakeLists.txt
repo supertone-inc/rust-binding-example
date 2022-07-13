@@ -25,6 +25,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   -s EXPORT_ES6 \
   -s NO_DISABLE_EXCEPTION_CATCHING \
   --bind \
+  --pre-js ${CMAKE_CURRENT_SOURCE_DIR}/pre.js \
   "
 )
 
