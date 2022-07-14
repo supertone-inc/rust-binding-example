@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-include(emscripten.cmake)
+include(emsdk.cmake)
 
 project(hello-emscripten)
 
