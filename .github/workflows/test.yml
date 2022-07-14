@@ -76,12 +76,17 @@ jobs:
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v7
 
-      - name: Test
-        run: |
-          just cpp/hello/test
-          just nodejs/hello/test
-          just python/hello/test
-          just rust/hello/test
+      - name: Test C++
+        run: just cpp/hello/test
+
+      - name: Test Node.js
+        run: just nodejs/hello/test
+
+      - name: Test Python
+        run: just python/hello/test
+
+      - name: Test Rust
+        run: just rust/hello/test
 
       - name: Setup `wasm-pack`
         if: runner.os != 'Windows'
