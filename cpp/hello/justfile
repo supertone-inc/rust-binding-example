@@ -1,30 +1,15 @@
-LIB_NAME := "hello_cpp"
+build-cdylib:
+    just ../hello-cdylib/build
 
-LIB_FILE_NAME := if os() == "windows" {
-    LIB_NAME + ".dll"
-} else if os() == "macos" {
-    "lib" + LIB_NAME + ".dylib"
-} else {
-    "lib" + LIB_NAME + ".so"
-}
+build-staticlib:
+    just ../hello-staticlib/build
 
-RUST_TOOLCHAIN := `rustup default`
+build: build-cdylib build-staticlib
 
-CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
-    "-A Win32"
-} else {
-    ""
-}
+test-cdylib:
+    just ../hello-cdylib/test
 
-build:
-    cargo build
-    mkdir -p hello/lib
-    cp ../../target/debug/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
-    if [ {{os()}} = "windows" ]; then \
-        cp ../../target/debug/{{LIB_FILE_NAME}}.lib hello/lib/{{LIB_NAME}}.lib; \
-    fi
+test-staticlib:
+    just ../hello-staticlib/test
 
-test: build
-    cmake -S . -B build {{CMAKE_OPTIONS}}
-    cmake --build build --clean-first
-    ctest --test-dir build -V --no-tests=error
+test: test-cdylib test-staticlib
