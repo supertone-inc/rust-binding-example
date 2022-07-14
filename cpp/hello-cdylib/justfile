@@ -24,7 +24,7 @@ TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
     "."
 }
 
-TARGET_DIR := justfile_directory() + "/../../target/" + TARGET_DIR_NAME + "/debug"
+TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
 
 build:
     cargo build

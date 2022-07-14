@@ -22,7 +22,7 @@ TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
     "."
 }
 
-TARGET_DIR := justfile_directory() + "/../../target/" + TARGET_DIR_NAME + "/debug"
+TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
 
 build:
     cargo build
@@ -37,6 +37,7 @@ test: build
         -B tests/build \
         -D HELLO_CPP_INCLUDE_DIR={{justfile_directory()}}/hello/include \
         -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib \
+        -D HELLO_STATIC=true \
         -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
         {{CMAKE_OPTIONS}}
     cmake --build tests/build --clean-first

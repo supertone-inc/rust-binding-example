@@ -25,6 +25,12 @@ add_executable(${PROJECT_NAME}
 )
 target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello_cpp)
 
+if(HELLO_STATIC)
+  if(UNIX AND NOT APPLE)
+    target_link_libraries(${PROJECT_NAME} dl pthread)
+  endif()
+endif()
+
 if(WIN32)
   file(GLOB_RECURSE DYNAMIC_LIBS "${HELLO_CPP_LIB_DIR}/*.dll")
 	foreach(dll ${DYNAMIC_LIBS})
