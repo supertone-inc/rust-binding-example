@@ -28,6 +28,8 @@ target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello_cpp)
 if(HELLO_STATIC)
   if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME} dl pthread)
+  elseif(WIN32)
+    target_link_libraries(${PROJECT_NAME} bcrypt userenv ws2_32)
   endif()
 endif()
 

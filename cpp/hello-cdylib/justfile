@@ -41,7 +41,7 @@ test: build
     cmake \
         -S ../hello/tests \
         -B tests/build \
-        -D HELLO_DIR={{absolute_path("hello")}} \
+        -D HELLO_DIR="{{absolute_path("hello")}}" \
         -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
         {{CMAKE_OPTIONS}}
     cmake --build tests/build --clean-first
