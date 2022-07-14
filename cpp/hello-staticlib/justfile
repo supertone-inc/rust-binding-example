@@ -35,8 +35,7 @@ test: build
     cmake \
         -S ../hello/tests \
         -B tests/build \
-        -D HELLO_CPP_INCLUDE_DIR={{justfile_directory()}}/hello/include \
-        -D HELLO_CPP_LIB_DIR={{justfile_directory()}}/hello/lib \
+        -D HELLO_DIR={{absolute_path("hello")}} \
         -D HELLO_STATIC=true \
         -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
         {{CMAKE_OPTIONS}}
