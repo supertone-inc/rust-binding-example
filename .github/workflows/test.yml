@@ -76,24 +76,29 @@ jobs:
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v7
 
-      - name: Test C++
-        run: just cpp/hello/test
+      - name: Test `cpp/hello-cdylib`
+        run: just cpp/hello-cdylib/test
 
-      - name: Test Node.js
+      - name: Test `cpp/hello-staticlib`
+        run: just cpp/hello-staticlib/test
+
+      - name: Test `nodejs/hello`
         run: just nodejs/hello/test
 
-      - name: Test Python
+      - name: Test `python/hello`
         run: just python/hello/test
 
-      - name: Test Rust
+      - name: Test `rust/hello`
         run: just rust/hello/test
+
+      - name: Test `wasm/hello-emscripten`
+        if: runner.os != 'Windows'
+        run: just wasm/hello-emscripten/test
 
       - name: Setup `wasm-pack`
         if: runner.os != 'Windows'
         uses: jetli/wasm-pack-action@v0.3.0
 
-      - name: Test Wasm
+      - name: Test `wasm/hello-wasm-pack`
         if: runner.os != 'Windows'
-        run: |
-          just wasm/hello-emscripten/test
-          just wasm/hello-wasm-pack/test
+        run: just wasm/hello-wasm-pack/test

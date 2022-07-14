@@ -1,5 +1,6 @@
 build:
-    just cpp/hello/build
+    just cpp/hello-cdylib/build
+    just cpp/hello-staticlib/build
     just nodejs/hello/build
     just python/hello/build
     just rust/hello/build
@@ -7,7 +8,8 @@ build:
     just wasm/hello-wasm-pack/build
 
 test:
-    just cpp/hello/test
+    just cpp/hello-cdylib/test
+    just cpp/hello-staticlib/test
     just nodejs/hello/test
     just python/hello/test
     just rust/hello/test
