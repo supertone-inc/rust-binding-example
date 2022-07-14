@@ -291,13 +291,13 @@ checksum = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
 
 [[package]]
 name = "napi"
-version = "2.4.3"
+version = "2.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eba1b04555247b935187ea1dddac523ebc470c45806501d7203ed1bec7fa26b2"
+checksum = "4ab98a3f0790b3488cfef37e356e54afa9251ab2555e4e270671775d419f3749"
 dependencies = [
  "ctor",
- "lazy_static",
  "napi-sys",
+ "once_cell",
  "thread_local",
 ]
 
