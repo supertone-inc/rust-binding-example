@@ -13,13 +13,3 @@ test:
     just rust/hello/test
     just wasm/hello-emscripten/test
     just wasm/hello-wasm-pack/test
-
-setup-win32:
-    rustup default stable-i686-pc-windows-msvc
-    nvm use 16.12.0 32
-    pyenv global 3.8.10-win32
-
-setup-win64:
-    rustup default stable-x86_64-pc-windows-msvc
-    nvm use 16.12.0 64
-    pyenv global 3.8.10

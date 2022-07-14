@@ -10,12 +10,6 @@ LIB_FILE_NAME := if os() == "windows" {
 
 RUST_TOOLCHAIN := `rustup default`
 
-CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
-    "-A Win32"
-} else {
-    ""
-}
-
 CARGO_BUILD_TARGET := env_var_or_default("CARGO_BUILD_TARGET", "")
 
 TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
@@ -42,7 +36,6 @@ test: build
         -S ../hello/tests \
         -B tests/build \
         -D HELLO_DIR="{{absolute_path("hello")}}" \
-        -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
-        {{CMAKE_OPTIONS}}
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=true
     cmake --build tests/build --clean-first
     ctest --test-dir tests/build -V --no-tests=error

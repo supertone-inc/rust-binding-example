@@ -25,7 +25,6 @@ jobs:
         rust-target:
           - x86_64-unknown-linux-gnu
           - x86_64-apple-darwin
-          - i686-pc-windows-msvc
           - x86_64-pc-windows-msvc
 
         include:
@@ -38,11 +37,6 @@ jobs:
             runs-on: macos-latest
             node-architecture: x64
             python-architecture: x64
-
-          - rust-target: i686-pc-windows-msvc
-            runs-on: windows-latest
-            node-architecture: x86
-            python-architecture: x86
 
           - rust-target: x86_64-pc-windows-msvc
             runs-on: windows-latest
