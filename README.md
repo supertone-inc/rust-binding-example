@@ -9,7 +9,7 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 - [Rust](https://www.rust-lang.org/tools/install)
 - [just](https://github.com/casey/just)
 
-### For C++ Project
+### For C++ Projects
 
 - [CMake](https://cmake.org/download) >= 3.20 (See [this](https://cgold.readthedocs.io/en/latest/first-step/installation.html) for installation.)
 
@@ -22,10 +22,19 @@ This project is aimed at testing and showing how to **bind a Rust project to the
 - [Python](https://www.python.org/downloads) >= 3.8 (Using [pyenv](https://github.com/pyenv/pyenv#installation) is recommended.)
 - [Poetry](https://python-poetry.org/docs/#installation)
 
-### For Wasm Project
+### For Wasm Projects
+
+#### Common
+
+- [Node.js](https://nodejs.org/en/download) >= 16 (Using [nvm](https://github.com/nvm-sh/nvm) is recommended.)
+
+#### `wasm/hello-emscripten`
+
+- `gettext` (Install via `brew install gettext`)
+
+#### `wasm/hello-wasm-pack`
 
 - [wasm-pack](https://rustwasm.github.io/wasm-pack/installer)
-- [Node.js](https://nodejs.org/en/download) >= 16 (Using [nvm](https://github.com/nvm-sh/nvm) is recommended.)
 
 ## Getting Started
 

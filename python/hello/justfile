@@ -1,7 +1,7 @@
 export PYO3_PYTHON := if os() == "windows" {
-    justfile_directory() + "/.venv/Scripts/python.exe"
+    absolute_path(".venv/Scripts/python.exe")
 } else {
-    justfile_directory() + "/.venv/bin/python"
+    absolute_path(".venv/bin/python")
 }
 
 SOURCE_LIB_FILE_NAME := if os() == "windows" {

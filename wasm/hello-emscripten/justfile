@@ -1,0 +1,35 @@
+EMSDK_DIR := absolute_path("build/_deps/emsdk-src")
+HELLO_CPP_DIR := absolute_path("../../cpp/hello-staticlib")
+
+build:
+    #!/usr/bin/env bash
+    set -e
+
+    cmake \
+        -S . \
+        -B build \
+        -D HELLO_DIR={{HELLO_CPP_DIR}}/hello \
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=1
+
+    export CARGO_BUILD_TARGET=wasm32-unknown-emscripten
+    rustup target add ${CARGO_BUILD_TARGET}
+    source {{EMSDK_DIR}}/emsdk_env.sh
+    just {{HELLO_CPP_DIR}}/build
+
+    cmake --build build --clean-first
+    cmake --install build --prefix hello
+
+test: build
+    #!/usr/bin/env bash
+    set -e
+
+    cd tests
+    npm install
+    npm test
+
+test-quick:
+    #!/usr/bin/env bash
+    set -e
+
+    cd tests
+    npm test
