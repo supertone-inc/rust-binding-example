@@ -49,7 +49,12 @@ jobs:
             node-architecture: x64
             python-architecture: x64
 
-          - target: wasm/hello
+          - target: wasm/hello-emscripten
+            rust-target: x86_64-unknown-linux-gnu
+            runs-on: ubuntu-latest
+            node-architecture: x64
+
+          - target: wasm/hello-wasm-pack
             rust-target: x86_64-unknown-linux-gnu
             runs-on: ubuntu-latest
             node-architecture: x64
@@ -84,10 +89,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install `wasm-pack`
-        if: startsWith(matrix.target, 'wasm')
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-
       - if: startsWith(matrix.target, 'nodejs') || startsWith(matrix.target, 'wasm')
         name: Setup Node
         uses: actions/setup-node@v3
@@ -121,6 +122,10 @@ jobs:
       - if: startsWith(matrix.target, 'python')
         name: Install Poetry
         uses: Gr1N/setup-poetry@v7
+
+      - name: Install `wasm-pack`
+        if: matrix.target == 'wasm/hello-wasm-pack'
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Test
         working-directory: ${{ matrix.target }}

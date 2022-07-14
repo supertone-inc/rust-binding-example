@@ -1,13 +1,13 @@
 [package]
-name = "hello-cpp"
+name = "hello-wasm-pack"
 version = "0.1.0"
 publish = false
 edition = "2021"
 
-[dependencies]
-libc = "0.2"
-thiserror = "1.0"
-hello = { path = "../../rust/hello" }
+[lib]
+crate-type = ["cdylib"]
 
-[build-dependencies]
-cbindgen = "0.23"
+[dependencies]
+hello = { path = "../../rust/hello" }
+js-sys = "0.3"
+wasm-bindgen = "0.2"

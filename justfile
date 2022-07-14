@@ -3,14 +3,16 @@ build:
     just nodejs/hello/build
     just python/hello/build
     just rust/hello/build
-    just wasm/hello/build
+    just wasm/hello-emscripten/build
+    just wasm/hello-wasm-pack/build
 
 test:
     just cpp/hello/test
     just nodejs/hello/test
     just python/hello/test
     just rust/hello/test
-    just wasm/hello/test
+    just wasm/hello-emscripten/test
+    just wasm/hello-wasm-pack/test
 
 setup-win32:
     rustup default stable-i686-pc-windows-msvc

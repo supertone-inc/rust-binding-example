@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "jest-puppeteer": "^6.1.0"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

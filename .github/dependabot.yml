@@ -20,6 +20,16 @@ updates:
     schedule:
       interval: "daily"
 
+  - directory: "/cpp/hello-dynamic"
+    package-ecosystem: "cargo"
+    schedule:
+      interval: "daily"
+
+  - directory: "/cpp/hello-static"
+    package-ecosystem: "cargo"
+    schedule:
+      interval: "daily"
+
   - directory: "/nodejs/hello"
     package-ecosystem: "cargo"
     schedule:
@@ -45,12 +55,17 @@ updates:
     schedule:
       interval: "daily"
 
-  - directory: "/wasm/hello"
+  - directory: "/wasm/hello-emscripten/tests"
+    package-ecosystem: "npm"
+    schedule:
+      interval: "daily"
+
+  - directory: "/wasm/hello-wasm-pack"
     package-ecosystem: "cargo"
     schedule:
       interval: "daily"
 
-  - directory: "/wasm/hello"
+  - directory: "/wasm/hello-wasm-pack/tests"
     package-ecosystem: "npm"
     schedule:
       interval: "daily"

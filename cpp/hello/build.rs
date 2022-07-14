@@ -4,7 +4,7 @@ use std::env;
 
 fn main() {
     let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
-    let header_file_path = "hello/include/hello.h";
+    let header_file_path = "hello/include/hello/hello.h";
 
     cbindgen::generate(crate_dir)
         .unwrap()

@@ -1,0 +1,43 @@
+LIB_NAME := "hello_cpp"
+
+LIB_FILE_NAME := if os() == "windows" {
+    LIB_NAME + ".lib"
+} else {
+    "lib" + LIB_NAME + ".a"
+}
+
+RUST_TOOLCHAIN := `rustup default`
+
+CMAKE_OPTIONS := if RUST_TOOLCHAIN == "stable-i686-pc-windows-msvc (default)" {
+    "-A Win32"
+} else {
+    ""
+}
+
+CARGO_BUILD_TARGET := env_var_or_default("CARGO_BUILD_TARGET", "")
+
+TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
+    CARGO_BUILD_TARGET
+} else {
+    "."
+}
+
+TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
+
+build:
+    cargo build
+    rm -rf hello
+    cp -r ../hello/hello hello
+    mkdir -p hello/lib
+    cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
+
+test: build
+    cmake \
+        -S ../hello/tests \
+        -B tests/build \
+        -D HELLO_DIR="{{absolute_path("hello")}}" \
+        -D HELLO_STATIC=true \
+        -D CMAKE_EXPORT_COMPILE_COMMANDS=1 \
+        {{CMAKE_OPTIONS}}
+    cmake --build tests/build --clean-first
+    ctest --test-dir tests/build -V --no-tests=error

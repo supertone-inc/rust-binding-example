@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <callback.hpp>
+#include <hello/callback.hpp>
 
 float mapper(int item)
 {
@@ -23,7 +23,9 @@ TEST_CASE("[C] hello__callback__map()")
 
 TEST_CASE("[C++] hello::callback::map()")
 {
-    auto result = hello::callback::map({1, 2, 3}, [](int item) { return item / 2.0f; });
+    auto devider = 2.0f;
+
+    auto result = hello::callback::map({1, 2, 3}, [&](int item) { return item / devider; });
 
     REQUIRE(result == std::vector<float>{0.5f, 1.0f, 1.5f});
 }
