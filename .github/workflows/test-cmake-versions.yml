@@ -14,9 +14,9 @@ jobs:
           - ubuntu-latest
           - windows-latest
         cmake-version:
-          - 3.20
-          - 3.21
-          - 3.22
+          - "3.20"
+          - "3.21"
+          - "3.22"
 
     runs-on: ${{ matrix.os }}
 
