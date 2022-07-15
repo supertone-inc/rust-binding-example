@@ -92,13 +92,13 @@ jobs:
         run: just rust/hello/test
 
       - name: Test `wasm/hello-emscripten`
-        if: runner.os != 'Windows'
+        if: runner.os == 'Linux'
         run: just wasm/hello-emscripten/test
 
       - name: Setup `wasm-pack`
-        if: runner.os != 'Windows'
+        if: runner.os == 'Linux'
         uses: jetli/wasm-pack-action@v0.3.0
 
       - name: Test `wasm/hello-wasm-pack`
-        if: runner.os != 'Windows'
+        if: runner.os == 'Linux'
         run: just wasm/hello-wasm-pack/test
