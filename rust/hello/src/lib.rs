@@ -2,7 +2,7 @@ pub mod array;
 pub mod callback;
 pub mod error;
 pub mod string;
-pub mod r#struct;
+pub mod structure;
 
 pub use error::Error;
 
