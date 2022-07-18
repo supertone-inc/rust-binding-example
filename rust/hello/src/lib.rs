@@ -2,6 +2,7 @@ pub mod array;
 pub mod callback;
 pub mod error;
 pub mod string;
+pub mod r#struct;
 
 pub use error::Error;
 
