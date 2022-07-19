@@ -19,6 +19,7 @@ add_executable(${PROJECT_NAME}
   test_callback.cpp
   test_error.cpp
   test_string.cpp
+  test_structure.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_DIR}/include)
