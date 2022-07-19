@@ -1,8 +1,3 @@
 language = "C"
 cpp_compat = true
 pragma_once = true
-
-[struct]
-# rename_fields = "hello__struct__greeter_"
-# must_use = "Greeter"
-derive_constructor = true
