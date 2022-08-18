@@ -15,7 +15,7 @@ std::vector<float> map(const std::vector<Item> &items, const Mapper &mapper)
 {
     std::vector<MappedItem> mapped_items(items.size());
 
-    hello__callback__map_with_state(
+    hello__callback__map_with_user_data(
         items.data(), mapped_items.data(), items.size(), static_cast<const void *>(&mapper),
         +[](const void *user_data, Item item) -> MappedItem {
             auto mapper = (*static_cast<const Mapper *>(user_data));

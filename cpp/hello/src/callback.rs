@@ -14,7 +14,7 @@ pub extern "C" fn hello__callback__map(
 }
 
 #[no_mangle]
-pub extern "C" fn hello__callback__map_with_state(
+pub extern "C" fn hello__callback__map_with_user_data(
     in_items: *const c_int,
     out_items: *mut c_float,
     item_count: size_t,
