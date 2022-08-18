@@ -23,9 +23,14 @@ TEST_CASE("[C] hello__callback__map()")
 
 TEST_CASE("[C++] hello::callback::map()")
 {
-    auto devider = 2.0f;
+    {
+        auto result = hello::callback::map({1, 2, 3}, mapper);
+        REQUIRE(result == std::vector<float>{0.5f, 1.0f, 1.5f});
+    }
 
-    auto result = hello::callback::map({1, 2, 3}, [&](int item) { return item / devider; });
-
-    REQUIRE(result == std::vector<float>{0.5f, 1.0f, 1.5f});
+    {
+        auto devider = 2.0f;
+        auto result = hello::callback::map({1, 2, 3}, [&](int item) { return item / devider; });
+        REQUIRE(result == std::vector<float>{0.5f, 1.0f, 1.5f});
+    }
 }
