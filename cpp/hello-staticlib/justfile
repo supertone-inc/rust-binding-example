@@ -30,7 +30,6 @@ test: build
         -S ../hello/tests \
         -B tests/build \
         -D HELLO_DIR="{{absolute_path("hello")}}" \
-        -D HELLO_STATIC=true \
-        -D CMAKE_EXPORT_COMPILE_COMMANDS=true
+        -D HELLO_STATIC=true
     cmake --build tests/build --clean-first
     ctest --test-dir tests/build -V --no-tests=error

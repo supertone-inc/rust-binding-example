@@ -8,8 +8,7 @@ build:
     cmake \
         -S . \
         -B build \
-        -D HELLO_DIR={{HELLO_CPP_DIR}}/hello \
-        -D CMAKE_EXPORT_COMPILE_COMMANDS=1
+        -D HELLO_DIR={{HELLO_CPP_DIR}}/hello
 
     export CARGO_BUILD_TARGET=wasm32-unknown-emscripten
     rustup target add ${CARGO_BUILD_TARGET}
