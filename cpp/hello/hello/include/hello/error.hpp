@@ -11,15 +11,16 @@ namespace error
 {
 class Exception : public std::exception
 {
-  public:
-    Exception(const std::string &message) : message(message){};
+public:
+    Exception(const std::string &message)
+        : message(message){};
 
     virtual const char *what() const throw()
     {
         return message.c_str();
     }
 
-  private:
+private:
     std::string message;
 };
 

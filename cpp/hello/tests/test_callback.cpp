@@ -1,5 +1,4 @@
 #include <catch2/catch.hpp>
-
 #include <hello/callback.hpp>
 
 float mapper(int item)

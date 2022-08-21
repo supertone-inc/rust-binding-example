@@ -1,12 +1,11 @@
 #include <emscripten/bind.h>
-
 #include <hello/array.hpp>
-
 #include <vector>
 
 namespace em = emscripten;
 
-template <typename T> em::val vector_as_typed_array(const std::vector<T> &vec)
+template <typename T>
+em::val vector_as_typed_array(const std::vector<T> &vec)
 {
     return em::val{em::typed_memory_view(vec.size(), vec.data())};
 }

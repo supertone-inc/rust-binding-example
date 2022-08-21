@@ -1,0 +1,15 @@
+{
+  BasedOnStyle: Microsoft,
+  AccessModifierOffset: -4,
+  AlignAfterOpenBracket: BlockIndent,
+  AllowAllArgumentsOnNextLine: false,
+  AllowAllConstructorInitializersOnNextLine: false,
+  AllowAllParametersOfDeclarationOnNextLine: false,
+  AlwaysBreakTemplateDeclarations: Yes,
+  BinPackArguments: false,
+  BinPackParameters: false,
+  BreakConstructorInitializers: BeforeComma,
+  BreakInheritanceList: BeforeComma,
+  BreakStringLiterals: false,
+  IncludeBlocks: Regroup,
+}

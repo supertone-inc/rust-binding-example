@@ -1,5 +1,4 @@
 #include <emscripten/bind.h>
-
 #include <hello/error.hpp>
 
 namespace em = emscripten;
