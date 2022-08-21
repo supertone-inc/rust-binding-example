@@ -9,7 +9,6 @@ namespace hello
 {
 namespace callback
 {
-
 template <typename Item = int, typename MappedItem = float, typename Mapper = std::function<MappedItem(Item)>>
 std::vector<float> map(const std::vector<Item> &items, const Mapper &mapper)
 {
