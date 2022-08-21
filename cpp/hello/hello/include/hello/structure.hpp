@@ -8,8 +8,9 @@ namespace structure
 {
 class Counter
 {
-  public:
-    Counter(int count) : raw(hello__structure__counter__new(count))
+public:
+    Counter(int count)
+        : raw(hello__structure__counter__new(count))
     {
     }
 
@@ -23,7 +24,7 @@ class Counter
         return hello__structure__counter__increase(raw, amount);
     }
 
-  private:
+private:
     void *raw;
 };
 } // namespace structure

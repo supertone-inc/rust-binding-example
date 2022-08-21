@@ -1,6 +1,4 @@
-
 #include <catch2/catch.hpp>
-
 #include <hello/structure.hpp>
 
 TEST_CASE("[C] hello__structure__counter")
