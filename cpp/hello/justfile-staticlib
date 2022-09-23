@@ -1,0 +1,34 @@
+LIB_NAME := "hello_cpp"
+
+LIB_FILE_NAME := if os() == "windows" {
+    LIB_NAME + ".lib"
+} else {
+    "lib" + LIB_NAME + ".a"
+}
+
+RUST_TOOLCHAIN := `rustup default`
+
+CARGO_BUILD_TARGET := env_var_or_default("CARGO_BUILD_TARGET", "")
+
+TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
+    CARGO_BUILD_TARGET
+} else {
+    "."
+}
+
+TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
+
+build:
+    cargo rustc --crate-type staticlib
+    mkdir -p hello/staticlib
+    cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} hello/staticlib/{{LIB_FILE_NAME}}
+
+test: build
+    cmake \
+        -S tests \
+        -B tests/build \
+        -D HELLO_INCLUDE_DIR="{{absolute_path("hello/include")}}" \
+        -D HELLO_LIB_DIR="{{absolute_path("hello/staticlib")}}" \
+        -D HELLO_STATIC=true
+    cmake --build tests/build --clean-first
+    ctest --test-dir tests/build -V --no-tests=error

@@ -1,9 +1,11 @@
 LIB_NAME := "hello_cpp"
 
 LIB_FILE_NAME := if os() == "windows" {
-    LIB_NAME + ".lib"
+    LIB_NAME + ".dll"
+} else if os() == "macos" {
+    "lib" + LIB_NAME + ".dylib"
 } else {
-    "lib" + LIB_NAME + ".a"
+    "lib" + LIB_NAME + ".so"
 }
 
 RUST_TOOLCHAIN := `rustup default`
@@ -19,17 +21,19 @@ TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
 TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
 
 build:
-    cargo build
-    rm -rf hello
-    cp -r ../hello/hello hello
-    mkdir -p hello/lib
+    cargo rustc --crate-type cdylib
+    mkdir -p hello/lib/{{TARGET_DIR_NAME}}
     cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
+
+    if [ {{os()}} = "windows" ]; then \
+        cp {{TARGET_DIR}}/{{LIB_FILE_NAME}}.lib hello/lib/{{LIB_NAME}}.lib; \
+    fi
 
 test: build
     cmake \
-        -S ../hello/tests \
+        -S tests \
         -B tests/build \
-        -D HELLO_DIR="{{absolute_path("hello")}}" \
-        -D HELLO_STATIC=true
+        -D HELLO_INCLUDE_DIR="{{absolute_path("hello/include")}}" \
+        -D HELLO_LIB_DIR="{{absolute_path("hello/lib")}}"
     cmake --build tests/build --clean-first
     ctest --test-dir tests/build -V --no-tests=error

@@ -13,8 +13,8 @@ add_executable(${PROJECT_NAME}
   src/string.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_DIR}/include)
-target_link_directories(${PROJECT_NAME} PRIVATE ${HELLO_DIR}/lib)
+target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_INCLUDE_DIR})
+target_link_directories(${PROJECT_NAME} PRIVATE ${HELLO_LIB_DIR})
 target_link_libraries(${PROJECT_NAME} hello_cpp)
 
 set(OUTPUT_NAME index)

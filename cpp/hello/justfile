@@ -1,15 +1,15 @@
 build-cdylib:
-    just ../hello-cdylib/build
+    just --justfile justfile-cdylib build
 
 build-staticlib:
-    just ../hello-staticlib/build
+    just --justfile justfile-staticlib build
 
 build: build-cdylib build-staticlib
 
 test-cdylib:
-    just ../hello-cdylib/test
+    just --justfile justfile-cdylib test
 
 test-staticlib:
-    just ../hello-staticlib/test
+    just --justfile justfile-staticlib test
 
 test: test-cdylib test-staticlib

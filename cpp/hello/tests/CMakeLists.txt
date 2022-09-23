@@ -24,8 +24,8 @@ add_executable(${PROJECT_NAME}
   test_structure.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_DIR}/include)
-target_link_directories(${PROJECT_NAME} PRIVATE ${HELLO_DIR}/lib)
+target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_INCLUDE_DIR})
+target_link_directories(${PROJECT_NAME} PRIVATE ${HELLO_LIB_DIR})
 target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello_cpp)
 
 if(HELLO_STATIC)
@@ -37,7 +37,7 @@ if(HELLO_STATIC)
 endif()
 
 if(WIN32)
-  file(GLOB_RECURSE DYNAMIC_LIBS "${HELLO_DIR}/lib/*.dll")
+  file(GLOB_RECURSE DYNAMIC_LIBS "${HELLO_LIB_DIR}/*.dll")
 	foreach(dll ${DYNAMIC_LIBS})
 		add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy ${dll} $<TARGET_FILE_DIR:${PROJECT_NAME}>

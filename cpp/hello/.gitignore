@@ -1,3 +1,4 @@
 /target
 /hello/include/hello/hello.h
 /hello/lib
+/hello/staticlib
