@@ -41,9 +41,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup CMake
-        uses: jwlawson/actions-setup-cmake@v1.12
+        uses: lukka/get-cmake@v3.25.2
         with:
-          cmake-version: ${{ matrix.cmake-version }}
+          cmakeVersion: ${{ matrix.cmake-version }}
 
       - name: Test
         run: just cpp/hello/test
