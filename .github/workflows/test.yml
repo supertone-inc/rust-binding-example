@@ -74,7 +74,7 @@ jobs:
           restore-keys: ${{ runner.os }}-poetry-
 
       - name: Install Poetry
-        uses: Gr1N/setup-poetry@v7
+        uses: Gr1N/setup-poetry@v8
 
       - name: Test `cpp/hello`
         run: just cpp/hello/test
