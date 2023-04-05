@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup CMake
-        uses: lukka/get-cmake@v3.25.2
+        uses: lukka/get-cmake@v3.26.1
         with:
           cmakeVersion: ${{ matrix.cmake-version }}
 
