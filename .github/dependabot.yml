@@ -8,54 +8,54 @@ updates:
   - directory: "/"
     package-ecosystem: "github-actions"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/"
     package-ecosystem: "cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/cpp/hello"
     package-ecosystem: "cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/nodejs/hello"
     package-ecosystem: "cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/nodejs/hello"
     package-ecosystem: "npm"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/python/hello"
     package-ecosystem: "cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/python/hello"
     package-ecosystem: "pip"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/rust/hello"
     package-ecosystem: "cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/wasm/hello-emscripten/tests"
     package-ecosystem: "npm"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/wasm/hello-wasm-pack"
     package-ecosystem: "cargo"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - directory: "/wasm/hello-wasm-pack/tests"
     package-ecosystem: "npm"
     schedule:
-      interval: "daily"
+      interval: "weekly"
