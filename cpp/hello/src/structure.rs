@@ -1,4 +1,4 @@
-use libc::{c_int, c_void};
+use std::ffi::{c_int, c_void};
 
 type Counter = hello::structure::Counter;
 

@@ -1,5 +1,4 @@
-use libc::c_char;
-use std::ffi::{CStr, CString};
+use std::ffi::{c_char, CStr, CString};
 
 #[no_mangle]
 pub extern "C" fn hello__string__to_uppercase_alloc(string: *const c_char) -> *mut c_char {

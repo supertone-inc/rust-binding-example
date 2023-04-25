@@ -1,11 +1,11 @@
-use libc::{c_float, size_t};
+use std::ffi::c_float;
 
 #[no_mangle]
 pub extern "C" fn hello__array__concat_alloc(
     a: *const c_float,
-    a_length: size_t,
+    a_length: usize,
     b: *const c_float,
-    b_length: size_t,
+    b_length: usize,
 ) -> *mut c_float {
     let a: &[f32] = unsafe { std::slice::from_raw_parts(a, a_length) };
     let b: &[f32] = unsafe { std::slice::from_raw_parts(b, b_length) };
@@ -21,9 +21,9 @@ pub unsafe extern "C" fn hello__array__destroy_array(array: *mut c_float) {
 #[no_mangle]
 pub extern "C" fn hello__array__concat(
     a: *const c_float,
-    a_length: size_t,
+    a_length: usize,
     b: *const c_float,
-    b_length: size_t,
+    b_length: usize,
     out_array: *mut c_float,
 ) {
     let a: &[f32] = unsafe { std::slice::from_raw_parts(a, a_length) };

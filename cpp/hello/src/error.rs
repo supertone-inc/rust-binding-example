@@ -1,5 +1,6 @@
-use libc::{c_char, c_int, size_t};
-use std::{cell::RefCell, ptr, slice};
+use std::cell::RefCell;
+use std::ffi::{c_char, c_int};
+use std::{ptr, slice};
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -23,9 +24,9 @@ fn take_last_error() -> Option<Box<Error>> {
 }
 
 #[no_mangle]
-pub extern "C" fn hello__error__last_error_length() -> size_t {
+pub extern "C" fn hello__error__last_error_length() -> usize {
     LAST_ERROR.with(|prev| match *prev.borrow() {
-        Some(ref err) => err.to_string().len() as size_t + 1,
+        Some(ref err) => err.to_string().len() as usize + 1,
         None => 0,
     })
 }
@@ -33,7 +34,7 @@ pub extern "C" fn hello__error__last_error_length() -> size_t {
 #[no_mangle]
 pub unsafe extern "C" fn hello__error__last_error_message(
     buffer: *mut c_char,
-    length: size_t,
+    length: usize,
 ) -> c_int {
     if buffer.is_null() {
         return -1;
