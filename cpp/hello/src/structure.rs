@@ -7,6 +7,7 @@ pub extern "C" fn hello__structure__counter__new(count: c_int) -> *mut c_void {
     Box::into_raw(Box::new(Counter::new(count))) as *mut c_void
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__structure__counter__delete(counter: *mut c_void) {
     let counter = counter as *mut Counter;
@@ -16,6 +17,7 @@ pub unsafe extern "C" fn hello__structure__counter__delete(counter: *mut c_void)
     }
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__structure__counter__increase(
     counter: *mut c_void,

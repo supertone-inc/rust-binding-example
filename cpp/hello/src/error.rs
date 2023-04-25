@@ -26,11 +26,12 @@ fn take_last_error() -> Option<Box<Error>> {
 #[no_mangle]
 pub extern "C" fn hello__error__last_error_length() -> usize {
     LAST_ERROR.with(|prev| match *prev.borrow() {
-        Some(ref err) => err.to_string().len() as usize + 1,
+        Some(ref err) => err.to_string().len() + 1,
         None => 0,
     })
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__error__last_error_message(
     buffer: *mut c_char,
@@ -47,7 +48,7 @@ pub unsafe extern "C" fn hello__error__last_error_message(
 
     let error_message = last_error.to_string();
 
-    let buffer = slice::from_raw_parts_mut(buffer as *mut u8, length as usize);
+    let buffer = slice::from_raw_parts_mut(buffer as *mut u8, length);
 
     if error_message.len() >= buffer.len() {
         return -1;
@@ -64,13 +65,14 @@ pub unsafe extern "C" fn hello__error__last_error_message(
     error_message.len() as c_int
 }
 
+#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__error__throw_error() -> c_int {
     match hello::error::throw_error() {
-        Ok(_) => return 0,
+        Ok(_) => 0,
         Err(err) => {
             update_last_error(err.into());
-            return -1;
+            -1
         }
-    };
+    }
 }
