@@ -2,50 +2,35 @@
 
 #include "hello.h"
 
-#include <exception>
+#include <stdexcept>
 #include <string>
 
 namespace hello
 {
 namespace error
 {
-class Exception : public std::exception
+class Error : public std::runtime_error
 {
-public:
-    Exception(const std::string &message)
-        : message(message){};
+    using std::runtime_error::runtime_error;
+};
 
-    virtual const char *what() const throw()
+void check_error(int error)
+{
+    if (!error)
     {
-        return message.c_str();
+        return;
     }
 
-private:
-    std::string message;
-};
+    size_t message_length = hello__error__get_last_error_message_length();
+    std::string message(message_length, '\0');
+    hello__error__get_last_error_message((char *)message.data(), message.length());
+
+    throw Error(message);
+}
 
 void throw_error()
 {
-    int result = hello__error__throw_error();
-    if (!result)
-    {
-        return;
-    }
-
-    size_t error_length = hello__error__last_error_length();
-    if (!error_length)
-    {
-        return;
-    }
-
-    std::string message(error_length, '\0');
-    int message_length = hello__error__last_error_message((char *)message.c_str(), message.capacity());
-    if (message_length <= 0)
-    {
-        throw Exception("Fetching error message failed");
-    }
-
-    throw Exception(message);
+    check_error(hello__error__throw_error());
 }
 } // namespace error
 } // namespace hello

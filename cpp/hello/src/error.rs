@@ -24,44 +24,37 @@ fn take_last_error() -> Option<Box<Error>> {
 }
 
 #[no_mangle]
-pub extern "C" fn hello__error__last_error_length() -> usize {
+pub extern "C" fn hello__error__get_last_error_message_length() -> usize {
     LAST_ERROR.with(|prev| match *prev.borrow() {
-        Some(ref err) => err.to_string().len() + 1,
+        Some(ref err) => err.to_string().len(),
         None => 0,
     })
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn hello__error__last_error_message(
+pub unsafe extern "C" fn hello__error__get_last_error_message(
     buffer: *mut c_char,
-    length: usize,
-) -> c_int {
+    buffer_length: usize,
+) -> usize {
     if buffer.is_null() {
-        return -1;
+        return 0;
     }
 
-    let last_error = match take_last_error() {
-        Some(err) => err,
-        None => return 0,
+    let error_message = match take_last_error() {
+        Some(err) => err.to_string(),
+        None => "".to_string(),
     };
 
-    let error_message = last_error.to_string();
+    let buffer = slice::from_raw_parts_mut(buffer as *mut u8, buffer_length);
+    let copy_length = std::cmp::min(buffer_length, error_message.len());
 
-    let buffer = slice::from_raw_parts_mut(buffer as *mut u8, length);
+    ptr::copy_nonoverlapping(error_message.as_ptr(), buffer.as_mut_ptr(), copy_length);
 
-    if error_message.len() >= buffer.len() {
-        return -1;
+    if buffer.len() > error_message.len() {
+        buffer[error_message.len()] = b'\0';
     }
 
-    ptr::copy_nonoverlapping(
-        error_message.as_ptr(),
-        buffer.as_mut_ptr(),
-        error_message.len(),
-    );
-
-    buffer[error_message.len()] = 0;
-
-    error_message.len() as c_int
+    copy_length
 }
 
 #[no_mangle]
