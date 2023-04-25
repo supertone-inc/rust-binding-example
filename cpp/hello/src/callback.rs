@@ -7,7 +7,7 @@ pub unsafe extern "C" fn hello__callback__map(
     item_count: usize,
     mapper: extern "C" fn(item: c_int) -> c_float,
 ) {
-    let items: &[c_int] = std::slice::from_raw_parts(in_items, item_count);
+    let items = std::slice::from_raw_parts(in_items, item_count);
     let mapped_items = hello::callback::map(items, |item| mapper(*item));
 
     std::ptr::copy_nonoverlapping(mapped_items.as_ptr(), out_items, item_count)
@@ -21,7 +21,7 @@ pub unsafe extern "C" fn hello__callback__map_with_user_data(
     user_data: *const c_void,
     mapper: extern "C" fn(user_data: *const c_void, item: c_int) -> c_float,
 ) {
-    let items: &[c_int] = std::slice::from_raw_parts(in_items, item_count);
+    let items = std::slice::from_raw_parts(in_items, item_count);
     let mapped_items = hello::callback::map(items, |item| mapper(user_data, *item));
 
     std::ptr::copy_nonoverlapping(mapped_items.as_ptr(), out_items, item_count)

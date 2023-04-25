@@ -7,8 +7,8 @@ pub unsafe extern "C" fn hello__array__concat_alloc(
     b: *const c_float,
     b_length: usize,
 ) -> *mut c_float {
-    let a: &[f32] = std::slice::from_raw_parts(a, a_length);
-    let b: &[f32] = std::slice::from_raw_parts(b, b_length);
+    let a = std::slice::from_raw_parts(a, a_length);
+    let b = std::slice::from_raw_parts(b, b_length);
     let c = hello::array::concat(a, b).into_boxed_slice();
     Box::into_raw(c) as *mut c_float
 }
@@ -26,8 +26,8 @@ pub unsafe extern "C" fn hello__array__concat(
     b_length: usize,
     out_array: *mut c_float,
 ) {
-    let a: &[f32] = std::slice::from_raw_parts(a, a_length);
-    let b: &[f32] = std::slice::from_raw_parts(b, b_length);
+    let a = std::slice::from_raw_parts(a, a_length);
+    let b = std::slice::from_raw_parts(b, b_length);
     let c = hello::array::concat(a, b);
 
     std::ptr::copy_nonoverlapping(c.as_ptr(), out_array, c.len())
