@@ -31,7 +31,6 @@ pub extern "C" fn hello__error__last_error_length() -> usize {
     })
 }
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__error__last_error_message(
     buffer: *mut c_char,
@@ -65,7 +64,6 @@ pub unsafe extern "C" fn hello__error__last_error_message(
     error_message.len() as c_int
 }
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__error__throw_error() -> c_int {
     match hello::error::throw_error() {

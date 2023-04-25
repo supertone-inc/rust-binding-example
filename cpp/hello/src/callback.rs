@@ -1,6 +1,5 @@
 use std::ffi::{c_float, c_int, c_void};
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__callback__map(
     in_items: *const c_int,
@@ -14,7 +13,6 @@ pub unsafe extern "C" fn hello__callback__map(
     std::ptr::copy_nonoverlapping(mapped_items.as_ptr(), out_items, item_count)
 }
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__callback__map_with_user_data(
     in_items: *const c_int,

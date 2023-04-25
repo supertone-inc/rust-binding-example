@@ -1,6 +1,5 @@
 use std::ffi::{c_char, CStr, CString};
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__string__to_uppercase_alloc(string: *const c_char) -> *mut c_char {
     let string = CStr::from_ptr(string).to_str().unwrap();
@@ -8,13 +7,11 @@ pub unsafe extern "C" fn hello__string__to_uppercase_alloc(string: *const c_char
     CString::new(string).unwrap().into_raw()
 }
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__string__destroy_string(string: *mut c_char) {
     let _ = CString::from_raw(string);
 }
 
-#[allow(clippy::missing_safety_doc)]
 #[no_mangle]
 pub unsafe extern "C" fn hello__string__to_uppercase(
     in_string: *const c_char,
