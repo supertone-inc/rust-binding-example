@@ -36,4 +36,9 @@ test: build
         -D HELLO_INCLUDE_DIR="{{absolute_path("hello/include")}}" \
         -D HELLO_LIB_DIR="{{absolute_path("hello/lib")}}"
     cmake --build tests/build --clean-first
-    ctest --test-dir tests/build -V --no-tests=error
+
+    if [ {{os()}} = "windows" ]; then \
+        tests/build/Debug/tests; \
+    else \
+        tests/build/tests; \
+    fi

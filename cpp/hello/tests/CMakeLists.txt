@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
+project(tests)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-enable_testing()
-
-project(tests)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -44,8 +41,3 @@ if(WIN32)
     )
 	endforeach()
 endif()
-
-list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/contrib)
-include(CTest)
-include(Catch)
-catch_discover_tests(${PROJECT_NAME})
