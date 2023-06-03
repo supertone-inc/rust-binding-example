@@ -9,8 +9,9 @@ BinPackArguments: false
 BinPackParameters: false
 BreakBeforeBraces: Custom
 BraceWrapping:
-  BeforeLambdaBody: true
+  BeforeLambdaBody: false
 BreakConstructorInitializers: BeforeComma
 BreakInheritanceList: BeforeComma
 BreakStringLiterals: false
+ColumnLimit: 0
 IncludeBlocks: Regroup
