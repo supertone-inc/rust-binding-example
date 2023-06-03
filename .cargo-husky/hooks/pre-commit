@@ -5,6 +5,24 @@ for file in $(git diff --name-only --staged); do
         continue
     fi
 
-    rustfmt "$file"
-    git add "$file"
+    case "$file" in
+    *.rs)
+        rustfmt "$file"
+        ;;
+    *.c | *.cc | *.cpp | *.cxx | *.h | *.hh | *.hpp | *.hxx)
+        clang-format -i "$file"
+        ;;
+    *.py)
+        black "$file"
+        ;;
+    *)
+        continue
+        ;;
+    esac
+
+    if [ $? -ne 0 ]; then
+        continue
+    fi
+
+    git add "$file" || exit $?
 done
