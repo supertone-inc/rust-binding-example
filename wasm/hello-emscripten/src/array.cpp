@@ -16,7 +16,7 @@ em::val concat(const em::val &a, const em::val &b)
     auto b_vec{em::convertJSArrayToNumberVector<float>(b)};
     auto c_vec{hello::array::concat(a_vec, b_vec)};
 
-    return vector_as_typed_array(c_vec);
+    return em::val::array(c_vec);
 }
 
 void concat_preallocated(const std::vector<float> &a, const std::vector<float> &b, std::vector<float> &c)
