@@ -17,6 +17,6 @@ mod tests {
 
     #[test]
     fn test_throw_error() {
-        assert_matches!(throw_error(), Err(Error::Default(msg)) if msg == "error from Rust!");
+        assert_matches!(throw_error(), Err(Error::Default("error from Rust!")));
     }
 }
