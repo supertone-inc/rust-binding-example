@@ -6,9 +6,7 @@ LIB_FILE_NAME := if os() == "windows" {
     "lib" + LIB_NAME + ".a"
 }
 
-export CARGO_BUILD_TARGET := "wasm32-unknown-emscripten"
-
-TARGET_DIR := "../../target/" + CARGO_BUILD_TARGET + "/debug"
+TARGET_DIR := "../../target/wasm32-unknown-emscripten/debug"
 
 EMSDK_DIR := absolute_path("build/_deps/emsdk-src")
 
@@ -22,7 +20,7 @@ build:
         -D HELLO_INCLUDE_DIR="{{absolute_path("include")}}" \
         -D HELLO_LIB_DIR="{{absolute_path("lib")}}"
 
-    rustup target add ${CARGO_BUILD_TARGET}
+    rustup target add wasm32-unknown-emscripten
     source {{EMSDK_DIR}}/emsdk_env.sh
     cargo build
     mkdir -p lib
