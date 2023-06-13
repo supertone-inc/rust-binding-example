@@ -22,22 +22,27 @@ add_executable(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_INCLUDE_DIR})
-target_link_directories(${PROJECT_NAME} PRIVATE ${HELLO_LIB_DIR})
-target_link_libraries(${PROJECT_NAME} Catch2::Catch2 hello_cpp)
+target_link_libraries(${PROJECT_NAME} Catch2::Catch2)
 
 if(HELLO_STATIC)
+  target_link_libraries(${PROJECT_NAME} ${HELLO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}hello_cpp${CMAKE_STATIC_LIBRARY_SUFFIX})
+
   if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME} dl pthread)
   elseif(WIN32)
     target_link_libraries(${PROJECT_NAME} bcrypt userenv ws2_32)
   endif()
-endif()
+else()
+  if(UNIX)
+    target_link_libraries(${PROJECT_NAME} ${HELLO_LIB_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}hello_cpp${CMAKE_SHARED_LIBRARY_SUFFIX})
+  else()
+    target_link_libraries(${PROJECT_NAME} ${HELLO_LIB_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}hello_cpp${CMAKE_SHARED_LIBRARY_SUFFIX}${CMAKE_STATIC_LIBRARY_SUFFIX})
 
-if(WIN32)
-  file(GLOB_RECURSE DYNAMIC_LIBS "${HELLO_LIB_DIR}/*.dll")
-	foreach(dll ${DYNAMIC_LIBS})
-		add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${dll} $<TARGET_FILE_DIR:${PROJECT_NAME}>
-    )
-	endforeach()
+    file(GLOB_RECURSE DYNAMIC_LIBS "${HELLO_LIB_DIR}/*.dll")
+    foreach(dll ${DYNAMIC_LIBS})
+      add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy ${dll} $<TARGET_FILE_DIR:${PROJECT_NAME}>
+      )
+    endforeach()
+  endif()
 endif()

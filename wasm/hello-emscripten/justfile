@@ -9,14 +9,14 @@ build:
         -S . \
         -B build \
         -D HELLO_INCLUDE_DIR={{HELLO_CPP_DIR}}/hello/include \
-        -D HELLO_LIB_DIR={{HELLO_CPP_DIR}}/hello/staticlib
+        -D HELLO_LIB_DIR={{HELLO_CPP_DIR}}/hello/lib
 
     export CARGO_BUILD_TARGET=wasm32-unknown-emscripten
     rustup target add ${CARGO_BUILD_TARGET}
     source {{EMSDK_DIR}}/emsdk_env.sh
     just {{HELLO_CPP_DIR}}/build-staticlib
 
-    cmake --build build --clean-first
+    cmake --build build
     cmake --install build --prefix hello
 
 test: build

@@ -20,17 +20,17 @@ TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
 
 build:
     cargo rustc --crate-type staticlib
-    mkdir -p hello/staticlib
-    cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} hello/staticlib/{{LIB_FILE_NAME}}
+    mkdir -p hello/lib
+    cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
 
 test: build
     cmake \
         -S tests \
         -B tests/build \
         -D HELLO_INCLUDE_DIR="{{absolute_path("hello/include")}}" \
-        -D HELLO_LIB_DIR="{{absolute_path("hello/staticlib")}}" \
-        -D HELLO_STATIC=true
-    cmake --build tests/build --clean-first
+        -D HELLO_LIB_DIR="{{absolute_path("hello/lib")}}" \
+        -D HELLO_STATIC=ON
+    cmake --build tests/build
     
     if [ {{os()}} = "windows" ]; then \
         tests/build/Debug/tests; \

@@ -22,11 +22,11 @@ TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
 
 build:
     cargo rustc --crate-type cdylib
-    mkdir -p hello/lib/{{TARGET_DIR_NAME}}
+    mkdir -p hello/lib
     cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} hello/lib/{{LIB_FILE_NAME}}
 
     if [ {{os()}} = "windows" ]; then \
-        cp {{TARGET_DIR}}/{{LIB_FILE_NAME}}.lib hello/lib/{{LIB_NAME}}.lib; \
+        cp {{TARGET_DIR}}/{{LIB_FILE_NAME}}.lib hello/lib/{{LIB_FILE_NAME}}.lib; \
     fi
 
 test: build
@@ -34,8 +34,9 @@ test: build
         -S tests \
         -B tests/build \
         -D HELLO_INCLUDE_DIR="{{absolute_path("hello/include")}}" \
-        -D HELLO_LIB_DIR="{{absolute_path("hello/lib")}}"
-    cmake --build tests/build --clean-first
+        -D HELLO_LIB_DIR="{{absolute_path("hello/lib")}}" \
+        -D HELLO_STATIC=OFF
+    cmake --build tests/build
 
     if [ {{os()}} = "windows" ]; then \
         tests/build/Debug/tests; \
