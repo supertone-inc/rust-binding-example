@@ -37,7 +37,7 @@ else()
   else()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/hello_cpp.dll.lib)
 
-    file(GLOB_RECURSE dlls "../lib/*.dll")
+    file(GLOB_RECURSE dlls ../hello/lib/*.dll)
 
     foreach(dll ${dlls})
       add_custom_command(
