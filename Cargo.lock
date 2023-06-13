@@ -134,7 +134,7 @@ checksum = "2540771e65fc8cb83cd6e8a237f70c319bd5c29f78ed1084ba5d50eeac86f7f9"
 
 [[package]]
 name = "hello"
-version = "0.1.0"
+version = "0.0.0"
 dependencies = [
  "assert_matches",
  "cargo-husky",
@@ -143,7 +143,7 @@ dependencies = [
 
 [[package]]
 name = "hello-cpp"
-version = "0.1.0"
+version = "0.0.0"
 dependencies = [
  "cbindgen",
  "hello",
@@ -152,7 +152,7 @@ dependencies = [
 
 [[package]]
 name = "hello-nodejs"
-version = "0.1.0"
+version = "0.0.0"
 dependencies = [
  "hello",
  "napi",
@@ -163,7 +163,7 @@ dependencies = [
 
 [[package]]
 name = "hello-python"
-version = "0.1.0"
+version = "0.0.0"
 dependencies = [
  "hello",
  "pyo3",
@@ -172,7 +172,7 @@ dependencies = [
 
 [[package]]
 name = "hello-wasm-pack"
-version = "0.1.0"
+version = "0.0.0"
 dependencies = [
  "hello",
  "js-sys",

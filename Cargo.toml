@@ -3,7 +3,7 @@ members = ["rust/*", "cpp/*", "nodejs/*", "python/*", "wasm/*"]
 exclude = ["wasm/hello-emscripten"]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.0.0"
 publish = false
 edition = "2021"
 rust-version = "1.64"
