@@ -1,4 +1,3 @@
-use super::*;
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -7,7 +6,7 @@ pub enum Error {
     Default(&'static str),
 }
 
-pub fn throw_error() -> Result<()> {
+pub fn throw_error() -> Result<(), Error> {
     Err(Error::Default("error from Rust!"))
 }
 
