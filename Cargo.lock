@@ -41,6 +41,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
+name = "bitflags"
+version = "2.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6dbe3c979c178231552ecba20214a8272df4e09f232a87aef4320cf06539aded"
+
+[[package]]
 name = "bumpalo"
 version = "3.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -84,7 +90,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d8c93436c21e4698bacadf42917db28b23017027a4deccb35dbe47a7e7840123"
 dependencies = [
  "atty",
- "bitflags",
+ "bitflags 1.3.2",
  "indexmap",
  "os_str_bytes",
  "strsim",
@@ -103,12 +109,12 @@ dependencies = [
 
 [[package]]
 name = "ctor"
-version = "0.1.22"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f877be4f7c9f246b183111634f75baa039715e3f46ce860677d3b19a69fb229c"
+checksum = "1586fa608b1dab41f667475b4a41faec5ba680aee428bfa5de4ea520fdc6e901"
 dependencies = [
  "quote",
- "syn 1.0.90",
+ "syn 2.0.13",
 ]
 
 [[package]]
@@ -296,15 +302,15 @@ dependencies = [
 
 [[package]]
 name = "napi"
-version = "2.11.2"
+version = "2.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a04bc019733ca752e011422075141df43ecf3f782b5e71c7a04443e5a474782c"
+checksum = "d7f0a2e93526dd9c8c522d72a4d0c88678be8966fabe9fb8f2947fde6339b682"
 dependencies = [
- "bitflags",
+ "bitflags 2.3.2",
  "ctor",
+ "napi-derive",
  "napi-sys",
  "once_cell",
- "thread_local",
 ]
 
 [[package]]
@@ -473,7 +479,7 @@ version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ae183fc1b06c149f0c1793e1eb447c8b04bfe46d48e9e48bfb8d2d7ed64ecf0"
 dependencies = [
- "bitflags",
+ "bitflags 1.3.2",
 ]
 
 [[package]]
@@ -632,15 +638,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.13",
-]
-
-[[package]]
-name = "thread_local"
-version = "1.1.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5516c27b78311c50bf42c071425c560ac799b11c30b31f87e3081965fe5e0180"
-dependencies = [
- "once_cell",
 ]
 
 [[package]]
