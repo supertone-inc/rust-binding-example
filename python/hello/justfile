@@ -24,4 +24,4 @@ build:
     cp ../../target/debug/{{SOURCE_LIB_FILE_NAME}} hello/{{TARGET_LIB_FILE_NAME}}
 
 test: build
-    poetry run pytest -s
+    poetry run pytest
