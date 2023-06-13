@@ -1,15 +1,3 @@
-LIB_NAME := "hello_emscripten"
-
-LIB_FILE_NAME := if os() == "windows" {
-    LIB_NAME + ".lib"
-} else {
-    "lib" + LIB_NAME + ".a"
-}
-
-TARGET_DIR := "../../target/wasm32-unknown-emscripten/debug"
-
-EMSDK_DIR := absolute_path("build/_deps/emsdk-src")
-
 build:
     #!/usr/bin/env bash
     set -e
@@ -21,10 +9,10 @@ build:
         -D HELLO_LIB_DIR="{{absolute_path("lib")}}"
 
     rustup target add wasm32-unknown-emscripten
-    source {{EMSDK_DIR}}/emsdk_env.sh
+    source ./build/_deps/emsdk-src/emsdk_env.sh
     cargo build
     mkdir -p lib
-    cp {{TARGET_DIR}}/{{LIB_FILE_NAME}} lib/{{LIB_FILE_NAME}}
+    cp ../../target/wasm32-unknown-emscripten/debug/libhello_emscripten.a lib/libhello_emscripten.a
 
     cmake --build build
     cmake --install build --prefix hello
