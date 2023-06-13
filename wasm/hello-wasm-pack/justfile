@@ -1,8 +1,10 @@
 build:
-    wasm-pack build --out-dir hello --out-name index --target web
+    wasm-pack build \
+        --out-dir hello \
+        --out-name index \
+        --target web
 
 test: build
-    #!/usr/bin/env bash
-    cd tests
-    npm install
+    cd tests && \
+    npm install && \
     npm test

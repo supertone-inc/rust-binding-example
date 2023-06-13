@@ -1,7 +1,4 @@
 build:
-    #!/usr/bin/env bash
-    set -e
-
     cmake \
         -S . \
         -B build \
@@ -18,16 +15,10 @@ build:
     cmake --install build --prefix hello
 
 test: build
-    #!/usr/bin/env bash
-    set -e
-
-    cd tests
-    npm install
+    cd tests && \
+    npm install && \
     npm test
 
 test-quick:
-    #!/usr/bin/env bash
-    set -e
-
-    cd tests
+    cd tests && \
     npm test
