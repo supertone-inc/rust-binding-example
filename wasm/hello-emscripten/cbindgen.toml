@@ -1,0 +1,9 @@
+language = "C"
+cpp_compat = true
+pragma_once = true
+usize_is_size_t = true
+
+[parse]
+parse_deps = true
+include = ["hello-cpp"]
+extra_bindings = ["hello-cpp"]

@@ -14,7 +14,7 @@ add_executable(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} ${HELLO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}hello_cpp${CMAKE_STATIC_LIBRARY_SUFFIX})
+target_link_libraries(${PROJECT_NAME} ${HELLO_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}hello_emscripten${CMAKE_STATIC_LIBRARY_SUFFIX})
 
 set(OUTPUT_NAME index)
 

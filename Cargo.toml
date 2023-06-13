@@ -1,6 +1,5 @@
 [workspace]
 members = ["rust/*", "cpp/*", "nodejs/*", "python/*", "wasm/*"]
-exclude = ["wasm/hello-emscripten"]
 
 [workspace.package]
 version = "0.0.0"

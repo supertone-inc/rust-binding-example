@@ -8,17 +8,7 @@ LIB_FILE_NAME := if os() == "windows" {
     "lib" + LIB_NAME + ".so"
 }
 
-RUST_TOOLCHAIN := `rustup default`
-
-CARGO_BUILD_TARGET := env_var_or_default("CARGO_BUILD_TARGET", "")
-
-TARGET_DIR_NAME := if CARGO_BUILD_TARGET != "" {
-    CARGO_BUILD_TARGET
-} else {
-    "."
-}
-
-TARGET_DIR := "../../target/" + TARGET_DIR_NAME + "/debug"
+TARGET_DIR := "../../target/debug"
 
 build:
     cargo rustc --crate-type cdylib
