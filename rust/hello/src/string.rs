@@ -1,5 +1,5 @@
 pub fn to_uppercase(s: &str) -> String {
-    String::from(s).to_uppercase()
+    s.to_uppercase()
 }
 
 #[cfg(test)]
