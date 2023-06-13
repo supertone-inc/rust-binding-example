@@ -1,5 +1,11 @@
+CMAKE_OPTIONS := if os() == "windows" {
+    "-G Ninja"
+} else {
+    ""
+}
+
 build:
-    cmake -B build
+    cmake -B build {{CMAKE_OPTIONS}}
 
     rustup target add wasm32-unknown-emscripten
     cargo build

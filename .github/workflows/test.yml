@@ -75,6 +75,9 @@ jobs:
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v8
 
+      - name: Setup `wasm-pack`
+        uses: jetli/wasm-pack-action@v0.4.0
+
       - name: Test `cpp/hello`
         run: just cpp/hello/test
 
@@ -88,13 +91,7 @@ jobs:
         run: just rust/hello/test
 
       - name: Test `wasm/hello-emscripten`
-        if: runner.os == 'Linux'
         run: just wasm/hello-emscripten/test
 
-      - name: Setup `wasm-pack`
-        if: runner.os == 'Linux'
-        uses: jetli/wasm-pack-action@v0.4.0
-
       - name: Test `wasm/hello-wasm-pack`
-        if: runner.os == 'Linux'
         run: just wasm/hello-wasm-pack/test

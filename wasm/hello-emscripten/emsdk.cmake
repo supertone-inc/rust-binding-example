@@ -16,7 +16,13 @@ endif()
 
 set(EMSDK_DIR ${emsdk_SOURCE_DIR})
 
-execute_process(COMMAND ${EMSDK_DIR}/emsdk install ${EMSDK_VERSION})
-execute_process(COMMAND ${EMSDK_DIR}/emsdk activate ${EMSDK_VERSION})
+if(UNIX)
+    set(EMSDK_COMMAND ${EMSDK_DIR}/emsdk)
+else()
+    set(EMSDK_COMMAND ${EMSDK_DIR}/emsdk.bat)
+endif()
+
+execute_process(COMMAND ${EMSDK_COMMAND} install ${EMSDK_VERSION})
+execute_process(COMMAND ${EMSDK_COMMAND} activate ${EMSDK_VERSION})
 
 set(CMAKE_TOOLCHAIN_FILE ${EMSDK_DIR}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
