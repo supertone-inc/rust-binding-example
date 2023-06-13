@@ -7,7 +7,7 @@ pub enum Error {
     Hello(#[from] hello::error::Error),
 }
 
-impl std::convert::From<Error> for PyErr {
+impl From<Error> for PyErr {
     fn from(err: Error) -> PyErr {
         PyException::new_err(err.to_string())
     }
