@@ -4,7 +4,7 @@ use thiserror::Error;
 #[derive(Error, Debug)]
 pub enum Error {
     #[error(transparent)]
-    Hello(#[from] hello::Error),
+    Hello(#[from] hello::error::Error),
 }
 
 impl std::convert::From<Error> for PyErr {

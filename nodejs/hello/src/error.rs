@@ -6,7 +6,7 @@ pub mod error {
     #[derive(Error, Debug)]
     pub enum Error {
         #[error(transparent)]
-        Hello(#[from] hello::Error),
+        Hello(#[from] hello::error::Error),
     }
 
     impl From<Error> for napi::Error {
