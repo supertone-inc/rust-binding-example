@@ -13,7 +13,3 @@ test: build
     cd tests && \
     npm install && \
     npm test
-
-test-quick:
-    cd tests && \
-    npm test
