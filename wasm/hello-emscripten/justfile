@@ -6,7 +6,6 @@ build:
         -D HELLO_LIB_DIR="{{absolute_path("lib")}}"
 
     rustup target add wasm32-unknown-emscripten
-    source ./build/_deps/emsdk-src/emsdk_env.sh
     cargo build
     mkdir -p lib
     cp ../../target/wasm32-unknown-emscripten/debug/libhello_emscripten.a lib/libhello_emscripten.a
