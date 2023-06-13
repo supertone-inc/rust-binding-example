@@ -13,8 +13,8 @@ add_executable(${PROJECT_NAME}
   src/string.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${HELLO_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} ${HELLO_LIB_DIR}/libhello_emscripten.a)
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/lib/libhello_emscripten.a)
 
 set(OUTPUT_NAME index)
 
