@@ -24,7 +24,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ../hello/include)
 target_link_libraries(${PROJECT_NAME} Catch2::Catch2)
 
 if(HELLO_STATIC)
-  target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/${CMAKE_STATIC_LIBRARY_PREFIX}hello_cpp${CMAKE_STATIC_LIBRARY_SUFFIX})
+  target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/${CMAKE_STATIC_LIBRARY_PREFIX}hello_cbindgen${CMAKE_STATIC_LIBRARY_SUFFIX})
 
   if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME} dl pthread)
@@ -33,9 +33,9 @@ if(HELLO_STATIC)
   endif()
 else()
   if(UNIX)
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/${CMAKE_SHARED_LIBRARY_PREFIX}hello_cpp${CMAKE_SHARED_LIBRARY_SUFFIX})
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/${CMAKE_SHARED_LIBRARY_PREFIX}hello_cbindgen${CMAKE_SHARED_LIBRARY_SUFFIX})
   else()
-    target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/hello_cpp.dll.lib)
+    target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/../hello/lib/hello_cbindgen.dll.lib)
 
     file(GLOB_RECURSE dlls ../hello/lib/*.dll)
 

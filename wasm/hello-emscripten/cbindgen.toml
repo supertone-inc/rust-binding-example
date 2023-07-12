@@ -5,5 +5,5 @@ usize_is_size_t = true
 
 [parse]
 parse_deps = true
-include = ["hello-cpp"]
-extra_bindings = ["hello-cpp"]
+include = ["hello-cbindgen"]
+extra_bindings = ["hello-cbindgen"]

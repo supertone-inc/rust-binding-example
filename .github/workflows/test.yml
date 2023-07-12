@@ -78,8 +78,8 @@ jobs:
       - name: Setup `wasm-pack`
         uses: jetli/wasm-pack-action@v0.4.0
 
-      - name: Test `cpp/hello`
-        run: just cpp/hello/test
+      - name: Test `cpp/hello-cbindgen`
+        run: just cpp/hello-cbindgen/test
 
       - name: Test `nodejs/hello`
         run: just nodejs/hello/test

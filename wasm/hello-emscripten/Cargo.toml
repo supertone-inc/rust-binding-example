@@ -9,7 +9,7 @@ rust-version.workspace = true
 crate-type = ["staticlib"]
 
 [dependencies]
-hello-cpp = { path = "../../cpp/hello" }
+hello-cbindgen = { path = "../../cpp/hello-cbindgen" }
 
 [build-dependencies]
 cbindgen = "0.24"

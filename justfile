@@ -1,5 +1,5 @@
 build:
-    just cpp/hello/build
+    just cpp/hello-cbindgen/build
     just nodejs/hello/build
     just python/hello/build
     just rust/hello/build
@@ -7,7 +7,7 @@ build:
     just wasm/hello-wasm-pack/build
 
 test:
-    just cpp/hello/test
+    just cpp/hello-cbindgen/test
     just nodejs/hello/test
     just python/hello/test
     just rust/hello/test

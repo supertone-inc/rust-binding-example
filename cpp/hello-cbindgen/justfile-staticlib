@@ -5,15 +5,15 @@ build: && post-build
 post-build:
     mkdir -p hello/lib
     cp \
-        ../../target/debug/libhello_cpp.a \
-        hello/lib/libhello_cpp.a
+        ../../target/debug/libhello_cbindgen.a \
+        hello/lib/libhello_cbindgen.a
 
 [windows]
 post-build:
     mkdir -p hello/lib
     cp \
-        ../../target/debug/hello_cpp.lib \
-        hello/lib/hello_cpp.lib
+        ../../target/debug/hello_cbindgen.lib \
+        hello/lib/hello_cbindgen.lib
 
 test: build
     cmake \

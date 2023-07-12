@@ -46,4 +46,4 @@ jobs:
           cmakeVersion: ${{ matrix.cmake-version }}
 
       - name: Test
-        run: just cpp/hello/test
+        run: just cpp/hello-cbindgen/test

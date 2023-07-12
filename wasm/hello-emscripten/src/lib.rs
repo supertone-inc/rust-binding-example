@@ -1,1 +1,1 @@
-pub use hello_cpp::*;
+pub use hello_cbindgen::*;

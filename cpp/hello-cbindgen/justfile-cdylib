@@ -1,0 +1,33 @@
+build: && post-build
+    cargo rustc --crate-type cdylib
+
+[linux]
+post-build:
+    mkdir -p hello/lib
+    cp \
+        ../../target/debug/libhello_cbindgen.so \
+        hello/lib/libhello_cbindgen.so
+
+[macos]
+post-build:
+    mkdir -p hello/lib
+    cp \
+        ../../target/debug/libhello_cbindgen.dylib \
+        hello/lib/libhello_cbindgen.dylib
+
+[windows]
+post-build:
+    mkdir -p hello/lib
+    cp \
+        ../../target/debug/hello_cbindgen.dll \
+        hello/lib/hello_cbindgen.dll
+    cp \
+        ../../target/debug/hello_cbindgen.dll.lib \
+        hello/lib/hello_cbindgen.dll.lib
+
+test: build
+    cmake \
+        -S tests \
+        -B tests/build \
+        -D HELLO_STATIC=OFF
+    cmake --build tests/build

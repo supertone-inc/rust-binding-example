@@ -148,7 +148,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hello-cpp"
+name = "hello-cbindgen"
 version = "0.0.0"
 dependencies = [
  "cbindgen",
@@ -161,7 +161,7 @@ name = "hello-emscripten"
 version = "0.0.0"
 dependencies = [
  "cbindgen",
- "hello-cpp",
+ "hello-cbindgen",
 ]
 
 [[package]]

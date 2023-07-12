@@ -19,7 +19,7 @@ fn copy_cpp_headers() {
     use std::path::PathBuf;
 
     let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
-    let src_dir = PathBuf::from(&crate_dir).join("../../cpp/hello/hello/include/hello");
+    let src_dir = PathBuf::from(&crate_dir).join("../../cpp/hello-cbindgen/hello/include/hello");
     let dst_dir = PathBuf::from(&crate_dir).join("include/hello");
 
     for entry in fs::read_dir(src_dir).unwrap() {
