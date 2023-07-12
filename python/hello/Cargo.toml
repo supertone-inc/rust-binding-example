@@ -13,5 +13,5 @@ thiserror = "1.0"
 hello = { path = "../../rust/hello" }
 
 [dependencies.pyo3]
-version = "0.18"
+version = "0.19"
 features = ["extension-module"]
