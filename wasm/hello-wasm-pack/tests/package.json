@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "jest": "^29.5.0",
-    "jest-puppeteer": "^8.0.6"
+    "jest-puppeteer": "^9.0.0"
   },
   "engines": {
     "node": ">= 16"
