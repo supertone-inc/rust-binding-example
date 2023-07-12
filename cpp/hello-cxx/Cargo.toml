@@ -1,0 +1,10 @@
+[package]
+name = "hello-cxx"
+version.workspace = true
+publish.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+cxx = "1.0"
+hello = { path = "../../rust/hello" }
