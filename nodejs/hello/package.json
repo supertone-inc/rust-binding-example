@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^2.16.1",
+    "@napi-rs/cli": "^2.16.2",
     "jest": "^29.6.1"
   },
   "engines": {
